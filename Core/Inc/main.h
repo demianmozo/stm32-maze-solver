@@ -49,6 +49,8 @@ extern "C" {
 
 /* USER CODE END EM */
 
+void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
+
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
 
@@ -81,10 +83,22 @@ void Error_Handler(void);
 #define SPI1_MISO_GPIO_Port GPIOA
 #define SPI1_MOSI_Pin GPIO_PIN_7
 #define SPI1_MOSI_GPIO_Port GPIOA
+#define RightSensor_Pin GPIO_PIN_0
+#define RightSensor_GPIO_Port GPIOB
+#define LeftSensor_Pin GPIO_PIN_1
+#define LeftSensor_GPIO_Port GPIOB
 #define BOOT1_Pin GPIO_PIN_2
 #define BOOT1_GPIO_Port GPIOB
 #define CLK_IN_Pin GPIO_PIN_10
 #define CLK_IN_GPIO_Port GPIOB
+#define MI0_Pin GPIO_PIN_11
+#define MI0_GPIO_Port GPIOB
+#define MI1_Pin GPIO_PIN_12
+#define MI1_GPIO_Port GPIOB
+#define MD0_Pin GPIO_PIN_13
+#define MD0_GPIO_Port GPIOB
+#define MD1_Pin GPIO_PIN_14
+#define MD1_GPIO_Port GPIOB
 #define LD4_Pin GPIO_PIN_12
 #define LD4_GPIO_Port GPIOD
 #define LD3_Pin GPIO_PIN_13
@@ -93,8 +107,14 @@ void Error_Handler(void);
 #define LD5_GPIO_Port GPIOD
 #define LD6_Pin GPIO_PIN_15
 #define LD6_GPIO_Port GPIOD
-#define I2S3_MCK_Pin GPIO_PIN_7
-#define I2S3_MCK_GPIO_Port GPIOC
+#define WallSensor_Pin GPIO_PIN_6
+#define WallSensor_GPIO_Port GPIOC
+#define LineSensor_Pin GPIO_PIN_7
+#define LineSensor_GPIO_Port GPIOC
+#define Vel_I_Pin GPIO_PIN_8
+#define Vel_I_GPIO_Port GPIOC
+#define Vel_D_Pin GPIO_PIN_9
+#define Vel_D_GPIO_Port GPIOC
 #define VBUS_FS_Pin GPIO_PIN_9
 #define VBUS_FS_GPIO_Port GPIOA
 #define OTG_FS_ID_Pin GPIO_PIN_10
