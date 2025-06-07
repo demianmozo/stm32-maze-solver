@@ -27,15 +27,15 @@ var NAVTREE =
   [ "STM32 Maze Solver", "index.html", [
     [ "stm32-maze-solver", "index.html", "index" ],
     [ "Topics", "topics.html", "topics" ],
-    [ "Files", "files.html", [
-      [ "File List", "files.html", "files_dup" ],
-      [ "Globals", "globals.html", [
-        [ "All", "globals.html", "globals_dup" ],
-        [ "Functions", "globals_func.html", null ],
+    [ "Archivos", "files.html", [
+      [ "Lista de archivos", "files.html", "files_dup" ],
+      [ "Globales", "globals.html", [
+        [ "Todos", "globals.html", "globals_dup" ],
+        [ "Funciones", "globals_func.html", null ],
         [ "Variables", "globals_vars.html", null ],
-        [ "Enumerations", "globals_enum.html", null ],
-        [ "Enumerator", "globals_eval.html", null ],
-        [ "Macros", "globals_defs.html", null ]
+        [ "Enumeraciones", "globals_enum.html", null ],
+        [ "Valores de enumeraciones", "globals_eval.html", null ],
+        [ "defines", "globals_defs.html", null ]
       ] ]
     ] ]
   ] ]
@@ -47,6 +47,6 @@ var NAVTREEINDEX =
 "stm32f4xx__hal__conf_8h.html#a9b01c64d19f0d4839b7da08bd61c7ff7"
 ];
 
-var SYNCONMSG = 'click to disable panel synchronization';
-var SYNCOFFMSG = 'click to enable panel synchronization';
-var LISTOFALLMEMBERS = 'List of all members';
+var SYNCONMSG = 'pulsar para deshabilitar sincronización';
+var SYNCOFFMSG = 'pulsar para habilitar sincronización';
+var LISTOFALLMEMBERS = 'Lista de todos los miembros';
