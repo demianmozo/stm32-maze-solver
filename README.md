@@ -1,6 +1,6 @@
 # stm32-maze-solver
 
-🚗 Proyecto de robot autónomo que resuelve un laberinto mediante el algoritmo de llenado (*Flood Fill*), desarrollado sobre STM32 usando STM32CubeIDE.
+🚗 Proyecto de robot autónomo que resuelve un laberinto mediante un algoritmo de llenado (*Flood Fill*), desarrollado sobre STM32 usando STM32CubeIDE.
 
 ---
 
@@ -12,7 +12,7 @@ Este proyecto implementa un sistema de control embebido en un microcontrolador S
 
 ## ⚙️ Especificaciones Técnicas
 
-- **Placa:** STM32F407G-DISC1  
+- **Placa:** STM32F407G-DISC1 (Discovery)
 - **Microcontrolador:** STM32F407VGT6  
 - **IDE:** STM32CubeIDE  
 - **Lenguaje:** C  
@@ -31,7 +31,7 @@ Este proyecto implementa un sistema de control embebido en un microcontrolador S
 ## 🧩 Subsistemas
 
 - **Control de motores:**  
-  Mantiene el desplazamiento recto y permite giros precisos de 90° y 180° según detección de obstáculos.
+  Mantiene el desplazamiento recto y permite giros precisos de 90° y 180°.
 
 - **Detección y escritura de muros:**  
   El sensor frontal detecta paredes y actualiza el mapa interno del laberinto.
