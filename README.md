@@ -8,6 +8,8 @@
 
 Este proyecto implementa un sistema de control embebido en un microcontrolador STM32 para un robot capaz de detectar obstáculos, ajustar su trayectoria y salir de un laberinto desconocido en el menor tiempo posible. La navegación está basada en un algoritmo de llenado de celdas, lo que permite optimizar el recorrido.
 
+📄 [Ver documentación Doxygen](https://demianmozo.github.io/stm32-maze-solver/)
+
 ---
 
 ## ⚙️ Especificaciones Técnicas
