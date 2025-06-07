@@ -1,0 +1,105 @@
+\doxysection{Control de Motores }
+\hypertarget{group___control_motor}{}\label{group___control_motor}\index{Control de Motores@{Control de Motores}}
+
+
+Funciones para navegación del robot en el laberinto.  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{group___control_motor_ga78eb73797c69058669b1a02c4a323a2b}{control\+\_\+motor\+\_\+init}} (void)
+\begin{DoxyCompactList}\small\item\em Inicializa el sistema de control de motores. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group___control_motor_gabc7b24d0ece6918ca9856bdf1056c0b8}{avanza}} (void)
+\begin{DoxyCompactList}\small\item\em Avanza con ambos motores al 70\% de velocidad. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group___control_motor_gabc94a674aa00829e8a7be0155dfabfeb}{gira90izq}} (void)
+\begin{DoxyCompactList}\small\item\em Gira 90 grados a la izquierda y continúa avanzando. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group___control_motor_ga98952c0d2b570f24c517424dd26ff160}{gira90der}} (void)
+\begin{DoxyCompactList}\small\item\em Gira 90 grados a la derecha y continúa avanzando. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group___control_motor_gaf3e5883f65fecd448a16a35039d5339d}{gira180}} (void)
+\begin{DoxyCompactList}\small\item\em Gira 180 grados y continúa avanzando. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group___control_motor_ga3bd86bdf33be17187cb052c48c4c0f84}{termino}} (void)
+\begin{DoxyCompactList}\small\item\em Detiene ambos motores completamente. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Funciones para navegación del robot en el laberinto. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{group___control_motor_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{group___control_motor_gabc7b24d0ece6918ca9856bdf1056c0b8}\index{Control de Motores@{Control de Motores}!avanza@{avanza}}
+\index{avanza@{avanza}!Control de Motores@{Control de Motores}}
+\doxysubsubsection{\texorpdfstring{avanza()}{avanza()}}
+{\footnotesize\ttfamily \label{group___control_motor_gabc7b24d0ece6918ca9856bdf1056c0b8} 
+void avanza (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Avanza con ambos motores al 70\% de velocidad. 
+
+Configura ambos motores en modo avance con VELOCIDAD\+\_\+\+AVANCE \Hypertarget{group___control_motor_ga78eb73797c69058669b1a02c4a323a2b}\index{Control de Motores@{Control de Motores}!control\_motor\_init@{control\_motor\_init}}
+\index{control\_motor\_init@{control\_motor\_init}!Control de Motores@{Control de Motores}}
+\doxysubsubsection{\texorpdfstring{control\_motor\_init()}{control\_motor\_init()}}
+{\footnotesize\ttfamily \label{group___control_motor_ga78eb73797c69058669b1a02c4a323a2b} 
+void control\+\_\+motor\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inicializa el sistema de control de motores. 
+
+Configura PWM en TIM3 canales 3 y 4, y detiene motores \begin{DoxyNote}{Note}
+Debe llamarse después de HAL\+\_\+\+Init() y configuración de GPIO
+\end{DoxyNote}
+Inicializa el sistema de control de motores. \Hypertarget{group___control_motor_gaf3e5883f65fecd448a16a35039d5339d}\index{Control de Motores@{Control de Motores}!gira180@{gira180}}
+\index{gira180@{gira180}!Control de Motores@{Control de Motores}}
+\doxysubsubsection{\texorpdfstring{gira180()}{gira180()}}
+{\footnotesize\ttfamily \label{group___control_motor_gaf3e5883f65fecd448a16a35039d5339d} 
+void gira180 (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Gira 180 grados y continúa avanzando. 
+
+Motor derecho retrocede, motor izquierdo avanza, al 100\%
+
+Gira 180 grados y continúa avanzando. \Hypertarget{group___control_motor_ga98952c0d2b570f24c517424dd26ff160}\index{Control de Motores@{Control de Motores}!gira90der@{gira90der}}
+\index{gira90der@{gira90der}!Control de Motores@{Control de Motores}}
+\doxysubsubsection{\texorpdfstring{gira90der()}{gira90der()}}
+{\footnotesize\ttfamily \label{group___control_motor_ga98952c0d2b570f24c517424dd26ff160} 
+void gira90der (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Gira 90 grados a la derecha y continúa avanzando. 
+
+Motor derecho retrocede, motor izquierdo avanza, al 100\%
+
+Gira 90 grados a la derecha y continúa avanzando. \Hypertarget{group___control_motor_gabc94a674aa00829e8a7be0155dfabfeb}\index{Control de Motores@{Control de Motores}!gira90izq@{gira90izq}}
+\index{gira90izq@{gira90izq}!Control de Motores@{Control de Motores}}
+\doxysubsubsection{\texorpdfstring{gira90izq()}{gira90izq()}}
+{\footnotesize\ttfamily \label{group___control_motor_gabc94a674aa00829e8a7be0155dfabfeb} 
+void gira90izq (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Gira 90 grados a la izquierda y continúa avanzando. 
+
+Motor izquierdo retrocede, motor derecho avanza, al 100\%
+
+Gira 90 grados a la izquierda y continúa avanzando. \Hypertarget{group___control_motor_ga3bd86bdf33be17187cb052c48c4c0f84}\index{Control de Motores@{Control de Motores}!termino@{termino}}
+\index{termino@{termino}!Control de Motores@{Control de Motores}}
+\doxysubsubsection{\texorpdfstring{termino()}{termino()}}
+{\footnotesize\ttfamily \label{group___control_motor_ga3bd86bdf33be17187cb052c48c4c0f84} 
+void termino (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Detiene ambos motores completamente. 
+
+Usado cuando el robot gana \begin{DoxyWarning}{Warning}
+Solo se usa cuando el robot debe detenerse definitivamente
+\end{DoxyWarning}
+Detiene ambos motores completamente. 

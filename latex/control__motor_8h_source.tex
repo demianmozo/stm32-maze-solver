@@ -1,0 +1,49 @@
+\doxysection{control\+\_\+motor.\+h}
+\hypertarget{control__motor_8h_source}{}\label{control__motor_8h_source}\index{Core/Inc/control\_motor.h@{Core/Inc/control\_motor.h}}
+\mbox{\hyperlink{control__motor_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#ifndef\ \_\_CONTROL\_MOTOR\_H}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#define\ \_\_CONTROL\_MOTOR\_H}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{main_8h}{main.h}}"{}}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{comment}{/*\ Definiciones\ para\ control\ de\ motores\ */}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ VELOCIDAD\_AVANCE\ 700\ }\textcolor{comment}{//\ 70\%\ de\ 1000\ (período\ del\ timer)\ VELOCIDAD\ CUANDO\ AVANZA}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#define\ VELOCIDAD\_GIRO\ 1000\ \ }\textcolor{comment}{//\ 100\%\ de\ 1000\ (período\ del\ timer)\ VELOCIDAD\ CUANDO\ GIRA}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{comment}{/*\ Tiempos\ de\ giro\ en\ milisegundos\ (ajustar\ según\ calibración)\ */}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#define\ TIEMPO\_GIRO\_90\ 500\ \ \ }\textcolor{comment}{//\ Tiempo\ para\ giro\ de\ 90\ grados}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#define\ TIEMPO\_GIRO\_180\ 1000\ }\textcolor{comment}{//\ Tiempo\ para\ giro\ de\ 180\ grados}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00037\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{00038\ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \mbox{\hyperlink{control__motor_8h_a2663002e830a96e71dbcbb8e27a81dfaaa71874643829b1acbe12df8bdae04713}{MOTOR\_AVANCE}}\ =\ 0,\ \textcolor{comment}{//\ M1=0,\ M0=1}}
+\DoxyCodeLine{00040\ \ \ \ \ \mbox{\hyperlink{control__motor_8h_a2663002e830a96e71dbcbb8e27a81dfaa00c3ac302373e1c0b32dc47c972dfa50}{MOTOR\_RETROCESO}},\ \ \textcolor{comment}{//\ M1=1,\ M0=0}}
+\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{control__motor_8h_a2663002e830a96e71dbcbb8e27a81dfaa49c8f05a309bcd70f7301c28715b9c75}{MOTOR\_FRENADO}}\ \ \ \ \ \textcolor{comment}{//\ M1=0,\ M0=0\ o\ M1=1,\ M0=1}}
+\DoxyCodeLine{00042\ \}\ \mbox{\hyperlink{control__motor_8h_a2663002e830a96e71dbcbb8e27a81dfa}{motor\_estado\_t}};}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00055\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group___control_motor_ga78eb73797c69058669b1a02c4a323a2b}{control\_motor\_init}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00061\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group___control_motor_gabc7b24d0ece6918ca9856bdf1056c0b8}{avanza}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00067\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group___control_motor_gabc94a674aa00829e8a7be0155dfabfeb}{gira90izq}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00073\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group___control_motor_ga98952c0d2b570f24c517424dd26ff160}{gira90der}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00079\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group___control_motor_gaf3e5883f65fecd448a16a35039d5339d}{gira180}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00086\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group___control_motor_ga3bd86bdf33be17187cb052c48c4c0f84}{termino}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00087\ \ \textcolor{comment}{//\ fin\ grupo\ ControlMotor}}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00102\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group___control_motor_aux_gaea869ae4a071ec341537819cd7cb7f5c}{set\_motor\_izq}}(\mbox{\hyperlink{control__motor_8h_a2663002e830a96e71dbcbb8e27a81dfa}{motor\_estado\_t}}\ estado,\ uint16\_t\ pwm);}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00110\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group___control_motor_aux_gaf3c5783b72cc3ebc19b1d9f74ab62896}{set\_motor\_der}}(\mbox{\hyperlink{control__motor_8h_a2663002e830a96e71dbcbb8e27a81dfa}{motor\_estado\_t}}\ estado,\ uint16\_t\ pwm);}
+\DoxyCodeLine{00111\ \ \textcolor{comment}{//\ fin\ grupo\ ControlMotorAux}}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_CONTROL\_MOTOR\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}
