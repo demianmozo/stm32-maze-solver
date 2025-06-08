@@ -3,6 +3,9 @@
  ******************************************************************************
  * @file           : main.c
  * @brief          : Main program body
+ * @author Tu nombre
+ * @date 2025-06-07
+ * Este archivo contiene la función main y la lógica principal del robot.
  ******************************************************************************
  * @attention
  *
