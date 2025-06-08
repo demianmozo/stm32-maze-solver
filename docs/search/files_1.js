@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['main_2ec_0',['main.c',['../main_8c.html',1,'']]],
-  ['main_2eh_1',['main.h',['../main_8h.html',1,'']]]
+  ['control_5fmotor_2ec_0',['control_motor.c',['../control__motor_8c.html',1,'']]],
+  ['control_5fmotor_2eh_1',['control_motor.h',['../control__motor_8h.html',1,'']]]
 ];

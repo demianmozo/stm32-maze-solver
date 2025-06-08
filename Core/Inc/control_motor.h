@@ -34,7 +34,11 @@
  * | 0  | 0  | Frenado   |
  * | 1  | 1  | Frenado   |
  */
-typedef enum
+
+typedef enum // Un enum es un tipo de dato que define un conjunto de 
+//constantes con nombres en lugar de usar números directamente.
+//para este caso, avance=0, retroceso=1, frenado=2
+//no se usan los nombres directamente xq chat dice que es una cagada usar strings en un micro, y no me compilaba creo que por eso
 {
     MOTOR_AVANCE = 0, // M1=0, M0=1
     MOTOR_RETROCESO,  // M1=1, M0=0
@@ -81,7 +85,6 @@ void gira180(void);
 /**
  * @brief Detiene ambos motores completamente
  * @details Usado cuando el robot gana
- * @warning Solo se usa cuando el robot debe detenerse definitivamente
  */
 void termino(void);
 
@@ -97,7 +100,7 @@ void termino(void);
  * @brief Configura el motor izquierdo
  * @param estado Estado del motor (MOTOR_AVANCE, MOTOR_RETROCESO, MOTOR_FRENADO)
  * @param pwm Valor PWM de velocidad (0-1000)
- * @details Controla pines MI0/MI1 para dirección y PC8 para velocidad
+ * @details Controla pines MI0/MI1 para dirección y Vel_I para velocidad
  */
 void set_motor_izq(motor_estado_t estado, uint16_t pwm);
 
@@ -105,7 +108,7 @@ void set_motor_izq(motor_estado_t estado, uint16_t pwm);
  * @brief Configura el motor derecho
  * @param estado Estado del motor (MOTOR_AVANCE, MOTOR_RETROCESO, MOTOR_FRENADO)
  * @param pwm Valor PWM de velocidad (0-1000)
- * @details Controla pines MD0/MD1 para dirección y PC9 para velocidad
+ * @details Controla pines MD0/MD1 para dirección y Vel_D para velocidad
  */
 void set_motor_der(motor_estado_t estado, uint16_t pwm);
 

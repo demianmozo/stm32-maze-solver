@@ -43,7 +43,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"control__motor_8c.html"
+"antirebote_8c.html"
 ];
 
 var SYNCONMSG = 'pulsar para deshabilitar sincronización';

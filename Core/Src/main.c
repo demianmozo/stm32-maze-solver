@@ -3,7 +3,7 @@
  ******************************************************************************
  * @file           : main.c
  * @brief          : Main program body
- * @author Tu nombre
+ * @author demianmozo
  * @date 2025-06-07
  * Este archivo contiene la función main y la lógica principal del robot.
  ******************************************************************************
@@ -25,7 +25,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "control_motor.h"
+#include "antirebote.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -117,6 +118,9 @@ int main(void)
   MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
 
+  // Inicializar el módulo de motores
+  control_motor_init();
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -127,27 +131,48 @@ int main(void)
     MX_USB_HOST_Process();
 
     /* USER CODE BEGIN 3 */
-    // OJO SOLO PARA PROBAR EL LUNES
 
-    avanza(); // Comenzar avanzando
+    // OJO SOLO PARA PROBAR EL LUNES LOS TIEMPOS DE LOS GIROS
+    avanza(); // Comenzar avanzando 1 SEGUNDO
     HAL_Delay(1000);
 
     // Simular detección de pared - girar a la derecha
-    gira90der(); // Gira Y SIGUE AVANZANDO automáticamente
+    gira90der(); // Gira Y SIGUE AVANZANDO POR 2 SEGUNDOS
     HAL_Delay(2000);
 
     // Otro obstáculo - girar a la izquierda
-    gira90izq(); // Gira Y SIGUE AVANZANDO automáticamente
+    gira90izq(); // Gira Y SIGUE AVANZANDO
     HAL_Delay(2000);
 
     // Callejón sin salida - dar media vuelta
-    gira180(); // Gira Y SIGUE AVANZANDO automáticamente
+    gira180(); // Gira Y SIGUE AVANZANDO POR 3 SEGUNDOS
     HAL_Delay(3000);
 
-    // Solo usar termino() cuando el laberinto esté resuelto
+    // SIMULA QUE TERMINÓ
     termino();
     HAL_Delay(5000); // Pausa antes de reiniciar
   }
+
+  /*  // EJEMPLO PARA PROBAR SENSIBILIDAD DE LOS SENSORES DIGITALES
+   if (antirebote(WallSensor_GPIO_Port, WallSensor_Pin))
+   {
+     // Detectó muro, gira a la derecha
+     gira90der();
+   }
+
+   // Avanzar por defecto
+   avanza();
+
+   // Ejemplo usando antirebote para línea de cuadrícula
+   if (antirebote(LineSensor_GPIO_Port, LineSensor_Pin))
+   {
+     // Cruzó una línea, contar celda
+     // tu_funcion_contar_celda();
+   }
+
+ // Avanzar por defecto
+ avanza(); */
+
   /* USER CODE END 3 */
 }
 
