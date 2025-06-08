@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['debugmon_5fhandler_0',['DebugMon_Handler',['../stm32f4xx__it_8h.html#adbdfb05858cc36fc520974df37ec3cb0',1,'DebugMon_Handler(void):&#160;stm32f4xx_it.c'],['../stm32f4xx__it_8c.html#adbdfb05858cc36fc520974df37ec3cb0',1,'DebugMon_Handler(void):&#160;stm32f4xx_it.c']]],
-  ['dma2_5fstream0_5firqhandler_1',['DMA2_Stream0_IRQHandler',['../stm32f4xx__it_8h.html#aaf6ce196dde98712e1223b99766e06c0',1,'DMA2_Stream0_IRQHandler(void):&#160;stm32f4xx_it.c'],['../stm32f4xx__it_8c.html#aaf6ce196dde98712e1223b99766e06c0',1,'DMA2_Stream0_IRQHandler(void):&#160;stm32f4xx_it.c']]]
+  ['gira180_0',['gira180',['../group___control_motor.html#gaf3e5883f65fecd448a16a35039d5339d',1,'gira180(void):&#160;control_motor.c'],['../group___control_motor.html#gaf3e5883f65fecd448a16a35039d5339d',1,'gira180(void):&#160;control_motor.c']]],
+  ['gira90der_1',['gira90der',['../group___control_motor.html#ga98952c0d2b570f24c517424dd26ff160',1,'gira90der(void):&#160;control_motor.c'],['../group___control_motor.html#ga98952c0d2b570f24c517424dd26ff160',1,'gira90der(void):&#160;control_motor.c']]],
+  ['gira90izq_2',['gira90izq',['../group___control_motor.html#gabc94a674aa00829e8a7be0155dfabfeb',1,'gira90izq(void):&#160;control_motor.c'],['../group___control_motor.html#gabc94a674aa00829e8a7be0155dfabfeb',1,'gira90izq(void):&#160;control_motor.c']]]
 ];

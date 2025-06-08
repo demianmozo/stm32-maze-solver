@@ -30,7 +30,7 @@ var NAVTREE =
     [ "Archivos", "files.html", [
       [ "Lista de archivos", "files.html", "files_dup" ],
       [ "Globales", "globals.html", [
-        [ "Todos", "globals.html", "globals_dup" ],
+        [ "Todos", "globals.html", null ],
         [ "Funciones", "globals_func.html", null ],
         [ "Variables", "globals_vars.html", null ],
         [ "Enumeraciones", "globals_enum.html", null ],
@@ -43,8 +43,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"control__motor_8c.html",
-"stm32f4xx__hal__conf_8h.html#a9b01c64d19f0d4839b7da08bd61c7ff7"
+"control__motor_8c.html"
 ];
 
 var SYNCONMSG = 'pulsar para deshabilitar sincronización';

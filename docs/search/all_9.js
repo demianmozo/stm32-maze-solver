@@ -8,6 +8,5 @@ var searchData=
   ['i2s3_5fws_5fpin_5',['I2S3_WS_Pin',['../main_8h.html#a8d26b516935502e7b9bcac3c5529557d',1,'main.h']]],
   ['ii_20depto_20de_20electrónica_20y_20computación_20facultad_20de_20ingeniería_20unmdp_6',['Asignatura Técnicas y Dispositivos Digitales II - Depto. de Electrónica y Computación - Facultad de Ingeniería - UNMdP',['../index.html#autotoc_md11',1,'']]],
   ['ingeniería_20unmdp_7',['Asignatura Técnicas y Dispositivos Digitales II - Depto. de Electrónica y Computación - Facultad de Ingeniería - UNMdP',['../index.html#autotoc_md11',1,'']]],
-  ['initialise_5fmonitor_5fhandles_8',['initialise_monitor_handles',['../syscalls_8c.html#a25c7f100d498300fff65568c2fcfe639',1,'syscalls.c']]],
-  ['instruction_5fcache_5fenable_9',['INSTRUCTION_CACHE_ENABLE',['../stm32f4xx__hal__conf_8h.html#a3379989d46599c7e19a43f42e9145a4a',1,'stm32f4xx_hal_conf.h']]]
+  ['initialise_5fmonitor_5fhandles_8',['initialise_monitor_handles',['../syscalls_8c.html#a25c7f100d498300fff65568c2fcfe639',1,'syscalls.c']]]
 ];

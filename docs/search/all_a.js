@@ -11,8 +11,5 @@ var searchData=
   ['leftsensor_5fgpio_5fport_8',['LeftSensor_GPIO_Port',['../main_8h.html#a163c9e6f493dba4cb4f5dece50145180',1,'main.h']]],
   ['leftsensor_5fpin_9',['LeftSensor_Pin',['../main_8h.html#adc9e7b6bc16d2170c94594adab486663',1,'main.h']]],
   ['linesensor_5fgpio_5fport_10',['LineSensor_GPIO_Port',['../main_8h.html#a3207d98854f1e48e9bf8bd81f47ae02f',1,'main.h']]],
-  ['linesensor_5fpin_11',['LineSensor_Pin',['../main_8h.html#ad5070a742757d17684fb3d06a60a15d4',1,'main.h']]],
-  ['lse_5fstartup_5ftimeout_12',['LSE_STARTUP_TIMEOUT',['../stm32f4xx__hal__conf_8h.html#a85e6fc812dc26f7161a04be2568a5462',1,'stm32f4xx_hal_conf.h']]],
-  ['lse_5fvalue_13',['LSE_VALUE',['../stm32f4xx__hal__conf_8h.html#a7bbb9d19e5189a6ccd0fb6fa6177d20d',1,'stm32f4xx_hal_conf.h']]],
-  ['lsi_5fvalue_14',['LSI_VALUE',['../stm32f4xx__hal__conf_8h.html#a4872023e65449c0506aac3ea6bec99e9',1,'stm32f4xx_hal_conf.h']]]
+  ['linesensor_5fpin_11',['LineSensor_Pin',['../main_8h.html#ad5070a742757d17684fb3d06a60a15d4',1,'main.h']]]
 ];

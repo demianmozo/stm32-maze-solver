@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['control_5fmotor_5finit_0',['control_motor_init',['../group___control_motor.html#ga78eb73797c69058669b1a02c4a323a2b',1,'control_motor_init(void):&#160;control_motor.c'],['../group___control_motor.html#ga78eb73797c69058669b1a02c4a323a2b',1,'control_motor_init(void):&#160;control_motor.c']]]
+  ['error_5fhandler_0',['Error_Handler',['../main_8h.html#a1730ffe1e560465665eb47d9264826f9',1,'Error_Handler(void):&#160;main.c'],['../main_8c.html#a1730ffe1e560465665eb47d9264826f9',1,'Error_Handler(void):&#160;main.c']]]
 ];

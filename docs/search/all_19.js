@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🧩_20subsistemas_0',['🧩 Subsistemas',['../index.html#autotoc_md8',1,'']]]
+  ['🧭_20resumen_20del_20proyecto_0',['🧭 Resumen del Proyecto',['../index.html#autotoc_md2',1,'']]]
 ];

@@ -1,15 +1,14 @@
 var searchData=
 [
-  ['objetivos_20del_20proyecto_0',['🎯 Objetivos del Proyecto',['../index.html#autotoc_md6',1,'']]],
-  ['otg_5ffs_5fdm_5fgpio_5fport_1',['OTG_FS_DM_GPIO_Port',['../main_8h.html#ade6d56d300ee56497bdc2915a29d0e9d',1,'main.h']]],
-  ['otg_5ffs_5fdm_5fpin_2',['OTG_FS_DM_Pin',['../main_8h.html#a29157cfd259518562da456a42924bc48',1,'main.h']]],
-  ['otg_5ffs_5fdp_5fgpio_5fport_3',['OTG_FS_DP_GPIO_Port',['../main_8h.html#a5203f09c46ff7a042660a5fd5af2d0db',1,'main.h']]],
-  ['otg_5ffs_5fdp_5fpin_4',['OTG_FS_DP_Pin',['../main_8h.html#abb6023b5dd0bbbe81e53018c435af61d',1,'main.h']]],
-  ['otg_5ffs_5fid_5fgpio_5fport_5',['OTG_FS_ID_GPIO_Port',['../main_8h.html#ae2468b01ae5c68e6aaa93b83fdc89abf',1,'main.h']]],
-  ['otg_5ffs_5fid_5fpin_6',['OTG_FS_ID_Pin',['../main_8h.html#a95eb2b06faed226575e4f319f76efc8c',1,'main.h']]],
-  ['otg_5ffs_5firqhandler_7',['OTG_FS_IRQHandler',['../stm32f4xx__it_8h.html#a75135d7a041e2932e9903e8a345b3fc4',1,'OTG_FS_IRQHandler(void):&#160;stm32f4xx_it.c'],['../stm32f4xx__it_8c.html#a75135d7a041e2932e9903e8a345b3fc4',1,'OTG_FS_IRQHandler(void):&#160;stm32f4xx_it.c']]],
-  ['otg_5ffs_5fovercurrent_5fgpio_5fport_8',['OTG_FS_OverCurrent_GPIO_Port',['../main_8h.html#a19f80096efa2ccb7bc032c1816b3edbf',1,'main.h']]],
-  ['otg_5ffs_5fovercurrent_5fpin_9',['OTG_FS_OverCurrent_Pin',['../main_8h.html#a6309490f48597e6babbceea1d42f3098',1,'main.h']]],
-  ['otg_5ffs_5fpowerswitchon_5fgpio_5fport_10',['OTG_FS_PowerSwitchOn_GPIO_Port',['../main_8h.html#a2576ccc509ae6bbef01dc3e7bfd63d7d',1,'main.h']]],
-  ['otg_5ffs_5fpowerswitchon_5fpin_11',['OTG_FS_PowerSwitchOn_Pin',['../main_8h.html#a4906d24ad629543e7b4c2d65a5cd1b9f',1,'main.h']]]
+  ['pc14_5fosc32_5fin_5fgpio_5fport_0',['PC14_OSC32_IN_GPIO_Port',['../main_8h.html#ac1324283f34366c96d7372e4ee4c603a',1,'main.h']]],
+  ['pc14_5fosc32_5fin_5fpin_1',['PC14_OSC32_IN_Pin',['../main_8h.html#a7d43c0c8b91a6510d9f474f78f57e5c9',1,'main.h']]],
+  ['pc15_5fosc32_5fout_5fgpio_5fport_2',['PC15_OSC32_OUT_GPIO_Port',['../main_8h.html#a77c4021efe27a551dc9d2884422b0fae',1,'main.h']]],
+  ['pc15_5fosc32_5fout_5fpin_3',['PC15_OSC32_OUT_Pin',['../main_8h.html#a4b7e48c6ffe3574f97f8fce18cae84de',1,'main.h']]],
+  ['pdm_5fout_5fgpio_5fport_4',['PDM_OUT_GPIO_Port',['../main_8h.html#a4280a19febddfe45250a2bf9f8207426',1,'main.h']]],
+  ['pdm_5fout_5fpin_5',['PDM_OUT_Pin',['../main_8h.html#aea51bcb3fe50a8b747169a864b413229',1,'main.h']]],
+  ['ph0_5fosc_5fin_5fgpio_5fport_6',['PH0_OSC_IN_GPIO_Port',['../main_8h.html#af8885fc2f50640cd8bb5084cd998088b',1,'main.h']]],
+  ['ph0_5fosc_5fin_5fpin_7',['PH0_OSC_IN_Pin',['../main_8h.html#addb0c037a01bd73baaf9f7d5a0379ac4',1,'main.h']]],
+  ['ph1_5fosc_5fout_5fgpio_5fport_8',['PH1_OSC_OUT_GPIO_Port',['../main_8h.html#a5b80653bbe01e9d4f334c74bdc5bc9f6',1,'main.h']]],
+  ['ph1_5fosc_5fout_5fpin_9',['PH1_OSC_OUT_Pin',['../main_8h.html#ac4d4c1fdbc6cd7491c705bd332f15693',1,'main.h']]],
+  ['proyecto_10',['Proyecto',['../index.html#autotoc_md6',1,'🎯 Objetivos del Proyecto'],['../index.html#autotoc_md10',1,'🏁 Estado del Proyecto'],['../index.html#autotoc_md2',1,'🧭 Resumen del Proyecto']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['busfault_5fhandler_0',['BusFault_Handler',['../stm32f4xx__it_8h.html#a850cefb17a977292ae5eb4cafa9976c3',1,'BusFault_Handler(void):&#160;stm32f4xx_it.c'],['../stm32f4xx__it_8c.html#a850cefb17a977292ae5eb4cafa9976c3',1,'BusFault_Handler(void):&#160;stm32f4xx_it.c']]]
+  ['control_5fmotor_5finit_0',['control_motor_init',['../group___control_motor.html#ga78eb73797c69058669b1a02c4a323a2b',1,'control_motor_init(void):&#160;control_motor.c'],['../group___control_motor.html#ga78eb73797c69058669b1a02c4a323a2b',1,'control_motor_init(void):&#160;control_motor.c']]]
 ];

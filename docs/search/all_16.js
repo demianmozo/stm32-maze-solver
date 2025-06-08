@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['⚙️_20especificaciones_20técnicas_0',['⚙️ Especificaciones Técnicas',['../index.html#autotoc_md4',1,'']]]
+  ['🎯_20objetivos_20del_20proyecto_0',['🎯 Objetivos del Proyecto',['../index.html#autotoc_md6',1,'']]]
 ];

@@ -1,18 +1,13 @@
 var searchData=
 [
-  ['ld3_5fgpio_5fport_0',['LD3_GPIO_Port',['../main_8h.html#ae851c2d6146e6d4fac9f4a9983f5cf1f',1,'main.h']]],
-  ['ld3_5fpin_1',['LD3_Pin',['../main_8h.html#a71154fae0eacbdf882bd1481164f0652',1,'main.h']]],
-  ['ld4_5fgpio_5fport_2',['LD4_GPIO_Port',['../main_8h.html#a4cc05543336aab13c54fd6aa62fd4523',1,'main.h']]],
-  ['ld4_5fpin_3',['LD4_Pin',['../main_8h.html#a6664d0311f9f672b321e0daff34b7ad4',1,'main.h']]],
-  ['ld5_5fgpio_5fport_4',['LD5_GPIO_Port',['../main_8h.html#a58b48323bdbf7421c8d6e9e3e050ebad',1,'main.h']]],
-  ['ld5_5fpin_5',['LD5_Pin',['../main_8h.html#aee7b888dd4dbc9a801963f319ed98b11',1,'main.h']]],
-  ['ld6_5fgpio_5fport_6',['LD6_GPIO_Port',['../main_8h.html#a4154850b2c5b4cfc8bbdd4c3b5abd0eb',1,'main.h']]],
-  ['ld6_5fpin_7',['LD6_Pin',['../main_8h.html#af752fb7d74e778ecaf48784c6f2fa107',1,'main.h']]],
-  ['leftsensor_5fgpio_5fport_8',['LeftSensor_GPIO_Port',['../main_8h.html#a163c9e6f493dba4cb4f5dece50145180',1,'main.h']]],
-  ['leftsensor_5fpin_9',['LeftSensor_Pin',['../main_8h.html#adc9e7b6bc16d2170c94594adab486663',1,'main.h']]],
-  ['linesensor_5fgpio_5fport_10',['LineSensor_GPIO_Port',['../main_8h.html#a3207d98854f1e48e9bf8bd81f47ae02f',1,'main.h']]],
-  ['linesensor_5fpin_11',['LineSensor_Pin',['../main_8h.html#ad5070a742757d17684fb3d06a60a15d4',1,'main.h']]],
-  ['lse_5fstartup_5ftimeout_12',['LSE_STARTUP_TIMEOUT',['../stm32f4xx__hal__conf_8h.html#a85e6fc812dc26f7161a04be2568a5462',1,'stm32f4xx_hal_conf.h']]],
-  ['lse_5fvalue_13',['LSE_VALUE',['../stm32f4xx__hal__conf_8h.html#a7bbb9d19e5189a6ccd0fb6fa6177d20d',1,'stm32f4xx_hal_conf.h']]],
-  ['lsi_5fvalue_14',['LSI_VALUE',['../stm32f4xx__hal__conf_8h.html#a4872023e65449c0506aac3ea6bec99e9',1,'stm32f4xx_hal_conf.h']]]
+  ['pc14_5fosc32_5fin_5fgpio_5fport_0',['PC14_OSC32_IN_GPIO_Port',['../main_8h.html#ac1324283f34366c96d7372e4ee4c603a',1,'main.h']]],
+  ['pc14_5fosc32_5fin_5fpin_1',['PC14_OSC32_IN_Pin',['../main_8h.html#a7d43c0c8b91a6510d9f474f78f57e5c9',1,'main.h']]],
+  ['pc15_5fosc32_5fout_5fgpio_5fport_2',['PC15_OSC32_OUT_GPIO_Port',['../main_8h.html#a77c4021efe27a551dc9d2884422b0fae',1,'main.h']]],
+  ['pc15_5fosc32_5fout_5fpin_3',['PC15_OSC32_OUT_Pin',['../main_8h.html#a4b7e48c6ffe3574f97f8fce18cae84de',1,'main.h']]],
+  ['pdm_5fout_5fgpio_5fport_4',['PDM_OUT_GPIO_Port',['../main_8h.html#a4280a19febddfe45250a2bf9f8207426',1,'main.h']]],
+  ['pdm_5fout_5fpin_5',['PDM_OUT_Pin',['../main_8h.html#aea51bcb3fe50a8b747169a864b413229',1,'main.h']]],
+  ['ph0_5fosc_5fin_5fgpio_5fport_6',['PH0_OSC_IN_GPIO_Port',['../main_8h.html#af8885fc2f50640cd8bb5084cd998088b',1,'main.h']]],
+  ['ph0_5fosc_5fin_5fpin_7',['PH0_OSC_IN_Pin',['../main_8h.html#addb0c037a01bd73baaf9f7d5a0379ac4',1,'main.h']]],
+  ['ph1_5fosc_5fout_5fgpio_5fport_8',['PH1_OSC_OUT_GPIO_Port',['../main_8h.html#a5b80653bbe01e9d4f334c74bdc5bc9f6',1,'main.h']]],
+  ['ph1_5fosc_5fout_5fpin_9',['PH1_OSC_OUT_Pin',['../main_8h.html#ac4d4c1fdbc6cd7491c705bd332f15693',1,'main.h']]]
 ];
