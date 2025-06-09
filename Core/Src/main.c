@@ -58,6 +58,8 @@ TIM_HandleTypeDef htim3;
 
 /* USER CODE BEGIN PV */
 
+brujula sentido;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -121,6 +123,8 @@ int main(void)
   // Inicializar el módulo de motores
   control_motor_init();
 
+  sentido = norte;			//empieza apuntando al norte
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -134,18 +138,22 @@ int main(void)
 
     // OJO SOLO PARA PROBAR EL LUNES LOS TIEMPOS DE LOS GIROS
     avanza(); // Comenzar avanzando 1 SEGUNDO
+    HAL_GPIO_WritePin(puerto_leds, verde, GPIO_PIN_SET);
     HAL_Delay(1000);
 
     // Simular detección de pared - girar a la derecha
-    gira90der(); // Gira Y SIGUE AVANZANDO POR 2 SEGUNDOS
+    sentido = gira90der(sentido); // Gira Y SIGUE AVANZANDO POR 2 SEGUNDOS
+    HAL_GPIO_WritePin(puerto_leds, naranja, GPIO_PIN_SET);
     HAL_Delay(2000);
 
     // Otro obstáculo - girar a la izquierda
-    gira90izq(); // Gira Y SIGUE AVANZANDO
+    sentido = gira90izq(sentido); // Gira Y SIGUE AVANZANDO
+    HAL_GPIO_WritePin(puerto_leds, rojo, GPIO_PIN_SET);
     HAL_Delay(2000);
 
     // Callejón sin salida - dar media vuelta
-    gira180(); // Gira Y SIGUE AVANZANDO POR 3 SEGUNDOS
+    sentido = gira180(sentido); // Gira Y SIGUE AVANZANDO POR 3 SEGUNDOS
+    HAL_GPIO_WritePin(puerto_leds, azul, GPIO_PIN_SET);
     HAL_Delay(3000);
 
     // SIMULA QUE TERMINÓ

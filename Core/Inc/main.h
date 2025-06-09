@@ -146,6 +146,13 @@ void Error_Handler(void);
 
 /* USER CODE BEGIN Private defines */
 
+#define verde GPIO_PIN_12			//definiciones para uso de leds (testeo)
+#define naranja GPIO_PIN_13
+#define rojo GPIO_PIN_14
+#define azul GPIO_PIN_15
+
+#define puerto_leds GPIOD
+
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

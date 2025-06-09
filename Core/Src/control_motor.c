@@ -94,45 +94,102 @@ void avanza(void)
  * @brief Gira 90 grados a la izquierda y luego continúa avanzando
  * Motor izq retrocede, motor der avanza al 100%
  */
-void gira90izq(void)
+brujula gira90izq(brujula sentido)
 {
     set_motor_izq(MOTOR_RETROCESO, VELOCIDAD_GIRO);
     set_motor_der(MOTOR_AVANCE, VELOCIDAD_GIRO);
 
     HAL_Delay(TIEMPO_GIRO_90);
+    switch(sentido)
+    {
+    	case norte:
+    	sentido = oeste;
+    	break;
+
+    	case este:
+    	sentido = norte;
+    	break;
+
+    	case sur:
+    	sentido = este;
+    	break;
+
+    	case oeste:
+    	sentido = sur;
+    	break;
+    }
 
     // Después del giro, continuar avanzando
     avanza();
+    return sentido;
 }
 
 /**
  * @brief Gira 90 grados a la derecha y luego continúa avanzando
  * Motor der retrocede, motor izq avanza al 100%
  */
-void gira90der(void)
+brujula gira90der(brujula sentido)
 {
     set_motor_izq(MOTOR_AVANCE, VELOCIDAD_GIRO);
     set_motor_der(MOTOR_RETROCESO, VELOCIDAD_GIRO);
 
     HAL_Delay(TIEMPO_GIRO_90);
+    switch(sentido)
+    {
+    	case norte:
+    	sentido = este;
+    	break;
+
+    	case este:
+    	sentido = sur;
+    	break;
+
+    	case sur:
+    	sentido = oeste;
+    	break;
+
+    	case oeste:
+    	sentido = norte;
+    	break;
+    }
 
     // Después del giro, continuar avanzando
     avanza();
+    return sentido;
 }
 
 /**
  * @brief Gira 180 grados y luego continúa avanzando
  * Motor der retrocede, motor izq avanza al 100%
  */
-void gira180(void)
+brujula gira180(brujula sentido)
 {
     set_motor_izq(MOTOR_AVANCE, VELOCIDAD_GIRO);
     set_motor_der(MOTOR_RETROCESO, VELOCIDAD_GIRO);
 
     HAL_Delay(TIEMPO_GIRO_180);
+    switch(sentido)
+    {
+    	case norte:
+    	sentido = sur;
+    	break;
+
+    	case este:
+    	sentido = oeste;
+    	break;
+
+    	case sur:
+    	sentido = norte;
+    	break;
+
+    	case oeste:
+    	sentido = este;
+    	break;
+    }
 
     // Después del giro, continuar avanzando
     avanza();
+    return sentido;
 }
 
 /**
