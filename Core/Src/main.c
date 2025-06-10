@@ -63,7 +63,9 @@ TIM_HandleTypeDef htim3;
 /* USER CODE BEGIN PV */
 uint8_t fila_actual = 4, columna_actual = 4;
 brujula sentido_actual = norte;
-bool terminado = false; // Flag de finalización
+bool terminado = false;             // Flag de finalización
+uint16_t TIEMPO_AVANCE_LINEA = 700; // Exploración
+bool modo_sprint = false;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -78,7 +80,10 @@ static void MX_TIM3_Init(void);
 void MX_USB_HOST_Process(void);
 
 /* USER CODE BEGIN PFP */
-
+void chequeolinea(void);
+void chequeomuro(void);
+void chequeolinearecta(void);
+void reset_posicion_pushbutton(void);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -139,6 +144,12 @@ int main(void)
     /* USER CODE BEGIN 3 */
     if (!terminado) // Solo ejecutar si no ha terminado
     {
+      // ASI DEBERIA QUEDAR EL MAIN
+      /*    chequeolinea();
+            chequeomuro();
+            chequeolinearecta();
+            reset_posicion_pushbutton(); // ⚡ I AM SPEED button */
+
       // OJO SOLO PARA PROBAR EL LUNES LOS TIEMPOS DE LOS GIROS
       avanza(); // Comenzar avanzando 1 SEGUNDO
       HAL_Delay(1000);
@@ -503,11 +514,11 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Alternate = GPIO_AF5_SPI2;
   HAL_GPIO_Init(PDM_OUT_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : B1_Pin */
-  GPIO_InitStruct.Pin = B1_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_EVT_RISING;
+  /*Configure GPIO pin : i_am_speed_Pin */
+  GPIO_InitStruct.Pin = i_am_speed_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(i_am_speed_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : BOOT1_Pin */
   GPIO_InitStruct.Pin = BOOT1_Pin;
@@ -588,7 +599,7 @@ void chequeolinea(void)
   if (antirebote(LineSensor_GPIO_Port, LineSensor_Pin))
   {
     // RETARDO DE UNOS MS
-    HAL_Delay(700);
+    HAL_Delay(TIEMPO_AVANCE_LINEA); // por si es sprint o no
 
     // Actualizar posición
     actualizar_posicion(&fila_actual, &columna_actual, sentido_actual);
@@ -625,6 +636,23 @@ void chequeomuro(void)
 
     // 4. Ejecutar movimiento LO QUE HIZO EL COLO YA ACTUALIZA EL SENTIDO ACTUAL SOLO
     sentido_actual = ejecutar_movimiento(sentido_actual, sentido_deseado);
+  }
+}
+
+// VELOCIDAD
+void reset_posicion_pushbutton(void)
+{
+  if (antirebote(i_am_speed_GPIO_Port, i_am_speed_Pin))
+  {
+
+    // Resetear posición
+    fila_actual = 4;
+    columna_actual = 4;
+    sentido_actual = norte;
+    terminado = false;
+
+    // ⚡ I AM SPEED!
+    activar_modo_sprint(); // Esta función está en control_motor.c
   }
 }
 

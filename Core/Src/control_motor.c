@@ -6,6 +6,13 @@
 
 extern TIM_HandleTypeDef htim3; // usa el timer 3 para PWM
 
+uint16_t VELOCIDAD_AVANCE = VELOCIDAD_EXPLORACION; // Inicializa en modo lento
+
+void activar_modo_sprint(void)
+{
+    VELOCIDAD_AVANCE = VELOCIDAD_SPRINT;
+}
+
 /**
  * @brief Inicializa el control de motores
  */
@@ -100,30 +107,29 @@ brujula gira90izq(brujula sentido)
     set_motor_der(MOTOR_AVANCE, VELOCIDAD_GIRO);
 
     HAL_Delay(TIEMPO_GIRO_90);
-    switch(sentido)
+    switch (sentido)
     {
-    	case norte:
-    	sentido = oeste;
-    	break;
+    case norte:
+        sentido = oeste;
+        break;
 
-    	case este:
-    	sentido = norte;
-    	break;
+    case este:
+        sentido = norte;
+        break;
 
-    	case sur:
-    	sentido = este;
-    	break;
+    case sur:
+        sentido = este;
+        break;
 
-    	case oeste:
-    	sentido = sur;
-    	break;
+    case oeste:
+        sentido = sur;
+        break;
     }
 
     // Después del giro, continuar avanzando
     avanza();
     return sentido;
 }
-
 
 /**
  * @brief Gira 90 grados a la derecha y luego continúa avanzando
@@ -135,23 +141,23 @@ brujula gira90der(brujula sentido)
     set_motor_der(MOTOR_RETROCESO, VELOCIDAD_GIRO);
 
     HAL_Delay(TIEMPO_GIRO_90);
-    switch(sentido)
+    switch (sentido)
     {
-    	case norte:
-    	sentido = este;
-    	break;
+    case norte:
+        sentido = este;
+        break;
 
-    	case este:
-    	sentido = sur;
-    	break;
+    case este:
+        sentido = sur;
+        break;
 
-    	case sur:
-    	sentido = oeste;
-    	break;
+    case sur:
+        sentido = oeste;
+        break;
 
-    	case oeste:
-    	sentido = norte;
-    	break;
+    case oeste:
+        sentido = norte;
+        break;
     }
 
     // Después del giro, continuar avanzando
@@ -169,30 +175,29 @@ brujula gira180(brujula sentido)
     set_motor_der(MOTOR_RETROCESO, VELOCIDAD_GIRO);
 
     HAL_Delay(TIEMPO_GIRO_180);
-    switch(sentido)
+    switch (sentido)
     {
-    	case norte:
-    	sentido = sur;
-    	break;
+    case norte:
+        sentido = sur;
+        break;
 
-    	case este:
-    	sentido = oeste;
-    	break;
+    case este:
+        sentido = oeste;
+        break;
 
-    	case sur:
-    	sentido = norte;
-    	break;
+    case sur:
+        sentido = norte;
+        break;
 
-    	case oeste:
-    	sentido = este;
-    	break;
+    case oeste:
+        sentido = este;
+        break;
     }
 
     // Después del giro, continuar avanzando
     avanza();
     return sentido;
 }
-
 
 /**
  * @brief Detiene ambos motores (cuando ganemos)
