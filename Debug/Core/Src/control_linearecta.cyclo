@@ -1,0 +1,7 @@
+../Core/Src/control_linearecta.c:16:6:HAL_ADC_ConvHalfCpltCallback	1
+../Core/Src/control_linearecta.c:21:6:HAL_ADC_ConvCpltCallback	1
+../Core/Src/control_linearecta.c:27:6:promediar_sensores	2
+../Core/Src/control_linearecta.c:44:6:auto_calibracion	1
+../Core/Src/control_linearecta.c:83:6:controlar_linea_recta	12
+../Core/Src/control_linearecta.c:109:6:correccion_izquierda	1
+../Core/Src/control_linearecta.c:115:6:correccion_derecha	1

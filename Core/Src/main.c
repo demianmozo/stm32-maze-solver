@@ -29,6 +29,7 @@
 #include "control_motor.h"
 #include "laberinto.h"
 #include "navegacion.h"
+#include "control_linearecta.h"
 #include <stdint.h>
 #include <stdbool.h>
 /* USER CODE END Includes */
@@ -40,7 +41,6 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -63,9 +63,12 @@ TIM_HandleTypeDef htim3;
 /* USER CODE BEGIN PV */
 uint8_t fila_actual = 4, columna_actual = 4;
 brujula sentido_actual = norte;
-bool terminado = false;             // Flag de finalización
+bool terminado = false; // Flag de finalización
+
 uint16_t TIEMPO_AVANCE_LINEA = 700; // Exploración
 bool modo_sprint = false;
+
+uint16_t dma_buffer[BUFFER_TOTAL];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -84,6 +87,11 @@ void chequeolinea(void);
 void chequeomuro(void);
 void chequeolinearecta(void);
 void reset_posicion_pushbutton(void);
+void auto_calibracion(void);
+void promediar_sensores(uint16_t *buffer);
+void controlar_linea_recta(void);
+void correccion_izquierda(void);
+void correccion_derecha(void);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -128,10 +136,13 @@ int main(void)
   MX_ADC1_Init();
   MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
+  // Inicializar ADC con DMA primero
+  HAL_ADC_Start_DMA(&hadc1, (uint32_t *)dma_buffer, BUFFER_TOTAL);
 
+  // Auto-calibración (sin motores activos)
+  auto_calibracion();
   // Inicializar el módulo de motores
   control_motor_init();
-
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -147,10 +158,11 @@ int main(void)
       // ASI DEBERIA QUEDAR EL MAIN
       /*    chequeolinea();
             chequeomuro();
-            chequeolinearecta();
+            controlar_linea_recta();
+    }
             reset_posicion_pushbutton(); // ⚡ I AM SPEED button */
 
-      // OJO SOLO PARA PROBAR EL LUNES LOS TIEMPOS DE LOS GIROS
+      // OJO SOLO PARA PROBAR LOS TIEMPOS DE LOS GIROS
       avanza(); // Comenzar avanzando 1 SEGUNDO
       HAL_Delay(1000);
 
@@ -604,7 +616,7 @@ void chequeolinea(void)
     // Actualizar posición
     actualizar_posicion(&fila_actual, &columna_actual, sentido_actual);
 
-    // ¿Meta?
+    // terminó?
     if (fila_actual == 1 && columna_actual == 1)
     {
       termino();
@@ -652,7 +664,8 @@ void reset_posicion_pushbutton(void)
     terminado = false;
 
     // ⚡ I AM SPEED!
-    activar_modo_sprint(); // Esta función está en control_motor.c
+    activar_modo_sprint();     // Esta función está en control_motor.c
+    TIEMPO_AVANCE_LINEA = 400; // Reducir tiempo de avance a 400 ms
   }
 }
 

@@ -20,7 +20,7 @@ void laberinto_init(void)
             laberinto[fila - 1][columna - 1].posicion.fila = fila;
             laberinto[fila - 1][columna - 1].posicion.columna = columna;
 
-            // Calcular peso inicial (distancia Manhattan jaja sape a la meta)
+            // Calcular peso inicial (distancia jaja sape a la meta)
             uint8_t distancia_fila = (fila > POSICION_META_FILA) ? (fila - POSICION_META_FILA) : (POSICION_META_FILA - fila);
             uint8_t distancia_columna = (columna > POSICION_META_COLUMNA) ? (columna - POSICION_META_COLUMNA) : (POSICION_META_COLUMNA - columna);
 

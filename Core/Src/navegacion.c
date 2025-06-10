@@ -64,7 +64,7 @@
      case 3: // Girar 90° a la izquierda
          return gira90izq(sentido_actual);
 
-     default: // No debería pasar (caso 0)
+     default: // No debería pasar (caso 0) pero pola dice que siempre se pone default
          avanza();
          return sentido_actual;
      }

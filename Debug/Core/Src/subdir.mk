@@ -6,6 +6,7 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../Core/Src/antirebote.c \
+../Core/Src/control_linearecta.c \
 ../Core/Src/control_motor.c \
 ../Core/Src/laberinto.c \
 ../Core/Src/main.c \
@@ -18,6 +19,7 @@ C_SRCS += \
 
 OBJS += \
 ./Core/Src/antirebote.o \
+./Core/Src/control_linearecta.o \
 ./Core/Src/control_motor.o \
 ./Core/Src/laberinto.o \
 ./Core/Src/main.o \
@@ -30,6 +32,7 @@ OBJS += \
 
 C_DEPS += \
 ./Core/Src/antirebote.d \
+./Core/Src/control_linearecta.d \
 ./Core/Src/control_motor.d \
 ./Core/Src/laberinto.d \
 ./Core/Src/main.d \
@@ -48,7 +51,7 @@ Core/Src/%.o Core/Src/%.su Core/Src/%.cyclo: ../Core/Src/%.c Core/Src/subdir.mk
 clean: clean-Core-2f-Src
 
 clean-Core-2f-Src:
-	-$(RM) ./Core/Src/antirebote.cyclo ./Core/Src/antirebote.d ./Core/Src/antirebote.o ./Core/Src/antirebote.su ./Core/Src/control_motor.cyclo ./Core/Src/control_motor.d ./Core/Src/control_motor.o ./Core/Src/control_motor.su ./Core/Src/laberinto.cyclo ./Core/Src/laberinto.d ./Core/Src/laberinto.o ./Core/Src/laberinto.su ./Core/Src/main.cyclo ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/main.su ./Core/Src/navegacion.cyclo ./Core/Src/navegacion.d ./Core/Src/navegacion.o ./Core/Src/navegacion.su ./Core/Src/stm32f4xx_hal_msp.cyclo ./Core/Src/stm32f4xx_hal_msp.d ./Core/Src/stm32f4xx_hal_msp.o ./Core/Src/stm32f4xx_hal_msp.su ./Core/Src/stm32f4xx_it.cyclo ./Core/Src/stm32f4xx_it.d ./Core/Src/stm32f4xx_it.o ./Core/Src/stm32f4xx_it.su ./Core/Src/syscalls.cyclo ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/syscalls.su ./Core/Src/sysmem.cyclo ./Core/Src/sysmem.d ./Core/Src/sysmem.o ./Core/Src/sysmem.su ./Core/Src/system_stm32f4xx.cyclo ./Core/Src/system_stm32f4xx.d ./Core/Src/system_stm32f4xx.o ./Core/Src/system_stm32f4xx.su
+	-$(RM) ./Core/Src/antirebote.cyclo ./Core/Src/antirebote.d ./Core/Src/antirebote.o ./Core/Src/antirebote.su ./Core/Src/control_linearecta.cyclo ./Core/Src/control_linearecta.d ./Core/Src/control_linearecta.o ./Core/Src/control_linearecta.su ./Core/Src/control_motor.cyclo ./Core/Src/control_motor.d ./Core/Src/control_motor.o ./Core/Src/control_motor.su ./Core/Src/laberinto.cyclo ./Core/Src/laberinto.d ./Core/Src/laberinto.o ./Core/Src/laberinto.su ./Core/Src/main.cyclo ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/main.su ./Core/Src/navegacion.cyclo ./Core/Src/navegacion.d ./Core/Src/navegacion.o ./Core/Src/navegacion.su ./Core/Src/stm32f4xx_hal_msp.cyclo ./Core/Src/stm32f4xx_hal_msp.d ./Core/Src/stm32f4xx_hal_msp.o ./Core/Src/stm32f4xx_hal_msp.su ./Core/Src/stm32f4xx_it.cyclo ./Core/Src/stm32f4xx_it.d ./Core/Src/stm32f4xx_it.o ./Core/Src/stm32f4xx_it.su ./Core/Src/syscalls.cyclo ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/syscalls.su ./Core/Src/sysmem.cyclo ./Core/Src/sysmem.d ./Core/Src/sysmem.o ./Core/Src/sysmem.su ./Core/Src/system_stm32f4xx.cyclo ./Core/Src/system_stm32f4xx.d ./Core/Src/system_stm32f4xx.o ./Core/Src/system_stm32f4xx.su
 
 .PHONY: clean-Core-2f-Src
 
