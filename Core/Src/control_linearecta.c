@@ -23,7 +23,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
     promediar_sensores(&dma_buffer[BUFFER_MINIMO]);
 }
 
-// Función promediar
+// Función promediar se ejecuta constantemente en DMA
 void promediar_sensores(uint16_t *buffer)
 {
     uint32_t izq_sum = 0, der_sum = 0;
@@ -86,34 +86,19 @@ void controlar_linea_recta(void)
         return;
 
     // Determinar posición relativa
-    bool muy_cerca_izq = (sensor_izq_avg < izq_cerca + 100);
+    bool muy_cerca_izq = (sensor_izq_avg < izq_cerca + 100); // +100 para tolerancia
     bool muy_cerca_der = (sensor_der_avg < der_cerca + 100);
-    bool centrado_izq = (sensor_izq_avg > izq_centrado - 200 && sensor_izq_avg < izq_centrado + 200);
-    bool centrado_der = (sensor_der_avg > der_centrado - 200 && sensor_der_avg < der_centrado + 200);
 
-    if (muy_cerca_izq && centrado_der)
+    if (muy_cerca_izq)
     {
         correccion_derecha();
     }
-    else if (muy_cerca_der && centrado_izq)
+    else if (muy_cerca_der)
     {
         correccion_izquierda();
     }
-    else if (centrado_izq && centrado_der)
+    else
     {
         avanza();
     }
-}
-
-// Funciones de corrección
-void correccion_izquierda(void)
-{
-    // TODO: Implementar
-    // Reducir velocidad motor izquierdo, mantener derecho
-}
-
-void correccion_derecha(void)
-{
-    // TODO: Implementar
-    // Reducir velocidad motor derecho, mantener izquierdo
 }

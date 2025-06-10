@@ -17,13 +17,13 @@
 #include "main.h"
 
 /* Definiciones para control de motores */
-//#define VELOCIDAD_AVANCE 700 // 70% de 1000 (período del timer) 
-// Variables de velocidad configurables para modo sprint
+// #define VELOCIDAD_AVANCE 700 // 70% de 1000 (período del timer)
+//  Variables de velocidad configurables para modo sprint
 extern uint16_t VELOCIDAD_AVANCE; // Variable en lugar de #define
 void activar_modo_sprint(void);   // Declaración
 #define VELOCIDAD_EXPLORACION 700 // 70% - Modo aprendizaje
 #define VELOCIDAD_SPRINT 900      // 90% - Modo velocidad máxima
-#define VELOCIDAD_GIRO 1000  // 100% de 1000 (período del timer) VELOCIDAD CUANDO GIRA
+#define VELOCIDAD_GIRO 1000       // 100% de 1000 (período del timer) VELOCIDAD CUANDO GIRA
 
 /* Tiempos de giro en milisegundos (ajustar según calibración) */
 #define TIEMPO_GIRO_90 500   // Tiempo para giro de 90 grados
@@ -40,10 +40,10 @@ void activar_modo_sprint(void);   // Declaración
  * | 1  | 1  | Frenado   |
  */
 
-typedef enum // Un enum es un tipo de dato que define un conjunto de 
-//constantes con nombres en lugar de usar números directamente.
-//para este caso, avance=0, retroceso=1, frenado=2
-//no se usan los nombres directamente xq chat dice que es una cagada usar strings en un micro, y no me compilaba creo que por eso
+typedef enum // Un enum es un tipo de dato que define un conjunto de
+// constantes con nombres en lugar de usar números directamente.
+// para este caso, avance=0, retroceso=1, frenado=2
+// no se usan los nombres directamente xq chat dice que es una cagada usar strings en un micro, y no me compilaba creo que por eso
 {
     MOTOR_AVANCE = 0, // M1=0, M0=1
     MOTOR_RETROCESO,  // M1=1, M0=0
@@ -124,6 +124,9 @@ void set_motor_izq(motor_estado_t estado, uint16_t pwm);
  * @details Controla pines MD0/MD1 para dirección y Vel_D para velocidad
  */
 void set_motor_der(motor_estado_t estado, uint16_t pwm);
+
+void correccion_izquierda(void);
+void correccion_derecha(void);
 
 /** @} */ // fin grupo ControlMotorAux
 

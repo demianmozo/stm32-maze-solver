@@ -207,3 +207,15 @@ void termino(void)
     set_motor_izq(MOTOR_FRENADO, 0);
     set_motor_der(MOTOR_FRENADO, 0);
 }
+
+void correccion_izquierda(void)
+{
+    __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 80);  // Motor izq más lento
+    __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, 100); // Motor der normal
+}
+
+void correccion_derecha(void)
+{
+    __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 100); // Motor izq normal
+    __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, 80);  // Motor der más lento
+}
