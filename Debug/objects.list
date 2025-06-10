@@ -1,6 +1,8 @@
 "./Core/Src/antirebote.o"
 "./Core/Src/control_motor.o"
+"./Core/Src/laberinto.o"
 "./Core/Src/main.o"
+"./Core/Src/navegacion.o"
 "./Core/Src/stm32f4xx_hal_msp.o"
 "./Core/Src/stm32f4xx_it.o"
 "./Core/Src/syscalls.o"

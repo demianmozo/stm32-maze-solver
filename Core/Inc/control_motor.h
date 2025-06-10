@@ -45,6 +45,14 @@ typedef enum // Un enum es un tipo de dato que define un conjunto de
     MOTOR_FRENADO     // M1=0, M0=0 o M1=1, M0=1
 } motor_estado_t;
 
+typedef enum // enumeracion para variable de brujula
+{
+    norte = 0,
+    este,
+    sur,
+    oeste
+} brujula;
+
 /**
  * @defgroup ControlMotor Control de Motores
  * @brief Funciones para navegación del robot en el laberinto
@@ -68,19 +76,19 @@ void avanza(void);
  * @brief Gira 90 grados a la izquierda y continúa avanzando
  * @details Motor izquierdo retrocede, motor derecho avanza, al 100%
  */
-void gira90izq(void);
+brujula gira90izq(brujula sentido);
 
 /**
  * @brief Gira 90 grados a la derecha y continúa avanzando
  * @details Motor derecho retrocede, motor izquierdo avanza, al 100%
  */
-void gira90der(void);
+brujula gira90der(brujula sentido);
 
 /**
  * @brief Gira 180 grados y continúa avanzando
  * @details Motor derecho retrocede, motor izquierdo avanza, al 100%
  */
-void gira180(void);
+brujula gira180(brujula sentido);
 
 /**
  * @brief Detiene ambos motores completamente

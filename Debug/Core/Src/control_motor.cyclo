@@ -2,7 +2,7 @@
 ../Core/Src/control_motor.c:27:6:set_motor_izq	3
 ../Core/Src/control_motor.c:58:6:set_motor_der	3
 ../Core/Src/control_motor.c:87:6:avanza	1
-../Core/Src/control_motor.c:97:6:gira90izq	1
-../Core/Src/control_motor.c:112:6:gira90der	1
-../Core/Src/control_motor.c:127:6:gira180	1
-../Core/Src/control_motor.c:141:6:termino	1
+../Core/Src/control_motor.c:97:9:gira90izq	5
+../Core/Src/control_motor.c:132:9:gira90der	5
+../Core/Src/control_motor.c:166:9:gira180	5
+../Core/Src/control_motor.c:200:6:termino	1

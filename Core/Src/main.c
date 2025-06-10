@@ -25,8 +25,12 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "control_motor.h"
 #include "antirebote.h"
+#include "control_motor.h"
+#include "laberinto.h"
+#include "navegacion.h"
+#include <stdint.h>
+#include <stdbool.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -57,7 +61,9 @@ SPI_HandleTypeDef hspi1;
 TIM_HandleTypeDef htim3;
 
 /* USER CODE BEGIN PV */
-
+uint8_t fila_actual = 4, columna_actual = 4;
+brujula sentido_actual = norte;
+bool terminado = false; // Flag de finalización
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -131,48 +137,31 @@ int main(void)
     MX_USB_HOST_Process();
 
     /* USER CODE BEGIN 3 */
+    if (!terminado) // Solo ejecutar si no ha terminado
+    {
+      // OJO SOLO PARA PROBAR EL LUNES LOS TIEMPOS DE LOS GIROS
+      avanza(); // Comenzar avanzando 1 SEGUNDO
+      HAL_Delay(1000);
 
-    // OJO SOLO PARA PROBAR EL LUNES LOS TIEMPOS DE LOS GIROS
-    avanza(); // Comenzar avanzando 1 SEGUNDO
-    HAL_Delay(1000);
+      // Simular detección de pared - girar a la derecha
+      sentido_actual = gira90der(sentido_actual); // Gira Y SIGUE AVANZANDO POR 2 SEGUNDOS
+      HAL_Delay(2000);
 
-    // Simular detección de pared - girar a la derecha
-    gira90der(); // Gira Y SIGUE AVANZANDO POR 2 SEGUNDOS
-    HAL_Delay(2000);
+      // Otro obstáculo - girar a la izquierda
+      sentido_actual = gira90izq(sentido_actual); // Gira Y SIGUE AVANZANDO
+      HAL_Delay(2000);
 
-    // Otro obstáculo - girar a la izquierda
-    gira90izq(); // Gira Y SIGUE AVANZANDO
-    HAL_Delay(2000);
+      // Callejón sin salida - dar media vuelta
+      sentido_actual = gira180(sentido_actual); // Gira Y SIGUE AVANZANDO POR 3 SEGUNDOS
+      HAL_Delay(3000);
 
-    // Callejón sin salida - dar media vuelta
-    gira180(); // Gira Y SIGUE AVANZANDO POR 3 SEGUNDOS
-    HAL_Delay(3000);
+      // SIMULA QUE TERMINÓ
+      termino();       // Usando tu función
+      HAL_Delay(5000); // Pausa antes de reiniciar
+    }
 
-    // SIMULA QUE TERMINÓ
-    termino();
-    HAL_Delay(5000); // Pausa antes de reiniciar
+    // Aquí se podría agregar el festejo
   }
-
-  /*  // EJEMPLO PARA PROBAR SENSIBILIDAD DE LOS SENSORES DIGITALES
-   if (antirebote(WallSensor_GPIO_Port, WallSensor_Pin))
-   {
-     // Detectó muro, gira a la derecha
-     gira90der();
-   }
-
-   // Avanzar por defecto
-   avanza();
-
-   // Ejemplo usando antirebote para línea de cuadrícula
-   if (antirebote(LineSensor_GPIO_Port, LineSensor_Pin))
-   {
-     // Cruzó una línea, contar celda
-     // tu_funcion_contar_celda();
-   }
-
- // Avanzar por defecto
- avanza(); */
-
   /* USER CODE END 3 */
 }
 
@@ -573,6 +562,71 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+// FUNCION QUE ACTUALIZA LA POSICION CADA VEZ QUE SE CRUZA UNA LINEA
+void actualizar_posicion(uint8_t *fila, uint8_t *columna, brujula sentido)
+{
+  switch (sentido)
+  {
+  case norte:
+    (*fila)--;
+    break;
+  case este:
+    (*columna)++;
+    break;
+  case sur:
+    (*fila)++;
+    break;
+  case oeste:
+    (*columna)--;
+    break;
+  }
+}
+
+// FUNCION CHEQUEO LINEA
+void chequeolinea(void)
+{
+  if (antirebote(LineSensor_GPIO_Port, LineSensor_Pin))
+  {
+    // RETARDO DE UNOS MS
+    HAL_Delay(700);
+
+    // Actualizar posición
+    actualizar_posicion(&fila_actual, &columna_actual, sentido_actual);
+
+    // ¿Meta?
+    if (fila_actual == 1 && columna_actual == 1)
+    {
+      termino();
+      terminado = true;
+      return;
+    }
+
+    // Calcular y ejecutar
+    brujula sentido_deseado = calcular_mejor_direccion(fila_actual, columna_actual); // funcion definida en navegacion.h
+    sentido_actual = ejecutar_movimiento(sentido_actual, sentido_deseado);           // funcion definida en navegacion.h
+  }
+}
+
+// FUNCION CHEQUEO MURO
+void chequeomuro(void)
+{
+
+  if (antirebote(WallSensor_GPIO_Port, WallSensor_Pin))
+  {
+
+    // 1. Registrar el muro detectado
+    laberinto_set_muro(fila_actual, columna_actual, sentido_actual);
+
+    // 2. Recalcular todos los pesos con el nuevo muro
+    laberinto_recalcular_pesos();
+
+    // 3. Calcular nueva mejor dirección
+    brujula sentido_deseado = calcular_mejor_direccion(fila_actual, columna_actual);
+
+    // 4. Ejecutar movimiento LO QUE HIZO EL COLO YA ACTUALIZA EL SENTIDO ACTUAL SOLO
+    sentido_actual = ejecutar_movimiento(sentido_actual, sentido_deseado);
+  }
+}
 
 /* USER CODE END 4 */
 
