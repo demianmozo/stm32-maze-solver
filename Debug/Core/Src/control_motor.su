@@ -1,8 +1,0 @@
-../Core/Src/control_motor.c:12:6:control_motor_init	8	static
-../Core/Src/control_motor.c:27:6:set_motor_izq	16	static
-../Core/Src/control_motor.c:58:6:set_motor_der	16	static
-../Core/Src/control_motor.c:87:6:avanza	8	static
-../Core/Src/control_motor.c:97:6:gira90izq	8	static
-../Core/Src/control_motor.c:112:6:gira90der	8	static
-../Core/Src/control_motor.c:127:6:gira180	8	static
-../Core/Src/control_motor.c:141:6:termino	8	static
