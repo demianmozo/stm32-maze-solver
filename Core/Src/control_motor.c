@@ -3,8 +3,11 @@
  * @brief Implementación del módulo de control de motores.
  */
 #include "control_motor.h"
+#include <stdbool.h>
 
 extern TIM_HandleTypeDef htim3; // usa el timer 3 para PWM
+extern volatile bool flag_linea_detectada; //flag linea
+extern volatile bool flag_muro_detectado;//flag muro
 
 uint16_t VELOCIDAD_AVANCE = VELOCIDAD_EXPLORACION; // Inicializa en modo lento
 
@@ -212,10 +215,26 @@ void correccion_izquierda(void)
 {
     __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 80);  // Motor izq más lento
     __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, 100); // Motor der normal
+    for (int i = 0; i < 10; i++) // 10 ciclos de 10 ms = 100 ms de corrección
+{
+    if (flag_linea_detectada || flag_muro_detectado)
+        return; // Salir si hay algo urgente
+
+    HAL_Delay(10);
 }
+}
+
 
 void correccion_derecha(void)
 {
     __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 100); // Motor izq normal
     __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, 80);  // Motor der más lento
+    for (int i = 0; i < 10; i++) // 10 ciclos de 10 ms = 100 ms de corrección
+{
+    if (flag_linea_detectada || flag_muro_detectado)
+        return; // Salir si hay algo urgente
+
+    HAL_Delay(10);
 }
+}
+
