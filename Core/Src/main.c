@@ -69,6 +69,10 @@ uint16_t TIEMPO_AVANCE_LINEA = 700; // Exploración
 bool modo_sprint = false;
 
 uint16_t dma_buffer[BUFFER_TOTAL];
+
+// NUEVAS BANDERAS PARA INTERRUPCIONES
+volatile bool flag_linea_detectada = false;
+volatile bool flag_muro_detectado = false;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -153,39 +157,55 @@ int main(void)
     MX_USB_HOST_Process();
 
     /* USER CODE BEGIN 3 */
-    if (!terminado) // Solo ejecutar si no ha terminado
+    if (!terminado)
     {
-      // ASI DEBERIA QUEDAR EL MAIN
-      /*    chequeolinea();
-            chequeomuro();
-            controlar_linea_recta();
-    }
-            reset_posicion_pushbutton(); // ⚡ I AM SPEED button */
+      // PROCESAR FLAGS CON PRIORIDAD: LÍNEA > MURO
 
-      // OJO SOLO PARA PROBAR LOS TIEMPOS DE LOS GIROS
-      avanza(); // Comenzar avanzando 1 SEGUNDO
-      HAL_Delay(1000);
-
-      // Simular detección de pared - girar a la derecha
-      sentido_actual = gira90der(sentido_actual); // Gira Y SIGUE AVANZANDO POR 2 SEGUNDOS
-      HAL_Delay(2000);
-
-      // Otro obstáculo - girar a la izquierda
-      sentido_actual = gira90izq(sentido_actual); // Gira Y SIGUE AVANZANDO
-      HAL_Delay(2000);
-
-      // Callejón sin salida - dar media vuelta
-      sentido_actual = gira180(sentido_actual); // Gira Y SIGUE AVANZANDO POR 3 SEGUNDOS
-      HAL_Delay(3000);
-
-      // SIMULA QUE TERMINÓ
-      termino();       // Usando tu función
-      HAL_Delay(5000); // Pausa antes de reiniciar
+      if (flag_linea_detectada)
+      {
+        flag_linea_detectada = false; // Clear flag PRIMERO
+        chequeolinea();               // Ejecutar función completa
+      }
+      else if (flag_muro_detectado)
+      {                              // else if = prioridad a línea
+        flag_muro_detectado = false; // Clear flag PRIMERO
+        chequeomuro();               // Ejecutar función completa
+      }
+      else
+      {
+        // Solo ejecutar control de línea recta si NO hay interrupciones pendientes
+        // FALTA HACER: HACER BREAKS DENTRO DE CONTROLAR_LINEA_RECTA PARA VERIFICAR SI HAY MURO O LINEA
+        controlar_linea_recta();
+      }
     }
 
-    // Aquí se podría agregar el festejo
+    reset_posicion_pushbutton(); // ⚡ I AM SPEED button
+
+    /*  // OJO SOLO PARA PROBAR LOS TIEMPOS DE LOS GIROS
+     avanza(); // Comenzar avanzando 1 SEGUNDO
+     HAL_Delay(1000);
+
+     // Simular detección de pared - girar a la derecha
+     sentido_actual = gira90der(sentido_actual); // Gira Y SIGUE AVANZANDO POR 2 SEGUNDOS
+     HAL_Delay(2000);
+
+     // Otro obstáculo - girar a la izquierda
+     sentido_actual = gira90izq(sentido_actual); // Gira Y SIGUE AVANZANDO
+     HAL_Delay(2000);
+
+     // Callejón sin salida - dar media vuelta
+     sentido_actual = gira180(sentido_actual); // Gira Y SIGUE AVANZANDO POR 3 SEGUNDOS
+     HAL_Delay(3000);
+
+     // SIMULA QUE TERMINÓ
+     termino();       // Usando tu función
+     HAL_Delay(5000); // Pausa antes de reiniciar
+   }
+
+   // Aquí se podría agregar el festejo
+ } */
+    /* USER CODE END 3 */
   }
-  /* USER CODE END 3 */
 }
 
 /**
@@ -563,7 +583,7 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pins : WallSensor_Pin LineSensor_Pin */
   GPIO_InitStruct.Pin = WallSensor_Pin | LineSensor_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
@@ -580,6 +600,9 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(MEMS_INT2_GPIO_Port, &GPIO_InitStruct);
 
   /* USER CODE BEGIN MX_GPIO_Init_2 */
+
+  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 1, 0); // Prioridad alta para ambos sensores
+  HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 
   /* USER CODE END MX_GPIO_Init_2 */
 }
@@ -666,6 +689,21 @@ void reset_posicion_pushbutton(void)
     // ⚡ I AM SPEED!
     activar_modo_sprint();     // Esta función está en control_motor.c
     TIEMPO_AVANCE_LINEA = 400; // Reducir tiempo de avance a 400 ms
+  }
+}
+
+//ATENCION A LA INTERRUPCION
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+  if (GPIO_Pin == LineSensor_Pin)
+  {
+    // Si se detecta línea, activar flag
+    flag_linea_detectada = true;
+  }
+  else if (GPIO_Pin == WallSensor_Pin)
+  {
+    // Si se detecta muro, activar flag
+    flag_muro_detectado = true;
   }
 }
 
