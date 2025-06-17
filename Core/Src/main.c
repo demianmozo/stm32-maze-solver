@@ -65,7 +65,7 @@ uint8_t fila_actual = 4, columna_actual = 4;
 brujula sentido_actual = norte;
 bool terminado = false; // Flag de finalización
 
-uint16_t TIEMPO_AVANCE_LINEA = 700; // Exploración
+uint16_t TIEMPO_AVANCE_LINEA = 300; // Exploración
 bool modo_sprint = false;
 
 uint16_t dma_buffer[BUFFER_TOTAL];

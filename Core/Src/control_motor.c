@@ -5,9 +5,9 @@
 #include "control_motor.h"
 #include <stdbool.h>
 
-extern TIM_HandleTypeDef htim3; // usa el timer 3 para PWM
-extern volatile bool flag_linea_detectada; //flag linea
-extern volatile bool flag_muro_detectado;//flag muro
+extern TIM_HandleTypeDef htim3;            // usa el timer 3 para PWM
+extern volatile bool flag_linea_detectada; // flag linea
+extern volatile bool flag_muro_detectado;  // flag muro
 
 uint16_t VELOCIDAD_AVANCE = VELOCIDAD_EXPLORACION; // Inicializa en modo lento
 
@@ -213,28 +213,27 @@ void termino(void)
 
 void correccion_izquierda(void)
 {
-    __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 400);  // Motor izq más lento
-    __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, 700); // Motor der normal
-    for (int i = 0; i < 10; i++) // 10 ciclos de 10 ms = 100 ms de corrección
-{
-    if (flag_linea_detectada || flag_muro_detectado)
-        return; // Salir si hay algo urgente
 
-    HAL_Delay(10);
-}
-}
+    __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_3, 100); // Motor izq más lento
+    __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_4, 700); // Motor der normal
+    /* for (int i = 0; i < 10; i++)                       // 10 ciclos de 10 ms = 100 ms de corrección
+    {
+        if (flag_linea_detectada || flag_muro_detectado)
+            return; // Salir si hay algo urgente
 
+        HAL_Delay(10);
+    } */
+}
 
 void correccion_derecha(void)
 {
-    __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 700); // Motor izq normal
-    __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, 400);  // Motor der más lento
-    for (int i = 0; i < 10; i++) // 10 ciclos de 10 ms = 100 ms de corrección
-{
-    if (flag_linea_detectada || flag_muro_detectado)
-        return; // Salir si hay algo urgente
+    __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_3, 700); // Motor izq normal
+    __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_4, 100); // Motor der más lento
+    /* for (int i = 0; i < 10; i++)                       // 10 ciclos de 10 ms = 100 ms de corrección
+    {
+        if (flag_linea_detectada || flag_muro_detectado)
+            return; // Salir si hay algo urgente
 
-    HAL_Delay(10);
+        HAL_Delay(10);
+    } */
 }
-}
-

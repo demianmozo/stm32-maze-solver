@@ -23,7 +23,7 @@ extern uint16_t VELOCIDAD_AVANCE; // Variable en lugar de #define
 void activar_modo_sprint(void);   // Declaración
 #define VELOCIDAD_EXPLORACION 700 // 70% - Modo aprendizaje
 #define VELOCIDAD_SPRINT 900      // 90% - Modo velocidad máxima
-#define VELOCIDAD_GIRO 1000       // 100% de 1000 (período del timer) VELOCIDAD CUANDO GIRA
+#define VELOCIDAD_GIRO 700        // 100% de 1000 (período del timer) VELOCIDAD CUANDO GIRA
 
 /* Tiempos de giro en milisegundos (ajustar según calibración) */
 #define TIEMPO_GIRO_90 380  // Tiempo para giro de 90 grados

@@ -2,4 +2,4 @@
 ../Core/Src/control_linearecta.c:24:6:HAL_ADC_ConvCpltCallback	1
 ../Core/Src/control_linearecta.c:30:6:promediar_sensores	2
 ../Core/Src/control_linearecta.c:47:6:auto_calibracion	1
-../Core/Src/control_linearecta.c:86:6:controlar_linea_recta	6
+../Core/Src/control_linearecta.c:86:6:controlar_linea_recta	10

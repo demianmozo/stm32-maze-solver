@@ -7,5 +7,5 @@
 ../Core/Src/control_motor.c:141:9:gira90der	5
 ../Core/Src/control_motor.c:175:9:gira180	5
 ../Core/Src/control_motor.c:208:6:termino	1
-../Core/Src/control_motor.c:214:6:correccion_izquierda	4
-../Core/Src/control_motor.c:228:6:correccion_derecha	4
+../Core/Src/control_motor.c:214:6:correccion_izquierda	1
+../Core/Src/control_motor.c:228:6:correccion_derecha	1
