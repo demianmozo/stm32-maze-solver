@@ -70,6 +70,9 @@ bool modo_sprint = false;
 
 uint16_t dma_buffer[BUFFER_TOTAL];
 
+volatile bool ultimo_estado_linea = true; // Asumimos que inicia en HIGH (no detectando)
+volatile bool ultimo_estado_muro = true;  // Asumimos que inicia en HIGH (no detectando)
+
 // NUEVAS BANDERAS PARA INTERRUPCIONES
 volatile bool flag_linea_detectada = false;
 volatile bool flag_muro_detectado = false;
@@ -631,47 +634,51 @@ void actualizar_posicion(uint8_t *fila, uint8_t *columna, brujula sentido)
 // FUNCION CHEQUEO LINEA
 void chequeolinea(void)
 {
-  if (antirebote(LineSensor_GPIO_Port, LineSensor_Pin))
+  // if (antirebote(LineSensor_GPIO_Port, LineSensor_Pin))
+  // {
+  // RETARDO DE UNOS MS
+  HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
+  HAL_Delay(TIEMPO_AVANCE_LINEA); // por si es sprint o no
+
+  // Actualizar posición
+  actualizar_posicion(&fila_actual, &columna_actual, sentido_actual);
+
+  // terminó?
+  if (fila_actual == 1 && columna_actual == 1)
   {
-    // RETARDO DE UNOS MS
-    HAL_Delay(TIEMPO_AVANCE_LINEA); // por si es sprint o no
-
-    // Actualizar posición
-    actualizar_posicion(&fila_actual, &columna_actual, sentido_actual);
-
-    // terminó?
-    if (fila_actual == 1 && columna_actual == 1)
-    {
-      termino();
-      terminado = true;
-      return;
-    }
-
-    // Calcular y ejecutar
-    brujula sentido_deseado = calcular_mejor_direccion(fila_actual, columna_actual); // funcion definida en navegacion.h
-    sentido_actual = ejecutar_movimiento(sentido_actual, sentido_deseado);           // funcion definida en navegacion.h
+    termino();
+    terminado = true;
+    return;
   }
+
+  // Calcular y ejecutar
+  brujula sentido_deseado = calcular_mejor_direccion(fila_actual, columna_actual); // funcion definida en navegacion.h
+  sentido_actual = ejecutar_movimiento(sentido_actual, sentido_deseado);           // funcion definida en navegacion.h
+  HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
+  //}
 }
 
 // FUNCION CHEQUEO MURO
 void chequeomuro(void)
 {
+  HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
+  // if (antirebote(WallSensor_GPIO_Port, WallSensor_Pin))
 
-  if (antirebote(WallSensor_GPIO_Port, WallSensor_Pin))
-  {
+  //{
 
-    // 1. Registrar el muro detectado
-    laberinto_set_muro(fila_actual, columna_actual, sentido_actual);
+  // 1. Registrar el muro detectado
+  laberinto_set_muro(fila_actual, columna_actual, sentido_actual);
 
-    // 2. Recalcular todos los pesos con el nuevo muro
-    laberinto_recalcular_pesos();
+  // 2. Recalcular todos los pesos con el nuevo muro
+  laberinto_recalcular_pesos();
 
-    // 3. Calcular nueva mejor dirección
-    brujula sentido_deseado = calcular_mejor_direccion(fila_actual, columna_actual);
+  // 3. Calcular nueva mejor dirección
+  brujula sentido_deseado = calcular_mejor_direccion(fila_actual, columna_actual);
 
-    // 4. Ejecutar movimiento LO QUE HIZO EL COLO YA ACTUALIZA EL SENTIDO ACTUAL SOLO
-    sentido_actual = ejecutar_movimiento(sentido_actual, sentido_deseado);
-  }
+  // 4. Ejecutar movimiento LO QUE HIZO EL COLO YA ACTUALIZA EL SENTIDO ACTUAL SOLO
+  sentido_actual = ejecutar_movimiento(sentido_actual, sentido_deseado);
+  //}
+  HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 }
 
 // VELOCIDAD
@@ -692,18 +699,36 @@ void reset_posicion_pushbutton(void)
   }
 }
 
-//ATENCION A LA INTERRUPCION
+// ATENCION A LA INTERRUPCION
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
   if (GPIO_Pin == LineSensor_Pin)
   {
-    // Si se detecta línea, activar flag
-    flag_linea_detectada = true;
+    // Leer estado actual del sensor
+    bool estado_actual = HAL_GPIO_ReadPin(LineSensor_GPIO_Port, LineSensor_Pin);
+
+    // Solo activar flag si hubo transición HIGH → LOW
+    if (ultimo_estado_linea == true && estado_actual == false)
+    {
+      flag_linea_detectada = true;
+    }
+
+    // Actualizar último estado
+    ultimo_estado_linea = estado_actual;
   }
   else if (GPIO_Pin == WallSensor_Pin)
   {
-    // Si se detecta muro, activar flag
-    flag_muro_detectado = true;
+    // Leer estado actual del sensor
+    bool estado_actual = HAL_GPIO_ReadPin(WallSensor_GPIO_Port, WallSensor_Pin);
+
+    // Solo activar flag si hubo transición HIGH → LOW
+    if (ultimo_estado_muro == true && estado_actual == false)
+    {
+      flag_muro_detectado = true;
+    }
+
+    // Actualizar último estado
+    ultimo_estado_muro = estado_actual;
   }
 }
 

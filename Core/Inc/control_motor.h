@@ -26,8 +26,8 @@ void activar_modo_sprint(void);   // Declaración
 #define VELOCIDAD_GIRO 1000       // 100% de 1000 (período del timer) VELOCIDAD CUANDO GIRA
 
 /* Tiempos de giro en milisegundos (ajustar según calibración) */
-#define TIEMPO_GIRO_90 500   // Tiempo para giro de 90 grados
-#define TIEMPO_GIRO_180 1000 // Tiempo para giro de 180 grados
+#define TIEMPO_GIRO_90 380  // Tiempo para giro de 90 grados
+#define TIEMPO_GIRO_180 800 // Tiempo para giro de 180 grados
 
 /**
  * @brief Estados de motor según tabla de control

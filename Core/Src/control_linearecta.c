@@ -6,6 +6,9 @@
 uint16_t sensor_izq_avg = 0;
 uint16_t sensor_der_avg = 0;
 
+extern volatile bool flag_linea_detectada;
+extern volatile bool flag_muro_detectado;
+
 // Umbrales dinámicos (se escriben nuevamente en calibración)
 uint16_t izq_cerca = 400, izq_lejos = 4000, izq_centrado = 2200;
 uint16_t der_cerca = 400, der_lejos = 4000, der_centrado = 2200;
@@ -85,9 +88,13 @@ void controlar_linea_recta(void)
     if (!calibrado)
         return;
 
+    // Verificar flags AL INICIO
+    if (flag_linea_detectada || flag_muro_detectado)
+        return;
+
     // Determinar posición relativa
-    bool muy_cerca_izq = (sensor_izq_avg < izq_cerca);
-    bool muy_cerca_der = (sensor_der_avg < der_cerca);
+    bool muy_cerca_izq = (sensor_izq_avg > izq_cerca);
+    bool muy_cerca_der = (sensor_der_avg > der_cerca);
 
     if (muy_cerca_izq)
     {

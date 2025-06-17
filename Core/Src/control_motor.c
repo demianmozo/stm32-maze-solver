@@ -213,8 +213,8 @@ void termino(void)
 
 void correccion_izquierda(void)
 {
-    __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 80);  // Motor izq más lento
-    __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, 100); // Motor der normal
+    __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 400);  // Motor izq más lento
+    __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, 700); // Motor der normal
     for (int i = 0; i < 10; i++) // 10 ciclos de 10 ms = 100 ms de corrección
 {
     if (flag_linea_detectada || flag_muro_detectado)
@@ -227,8 +227,8 @@ void correccion_izquierda(void)
 
 void correccion_derecha(void)
 {
-    __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 100); // Motor izq normal
-    __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, 80);  // Motor der más lento
+    __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 700); // Motor izq normal
+    __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, 400);  // Motor der más lento
     for (int i = 0; i < 10; i++) // 10 ciclos de 10 ms = 100 ms de corrección
 {
     if (flag_linea_detectada || flag_muro_detectado)
