@@ -65,7 +65,7 @@ uint8_t fila_actual = 4, columna_actual = 4;
 brujula sentido_actual = norte;
 bool terminado = false; // Flag de finalización
 
-uint16_t TIEMPO_AVANCE_LINEA = 300; // Exploración
+uint16_t TIEMPO_AVANCE_LINEA = 200; // Exploración
 bool modo_sprint = false;
 
 uint16_t dma_buffer[BUFFER_TOTAL];
@@ -92,7 +92,6 @@ void MX_USB_HOST_Process(void);
 /* USER CODE BEGIN PFP */
 void chequeolinea(void);
 void chequeomuro(void);
-void chequeolinearecta(void);
 void reset_posicion_pushbutton(void);
 void auto_calibracion(void);
 void promediar_sensores(uint16_t *buffer);
@@ -177,11 +176,13 @@ int main(void)
       else
       {
         // Solo ejecutar control de línea recta si NO hay interrupciones pendientes
-        // FALTA HACER: HACER BREAKS DENTRO DE CONTROLAR_LINEA_RECTA PARA VERIFICAR SI HAY MURO O LINEA
-        controlar_linea_recta();
+        // controlar_linea_recta();
       }
     }
-
+    else
+    {
+      termino();
+    }
     reset_posicion_pushbutton(); // ⚡ I AM SPEED button
 
     /*  // OJO SOLO PARA PROBAR LOS TIEMPOS DE LOS GIROS
@@ -654,6 +655,7 @@ void chequeolinea(void)
   // Calcular y ejecutar
   brujula sentido_deseado = calcular_mejor_direccion(fila_actual, columna_actual); // funcion definida en navegacion.h
   sentido_actual = ejecutar_movimiento(sentido_actual, sentido_deseado);           // funcion definida en navegacion.h
+  avanza();
   HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
   //}
 }
@@ -663,8 +665,6 @@ void chequeomuro(void)
 {
   HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
   // if (antirebote(WallSensor_GPIO_Port, WallSensor_Pin))
-
-  //{
 
   // 1. Registrar el muro detectado
   laberinto_set_muro(fila_actual, columna_actual, sentido_actual);
@@ -677,7 +677,7 @@ void chequeomuro(void)
 
   // 4. Ejecutar movimiento LO QUE HIZO EL COLO YA ACTUALIZA EL SENTIDO ACTUAL SOLO
   sentido_actual = ejecutar_movimiento(sentido_actual, sentido_deseado);
-  //}
+  avanza();
   HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 }
 
@@ -686,6 +686,7 @@ void reset_posicion_pushbutton(void)
 {
   if (antirebote(i_am_speed_GPIO_Port, i_am_speed_Pin))
   {
+    HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
 
     // Resetear posición
     fila_actual = 4;
@@ -696,6 +697,17 @@ void reset_posicion_pushbutton(void)
     // ⚡ I AM SPEED!
     activar_modo_sprint();     // Esta función está en control_motor.c
     TIEMPO_AVANCE_LINEA = 400; // Reducir tiempo de avance a 400 ms
+
+    flag_linea_detectada = false;
+    flag_muro_detectado = false;
+
+    // Resetear estados de sensores
+    ultimo_estado_linea = true;
+    ultimo_estado_muro = true;
+
+    avanza();
+    // Reactivar interrupciones
+    HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
   }
 }
 
