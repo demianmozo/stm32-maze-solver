@@ -25,12 +25,12 @@ extern uint16_t velocidad_giro_actual_der;
 // #define VELOCIDAD_AVANCE 700 // 70% de 1000 (período del timer)
 
 void activar_modo_sprint(void);  // Declaración
-#define VELOCIDAD_AVANCE_IZQ 700 // Motor izquierdo avance
-#define VELOCIDAD_AVANCE_DER 700 // Motor derecho avance
+#define VELOCIDAD_AVANCE_IZQ 600 // Motor izquierdo avance
+#define VELOCIDAD_AVANCE_DER 600 // Motor derecho avance
 #define VELOCIDAD_SPRINT_IZQ 900 // 90% - Motor izq modo velocidad máxima
 #define VELOCIDAD_SPRINT_DER 900 // 90% - Motor der modo velocidad máxima
-#define VELOCIDAD_GIRO_IZQ 700   // Motor izquierdo giro
-#define VELOCIDAD_GIRO_DER 700   // Motor derecho giro
+#define VELOCIDAD_GIRO_IZQ 600   // Motor izquierdo giro
+#define VELOCIDAD_GIRO_DER 600   // Motor derecho giro
 
 /* Tiempos de giro en milisegundos (ajustar según calibración) */
 #define TIEMPO_GIRO_90 460  // Tiempo para giro de 90 grados

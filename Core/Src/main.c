@@ -176,7 +176,7 @@ int main(void)
       else
       {
         // Solo ejecutar control de línea recta si NO hay interrupciones pendientes
-        // controlar_linea_recta();
+         controlar_linea_recta();
       }
     }
     else
