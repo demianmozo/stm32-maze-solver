@@ -39,15 +39,15 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  17 .debug_macro  00026c17  00000000  00000000  00031b0a  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_line   00022931  00000000  00000000  00058721  2**0
+ 18 .debug_line   0002292f  00000000  00000000  00058721  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    000e17cc  00000000  00000000  0007b052  2**0
+ 19 .debug_str    000e17cd  00000000  00000000  0007b050  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .comment      00000043  00000000  00000000  0015c81e  2**0
+ 20 .comment      00000043  00000000  00000000  0015c81d  2**0
                   CONTENTS, READONLY
- 21 .debug_frame  00006f10  00000000  00000000  0015c864  2**2
+ 21 .debug_frame  00006f10  00000000  00000000  0015c860  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 22 .debug_line_str 0000006c  00000000  00000000  00163774  2**0
+ 22 .debug_line_str 0000006c  00000000  00000000  00163770  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -1175,7 +1175,7 @@ brujula gira90izq(brujula sentido)
  80009c2:	f7ff ff97 	bl	80008f4 <set_motor_der>
 
     HAL_Delay(TIEMPO_GIRO_90);
- 80009c6:	f44f 70e6 	mov.w	r0, #460	@ 0x1cc
+ 80009c6:	f44f 70fa 	mov.w	r0, #500	@ 0x1f4
  80009ca:	f001 fbc9 	bl	8002160 <HAL_Delay>
     switch (sentido)
  80009ce:	79fb      	ldrb	r3, [r7, #7]
@@ -1257,7 +1257,7 @@ brujula gira90der(brujula sentido)
  8000a36:	f7ff ff5d 	bl	80008f4 <set_motor_der>
 
     HAL_Delay(TIEMPO_GIRO_90);
- 8000a3a:	f44f 70e6 	mov.w	r0, #460	@ 0x1cc
+ 8000a3a:	f44f 70fa 	mov.w	r0, #500	@ 0x1f4
  8000a3e:	f001 fb8f 	bl	8002160 <HAL_Delay>
     switch (sentido)
  8000a42:	79fb      	ldrb	r3, [r7, #7]
@@ -1339,7 +1339,7 @@ brujula gira180(brujula sentido)
  8000aaa:	f7ff ff23 	bl	80008f4 <set_motor_der>
 
     HAL_Delay(TIEMPO_GIRO_180);
- 8000aae:	f44f 702f 	mov.w	r0, #700	@ 0x2bc
+ 8000aae:	f44f 707a 	mov.w	r0, #1000	@ 0x3e8
  8000ab2:	f001 fb55 	bl	8002160 <HAL_Delay>
     switch (sentido)
  8000ab6:	79fb      	ldrb	r3, [r7, #7]
@@ -2227,7 +2227,7 @@ int main(void)
       else
       {
         // Solo ejecutar control de línea recta si NO hay interrupciones pendientes
-         controlar_linea_recta();
+        controlar_linea_recta();
  8000fd4:	f7ff fbc2 	bl	800075c <controlar_linea_recta>
  8000fd8:	e001      	b.n	8000fde <main+0x86>
       }

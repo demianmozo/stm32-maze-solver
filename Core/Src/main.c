@@ -176,7 +176,7 @@ int main(void)
       else
       {
         // Solo ejecutar control de línea recta si NO hay interrupciones pendientes
-         controlar_linea_recta();
+        controlar_linea_recta();
       }
     }
     else
@@ -185,29 +185,31 @@ int main(void)
     }
     reset_posicion_pushbutton(); // ⚡ I AM SPEED button
 
-    /*  // OJO SOLO PARA PROBAR LOS TIEMPOS DE LOS GIROS
-     avanza(); // Comenzar avanzando 1 SEGUNDO
-     HAL_Delay(1000);
+    /* // OJO SOLO PARA PROBAR LOS TIEMPOS DE LOS GIROS
+    avanza(); // Comenzar avanzando 1 SEGUNDO
+    HAL_Delay(1000);
 
-     // Simular detección de pared - girar a la derecha
-     sentido_actual = gira90der(sentido_actual); // Gira Y SIGUE AVANZANDO POR 2 SEGUNDOS
-     HAL_Delay(2000);
+    // Simular detección de pared - girar a la derecha
+    sentido_actual = gira90der(sentido_actual); // Gira Y SIGUE AVANZANDO POR 2 SEGUNDOS
+    avanza();
+    HAL_Delay(2000);
 
-     // Otro obstáculo - girar a la izquierda
-     sentido_actual = gira90izq(sentido_actual); // Gira Y SIGUE AVANZANDO
-     HAL_Delay(2000);
+    // Otro obstáculo - girar a la izquierda
+    sentido_actual = gira90izq(sentido_actual); // Gira Y SIGUE AVANZANDO
+    avanza();
+    HAL_Delay(2000);
 
-     // Callejón sin salida - dar media vuelta
-     sentido_actual = gira180(sentido_actual); // Gira Y SIGUE AVANZANDO POR 3 SEGUNDOS
-     HAL_Delay(3000);
+    // Callejón sin salida - dar media vuelta
+    sentido_actual = gira180(sentido_actual); // Gira Y SIGUE AVANZANDO POR 3 SEGUNDOS
+    avanza();
+    HAL_Delay(3000);
 
-     // SIMULA QUE TERMINÓ
-     termino();       // Usando tu función
-     HAL_Delay(5000); // Pausa antes de reiniciar
-   }
+    // SIMULA QUE TERMINÓ
+    termino();       // Usando tu función
+    HAL_Delay(5000); // Pausa antes de reiniciar
 
-   // Aquí se podría agregar el festejo
- } */
+    // Aquí se podría agregar el festejo */
+
     /* USER CODE END 3 */
   }
 }
