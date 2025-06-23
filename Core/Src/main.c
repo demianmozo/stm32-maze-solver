@@ -32,7 +32,6 @@
 #include "uart.h"
 #include <string.h> //para mandar mensajes por la UART
 #include <stdio.h>
-
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -67,13 +66,13 @@ uint8_t fila_actual = 4, columna_actual = 4;
 brujula sentido_actual = norte;
 bool terminado = false; // Flag de finalización
 
-uint16_t TIEMPO_AVANCE_LINEA = 300; // Exploración
+uint16_t TIEMPO_AVANCE_LINEA = 200; // Exploración
 bool modo_sprint = false;
 
 uint16_t dma_buffer[BUFFER_TOTAL];
 
 volatile bool ultimo_estado_linea = true; // Asumimos que inicia en HIGH (no detectando)
-volatile bool ultimo_estado_muro = true;  // Asumimos que inicia en HIGH (no detectando)
+volatile bool ultimo_estado_muro = true; // Asumimos que inicia en HIGH (no detectando)
 
 // NUEVAS BANDERAS PARA INTERRUPCIONES
 volatile bool flag_linea_detectada = false;
@@ -94,7 +93,6 @@ void MX_USB_HOST_Process(void);
 /* USER CODE BEGIN PFP */
 void chequeolinea(void);
 void chequeomuro(void);
-void chequeolinearecta(void);
 void reset_posicion_pushbutton(void);
 void auto_calibracion(void);
 void promediar_sensores(uint16_t *buffer);
@@ -145,26 +143,20 @@ int main(void)
   MX_TIM3_Init();
   MX_UART5_Init();
   /* USER CODE BEGIN 2 */
-
-  //Aca hay error en algun lado.
-
-
   // Inicializar ADC con DMA primero
-    HAL_ADC_Start_DMA(&hadc1, (uint32_t *)dma_buffer, BUFFER_TOTAL);
+  	HAL_ADC_Start_DMA(&hadc1, (uint32_t*) dma_buffer, BUFFER_TOTAL);
 
-    // Auto-calibración (sin motores activos)
-    auto_calibracion();
-    // Inicializar el módulo de motores
-    control_motor_init();
+  	// Auto-calibración (sin motores activos)
+  	auto_calibracion();
+  	// Inicializar el módulo de motores
+  	control_motor_init();
+  	//inicializar la uart
+      Inicializar_UART();
 
-    //inicializar la uart
-      	  Inicializar_UART();
-
-    //para transmitir con UART
-      	/*strcpy(mensaje, "M");
-        Transmision();
-      	 */
-
+      //para transmitir con UART
+        	/*strcpy(mensaje, "M");
+          Transmision();
+        	 */
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -175,53 +167,49 @@ int main(void)
     MX_USB_HOST_Process();
 
     /* USER CODE BEGIN 3 */
-    if (!terminado)
-        {
-          // PROCESAR FLAGS CON PRIORIDAD: LÍNEA > MURO
+    if (!terminado) {
+    			// PROCESAR FLAGS CON PRIORIDAD: LÍNEA > MURO
 
-          if (flag_linea_detectada)
-          {
-            flag_linea_detectada = false; // Clear flag PRIMERO
-            chequeolinea();               // Ejecutar función completa
-          }
-          else if (flag_muro_detectado)
-          {                              // else if = prioridad a línea
-            flag_muro_detectado = false; // Clear flag PRIMERO
-            chequeomuro();               // Ejecutar función completa
-          }
-          else
-          {
-            // Solo ejecutar control de línea recta si NO hay interrupciones pendientes
-            // FALTA HACER: HACER BREAKS DENTRO DE CONTROLAR_LINEA_RECTA PARA VERIFICAR SI HAY MURO O LINEA
-            controlar_linea_recta();
-          }
-        }
+    			if (flag_linea_detectada) {
+    				flag_linea_detectada = false; // Clear flag PRIMERO
+    				chequeolinea();               // Ejecutar función completa
+    			} else if (flag_muro_detectado) {     // else if = prioridad a línea
+    				flag_muro_detectado = false; // Clear flag PRIMERO
+    				chequeomuro();               // Ejecutar función completa
+    			} else {
+    				// Solo ejecutar control de línea recta si NO hay interrupciones pendientes
+    				controlar_linea_recta();
+    			}
+    		} else {
+    			termino();
+    		}
+    		reset_posicion_pushbutton(); // ⚡ I AM SPEED button
 
-        //reset_posicion_pushbutton(); // ⚡ I AM SPEED button
+    		/* // OJO SOLO PARA PROBAR LOS TIEMPOS DE LOS GIROS
+    		 avanza(); // Comenzar avanzando 1 SEGUNDO
+    		 HAL_Delay(1000);
 
-        /*  // OJO SOLO PARA PROBAR LOS TIEMPOS DE LOS GIROS
-         avanza(); // Comenzar avanzando 1 SEGUNDO
-         HAL_Delay(1000);
+    		 // Simular detección de pared - girar a la derecha
+    		 sentido_actual = gira90der(sentido_actual); // Gira Y SIGUE AVANZANDO POR 2 SEGUNDOS
+    		 avanza();
+    		 HAL_Delay(2000);
 
-         // Simular detección de pared - girar a la derecha
-         sentido_actual = gira90der(sentido_actual); // Gira Y SIGUE AVANZANDO POR 2 SEGUNDOS
-         HAL_Delay(2000);
+    		 // Otro obstáculo - girar a la izquierda
+    		 sentido_actual = gira90izq(sentido_actual); // Gira Y SIGUE AVANZANDO
+    		 avanza();
+    		 HAL_Delay(2000);
 
-         // Otro obstáculo - girar a la izquierda
-         sentido_actual = gira90izq(sentido_actual); // Gira Y SIGUE AVANZANDO
-         HAL_Delay(2000);
+    		 // Callejón sin salida - dar media vuelta
+    		 sentido_actual = gira180(sentido_actual); // Gira Y SIGUE AVANZANDO POR 3 SEGUNDOS
+    		 avanza();
+    		 HAL_Delay(3000);
 
-         // Callejón sin salida - dar media vuelta
-         sentido_actual = gira180(sentido_actual); // Gira Y SIGUE AVANZANDO POR 3 SEGUNDOS
-         HAL_Delay(3000);
+    		 // SIMULA QUE TERMINÓ
+    		 termino();       // Usando tu función
+    		 HAL_Delay(5000); // Pausa antes de reiniciar
 
-         // SIMULA QUE TERMINÓ
-         termino();       // Usando tu función
-         HAL_Delay(5000); // Pausa antes de reiniciar
-       }
+    		 // Aquí se podría agregar el festejo */
 
-       // Aquí se podría agregar el festejo
-     } */
   }
   /* USER CODE END 3 */
 }
@@ -483,7 +471,7 @@ static void MX_UART5_Init(void)
 
   /* USER CODE END UART5_Init 1 */
   huart5.Instance = UART5;
-  huart5.Init.BaudRate = 115200;
+  huart5.Init.BaudRate = 9600;
   huart5.Init.WordLength = UART_WORDLENGTH_8B;
   huart5.Init.StopBits = UART_STOPBITS_1;
   huart5.Init.Parity = UART_PARITY_NONE;
@@ -651,134 +639,135 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-void actualizar_posicion(uint8_t *fila, uint8_t *columna, brujula sentido)
-{
-  switch (sentido)
-  {
-  case norte:
-    (*fila)--;
-    break;
-  case este:
-    (*columna)++;
-    break;
-  case sur:
-    (*fila)++;
-    break;
-  case oeste:
-    (*columna)--;
-    break;
-  }
-}
+// FUNCION QUE ACTUALIZA LA POSICION CADA VEZ QUE SE CRUZA UNA LINEA
+	void actualizar_posicion(uint8_t *fila, uint8_t *columna, brujula sentido) {
+		switch (sentido) {
+		case norte:
+			(*fila)--;
+			break;
+		case este:
+			(*columna)++;
+			break;
+		case sur:
+			(*fila)++;
+			break;
+		case oeste:
+			(*columna)--;
+			break;
+		}
+	}
 
 // FUNCION CHEQUEO LINEA
-void chequeolinea(void)
-{
-  // if (antirebote(LineSensor_GPIO_Port, LineSensor_Pin))
-  // {
-  // RETARDO DE UNOS MS
-  HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
-  HAL_Delay(TIEMPO_AVANCE_LINEA); // por si es sprint o no
+	void chequeolinea(void) {
+		// if (antirebote(LineSensor_GPIO_Port, LineSensor_Pin))
+		// {
+		// RETARDO DE UNOS MS
+		HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
+		HAL_Delay(TIEMPO_AVANCE_LINEA); // por si es sprint o no
 
-  // Actualizar posición
-  actualizar_posicion(&fila_actual, &columna_actual, sentido_actual);
+		// Actualizar posición
+		actualizar_posicion(&fila_actual, &columna_actual, sentido_actual);
+		//enviar posicion por uart
+		//revisar que es lo que tiene que enviar
+ 		sprintf(mensaje, "%d,%d", fila_actual, columna_actual);
+      	Transmision();
 
-  //enviar posicion por uart
-//revisar que es lo que tiene que enviar
-  sprintf(mensaje, "%d,%d", fila_actual, columna_actual);
-      Transmision();
+		// terminó?
+		if (fila_actual == 1 && columna_actual == 1) {
+			termino();
+			terminado = true;
+			strcpy(mensaje, "Finalizado");
+    		Transmision();
+			return;
+		}
 
-
-  // terminó?
-  if (fila_actual == 1 && columna_actual == 1)
-  {
-    termino();
-    terminado = true;
-    return;
-
-  	strcpy(mensaje, "Finalizado");
-    Transmision();
-  }
-
-  // Calcular y ejecutar
-  brujula sentido_deseado = calcular_mejor_direccion(fila_actual, columna_actual); // funcion definida en navegacion.h
-  sentido_actual = ejecutar_movimiento(sentido_actual, sentido_deseado);           // funcion definida en navegacion.h
-  HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
-  //}
-}
+		// Calcular y ejecutar
+		brujula sentido_deseado = calcular_mejor_direccion(fila_actual,
+				columna_actual); // funcion definida en navegacion.h
+		sentido_actual = ejecutar_movimiento(sentido_actual, sentido_deseado); // funcion definida en navegacion.h
+		avanza();
+		HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
+		//}
+	}
 
 // FUNCION CHEQUEO MURO
-void chequeomuro(void)
-{
-  HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
-  // if (antirebote(WallSensor_GPIO_Port, WallSensor_Pin))
+	void chequeomuro(void) {
+		HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
+		// if (antirebote(WallSensor_GPIO_Port, WallSensor_Pin))
 
-  //{
+		// 1. Registrar el muro detectado
+		laberinto_set_muro(fila_actual, columna_actual, sentido_actual);
 
-  // 1. Registrar el muro detectado
-  laberinto_set_muro(fila_actual, columna_actual, sentido_actual);
+		// 2. Recalcular todos los pesos con el nuevo muro
+		laberinto_recalcular_pesos();
 
-  // 2. Recalcular todos los pesos con el nuevo muro
-  laberinto_recalcular_pesos();
+		// 3. Calcular nueva mejor dirección
+		brujula sentido_deseado = calcular_mejor_direccion(fila_actual,
+				columna_actual);
 
-  // 3. Calcular nueva mejor dirección
-  brujula sentido_deseado = calcular_mejor_direccion(fila_actual, columna_actual);
-
-  // 4. Ejecutar movimiento LO QUE HIZO EL COLO YA ACTUALIZA EL SENTIDO ACTUAL SOLO
-  sentido_actual = ejecutar_movimiento(sentido_actual, sentido_deseado);
-  //}
-  HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
-}
+		// 4. Ejecutar movimiento LO QUE HIZO EL COLO YA ACTUALIZA EL SENTIDO ACTUAL SOLO
+		sentido_actual = ejecutar_movimiento(sentido_actual, sentido_deseado);
+		avanza();
+		HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
+	}
 
 // VELOCIDAD
-void reset_posicion_pushbutton(void)
-{
-  if (antirebote(i_am_speed_GPIO_Port, i_am_speed_Pin))
-  {
+	void reset_posicion_pushbutton(void) {
+		if (antirebote(i_am_speed_GPIO_Port, i_am_speed_Pin)) {
+			HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
 
-    // Resetear posición
-    fila_actual = 4;
-    columna_actual = 4;
-    sentido_actual = norte;
-    terminado = false;
+			// Resetear posición
+			fila_actual = 4;
+			columna_actual = 4;
+			sentido_actual = norte;
+			terminado = false;
 
-    // ⚡ I AM SPEED!
-    activar_modo_sprint();     // Esta función está en control_motor.c
-    TIEMPO_AVANCE_LINEA = 400; // Reducir tiempo de avance a 400 ms
-  }
-}
+			// ⚡ I AM SPEED!
+			activar_modo_sprint();     // Esta función está en control_motor.c
+			TIEMPO_AVANCE_LINEA = 400; // Reducir tiempo de avance a 400 ms
+
+			flag_linea_detectada = false;
+			flag_muro_detectado = false;
+
+			// Resetear estados de sensores
+			ultimo_estado_linea = true;
+			ultimo_estado_muro = true;
+
+			avanza();
+			// Reactivar interrupciones
+			HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
+		}
+	}
 
 // ATENCION A LA INTERRUPCION
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
-{
-  if (GPIO_Pin == LineSensor_Pin)
-  {
-    // Leer estado actual del sensor
-    bool estado_actual = HAL_GPIO_ReadPin(LineSensor_GPIO_Port, LineSensor_Pin);
+	void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
+		if (GPIO_Pin == LineSensor_Pin) {
+			// Leer estado actual del sensor
+			bool estado_actual = HAL_GPIO_ReadPin(LineSensor_GPIO_Port,
+					LineSensor_Pin);
 
-    // Solo activar flag si hubo transición HIGH → LOW
-    if (ultimo_estado_linea == true && estado_actual == false)
-    {
-      flag_linea_detectada = true;
-    }
+			// Solo activar flag si hubo transición HIGH → LOW
+			if (ultimo_estado_linea == true && estado_actual == false) {
+				flag_linea_detectada = true;
+			}
 
-    // Actualizar último estado
-    ultimo_estado_linea = estado_actual;
-  }
-  else if (GPIO_Pin == WallSensor_Pin)
-  {
-    // Leer estado actual del sensor
-    bool estado_actual = HAL_GPIO_ReadPin(WallSensor_GPIO_Port, WallSensor_Pin);
+			// Actualizar último estado
+			ultimo_estado_linea = estado_actual;
+		} else if (GPIO_Pin == WallSensor_Pin) {
+			// Leer estado actual del sensor
+			bool estado_actual = HAL_GPIO_ReadPin(WallSensor_GPIO_Port,
+					WallSensor_Pin);
 
-    // Solo activar flag si hubo transición HIGH → LOW
-    if (ultimo_estado_muro == true && estado_actual == false)
-    {
-      flag_muro_detectado = true;
-    }
+			// Solo activar flag si hubo transición HIGH → LOW
+			if (ultimo_estado_muro == true && estado_actual == false) {
+				flag_muro_detectado = true;
+			}
 
-    // Actualizar último estado
-    ultimo_estado_muro = estado_actual;
-  }
-}
+			// Actualizar último estado
+			ultimo_estado_muro = estado_actual;
+		}
+	}
+
 /* USER CODE END 4 */
 
 /**

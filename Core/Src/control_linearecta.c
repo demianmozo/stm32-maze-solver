@@ -93,8 +93,8 @@ void controlar_linea_recta(void)
         return;
 
     // Determinar posición relativa
-    bool muy_cerca_izq = (sensor_izq_avg < izq_cerca);
-    bool muy_cerca_der = (sensor_der_avg < der_cerca);
+    bool muy_cerca_izq = (sensor_izq_avg < izq_cerca + 3);
+    bool muy_cerca_der = (sensor_der_avg < der_cerca + 3);
 
     if (muy_cerca_izq)
     {

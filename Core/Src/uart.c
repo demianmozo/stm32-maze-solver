@@ -1,4 +1,5 @@
-/* uart.c
+/*
+ * uart.c
  *
  *  Created on: Jun 9, 2025
  *      Author: tamis
@@ -30,3 +31,16 @@ void Inicializar_UART(void) {
     mensaje[0]='\0';
 
 }
+/*-----------------------------------------------------------------------------------
+en main.c
+
+#include "uart.h"
+
+#include <string.h> //para mandar mensajes por la UART
+ Private variables
+inicializar la uart
+  	  Inicializar_UART();
+para transmitir con UART
+  	strcpy(mensaje, "M");
+    Transmision(); */
+
