@@ -1,21 +1,21 @@
 /* USER CODE BEGIN Header */
 /**
- ******************************************************************************
- * @file           : main.h
- * @brief          : Header for main.c file.
- *                   This file contains the common defines of the application.
- ******************************************************************************
- * @attention
- *
- * Copyright (c) 2025 STMicroelectronics.
- * All rights reserved.
- *
- * This software is licensed under terms that can be found in the LICENSE file
- * in the root directory of this software component.
- * If no LICENSE file comes with this software, it is provided AS-IS.
- *
- ******************************************************************************
- */
+  ******************************************************************************
+  * @file           : main.h
+  * @brief          : Header for main.c file.
+  *                   This file contains the common defines of the application.
+  ******************************************************************************
+  * @attention
+  *
+  * Copyright (c) 2025 STMicroelectronics.
+  * All rights reserved.
+  *
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+  *
+  ******************************************************************************
+  */
 /* USER CODE END Header */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
@@ -131,8 +131,6 @@ void Error_Handler(void);
 #define SWCLK_GPIO_Port GPIOA
 #define I2S3_SCK_Pin GPIO_PIN_10
 #define I2S3_SCK_GPIO_Port GPIOC
-#define I2S3_SD_Pin GPIO_PIN_12
-#define I2S3_SD_GPIO_Port GPIOC
 #define Audio_RST_Pin GPIO_PIN_4
 #define Audio_RST_GPIO_Port GPIOD
 #define OTG_FS_OverCurrent_Pin GPIO_PIN_5

@@ -9,16 +9,11 @@ extern TIM_HandleTypeDef htim3;            // usa el timer 3 para PWM
 extern volatile bool flag_linea_detectada; // flag linea
 extern volatile bool flag_muro_detectado;  // flag muro
 
-
-uint16_t velocidad_actual_izq = VELOCIDAD_AVANCE_IZQ;
-uint16_t velocidad_actual_der = VELOCIDAD_AVANCE_DER;
-uint16_t velocidad_giro_actual_izq = VELOCIDAD_GIRO_IZQ;
-uint16_t velocidad_giro_actual_der = VELOCIDAD_GIRO_DER;
+uint16_t VELOCIDAD_AVANCE = VELOCIDAD_EXPLORACION; // Inicializa en modo lento
 
 void activar_modo_sprint(void)
 {
-    velocidad_actual_izq = VELOCIDAD_SPRINT_IZQ;
-    velocidad_actual_der = VELOCIDAD_SPRINT_DER;
+    VELOCIDAD_AVANCE = VELOCIDAD_SPRINT;
 }
 
 /**
@@ -101,8 +96,8 @@ void set_motor_der(motor_estado_t estado, uint16_t pwm)
  */
 void avanza(void)
 {
-    set_motor_izq(MOTOR_AVANCE, velocidad_actual_izq);
-    set_motor_der(MOTOR_AVANCE, velocidad_actual_der);
+    set_motor_izq(MOTOR_AVANCE, VELOCIDAD_AVANCE);
+    set_motor_der(MOTOR_AVANCE, VELOCIDAD_AVANCE);
 }
 
 /**
@@ -111,8 +106,8 @@ void avanza(void)
  */
 brujula gira90izq(brujula sentido)
 {
-    set_motor_izq(MOTOR_RETROCESO, velocidad_giro_actual_izq);
-    set_motor_der(MOTOR_AVANCE, velocidad_giro_actual_der);
+    set_motor_izq(MOTOR_RETROCESO, VELOCIDAD_GIRO);
+    set_motor_der(MOTOR_AVANCE, VELOCIDAD_GIRO);
 
     HAL_Delay(TIEMPO_GIRO_90);
     switch (sentido)
@@ -135,7 +130,7 @@ brujula gira90izq(brujula sentido)
     }
 
     // Después del giro, continuar avanzando
-    //avanza();
+    avanza();
     return sentido;
 }
 
@@ -145,8 +140,8 @@ brujula gira90izq(brujula sentido)
  */
 brujula gira90der(brujula sentido)
 {
-    set_motor_izq(MOTOR_AVANCE, velocidad_giro_actual_izq);
-    set_motor_der(MOTOR_RETROCESO, velocidad_giro_actual_der);
+    set_motor_izq(MOTOR_AVANCE, VELOCIDAD_GIRO);
+    set_motor_der(MOTOR_RETROCESO, VELOCIDAD_GIRO);
 
     HAL_Delay(TIEMPO_GIRO_90);
     switch (sentido)
@@ -169,7 +164,7 @@ brujula gira90der(brujula sentido)
     }
 
     // Después del giro, continuar avanzando
-    //avanza();
+    avanza();
     return sentido;
 }
 
@@ -179,8 +174,8 @@ brujula gira90der(brujula sentido)
  */
 brujula gira180(brujula sentido)
 {
-    set_motor_izq(MOTOR_AVANCE, velocidad_giro_actual_izq);
-    set_motor_der(MOTOR_RETROCESO, velocidad_giro_actual_der);
+    set_motor_izq(MOTOR_AVANCE, VELOCIDAD_GIRO);
+    set_motor_der(MOTOR_RETROCESO, VELOCIDAD_GIRO);
 
     HAL_Delay(TIEMPO_GIRO_180);
     switch (sentido)
@@ -203,7 +198,7 @@ brujula gira180(brujula sentido)
     }
 
     // Después del giro, continuar avanzando
-    //avanza();
+    avanza();
     return sentido;
 }
 
@@ -221,24 +216,24 @@ void correccion_izquierda(void)
 
     __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_3, 100); // Motor izq más lento
     __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_4, 700); // Motor der normal
-     for (int i = 0; i < 10; i++)                       // 10 ciclos de 10 ms = 100 ms de corrección
+    /* for (int i = 0; i < 10; i++)                       // 10 ciclos de 10 ms = 100 ms de corrección
     {
         if (flag_linea_detectada || flag_muro_detectado)
             return; // Salir si hay algo urgente
 
         HAL_Delay(10);
-    } 
+    } */
 }
 
 void correccion_derecha(void)
 {
     __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_3, 700); // Motor izq normal
     __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_4, 100); // Motor der más lento
-     for (int i = 0; i < 10; i++)                       // 10 ciclos de 10 ms = 100 ms de corrección
+    /* for (int i = 0; i < 10; i++)                       // 10 ciclos de 10 ms = 100 ms de corrección
     {
         if (flag_linea_detectada || flag_muro_detectado)
             return; // Salir si hay algo urgente
 
         HAL_Delay(10);
-    } 
+    } */
 }

@@ -1,23 +1,20 @@
 /* USER CODE BEGIN Header */
 /**
- ******************************************************************************
- * @file           : main.c
- * @brief          : Main program body
- * @author demianmozo
- * @date 2025-06-07
- * Este archivo contiene la función main y la lógica principal del robot.
- ******************************************************************************
- * @attention
- *
- * Copyright (c) 2025 STMicroelectronics.
- * All rights reserved.
- *
- * This software is licensed under terms that can be found in the LICENSE file
- * in the root directory of this software component.
- * If no LICENSE file comes with this software, it is provided AS-IS.
- *
- ******************************************************************************
- */
+  ******************************************************************************
+  * @file           : main.c
+  * @brief          : Main program body
+  ******************************************************************************
+  * @attention
+  *
+  * Copyright (c) 2025 STMicroelectronics.
+  * All rights reserved.
+  *
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+  *
+  ******************************************************************************
+  */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -32,6 +29,10 @@
 #include "control_linearecta.h"
 #include <stdint.h>
 #include <stdbool.h>
+#include "uart.h"
+#include <string.h> //para mandar mensajes por la UART
+#include <stdio.h>
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -41,6 +42,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -54,18 +56,18 @@ DMA_HandleTypeDef hdma_adc1;
 
 I2C_HandleTypeDef hi2c1;
 
-I2S_HandleTypeDef hi2s3;
-
 SPI_HandleTypeDef hspi1;
 
 TIM_HandleTypeDef htim3;
+
+UART_HandleTypeDef huart5;
 
 /* USER CODE BEGIN PV */
 uint8_t fila_actual = 4, columna_actual = 4;
 brujula sentido_actual = norte;
 bool terminado = false; // Flag de finalización
 
-uint16_t TIEMPO_AVANCE_LINEA = 200; // Exploración
+uint16_t TIEMPO_AVANCE_LINEA = 300; // Exploración
 bool modo_sprint = false;
 
 uint16_t dma_buffer[BUFFER_TOTAL];
@@ -83,15 +85,16 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_DMA_Init(void);
 static void MX_I2C1_Init(void);
-static void MX_I2S3_Init(void);
 static void MX_SPI1_Init(void);
 static void MX_ADC1_Init(void);
 static void MX_TIM3_Init(void);
+static void MX_UART5_Init(void);
 void MX_USB_HOST_Process(void);
 
 /* USER CODE BEGIN PFP */
 void chequeolinea(void);
 void chequeomuro(void);
+void chequeolinearecta(void);
 void reset_posicion_pushbutton(void);
 void auto_calibracion(void);
 void promediar_sensores(uint16_t *buffer);
@@ -106,9 +109,9 @@ void correccion_derecha(void);
 /* USER CODE END 0 */
 
 /**
- * @brief  The application entry point.
- * @retval int
- */
+  * @brief  The application entry point.
+  * @retval int
+  */
 int main(void)
 {
 
@@ -136,19 +139,32 @@ int main(void)
   MX_GPIO_Init();
   MX_DMA_Init();
   MX_I2C1_Init();
-  MX_I2S3_Init();
   MX_SPI1_Init();
   MX_USB_HOST_Init();
   MX_ADC1_Init();
   MX_TIM3_Init();
+  MX_UART5_Init();
   /* USER CODE BEGIN 2 */
-  // Inicializar ADC con DMA primero
-  HAL_ADC_Start_DMA(&hadc1, (uint32_t *)dma_buffer, BUFFER_TOTAL);
 
-  // Auto-calibración (sin motores activos)
-  auto_calibracion();
-  // Inicializar el módulo de motores
-  control_motor_init();
+  //Aca hay error en algun lado.
+
+
+  // Inicializar ADC con DMA primero
+    HAL_ADC_Start_DMA(&hadc1, (uint32_t *)dma_buffer, BUFFER_TOTAL);
+
+    // Auto-calibración (sin motores activos)
+    auto_calibracion();
+    // Inicializar el módulo de motores
+    control_motor_init();
+
+    //inicializar la uart
+      	  Inicializar_UART();
+
+    //para transmitir con UART
+      	/*strcpy(mensaje, "M");
+        Transmision();
+      	 */
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -160,77 +176,73 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
     if (!terminado)
-    {
-      // PROCESAR FLAGS CON PRIORIDAD: LÍNEA > MURO
+        {
+          // PROCESAR FLAGS CON PRIORIDAD: LÍNEA > MURO
 
-      if (flag_linea_detectada)
-      {
-        flag_linea_detectada = false; // Clear flag PRIMERO
-        chequeolinea();               // Ejecutar función completa
-      }
-      else if (flag_muro_detectado)
-      {                              // else if = prioridad a línea
-        flag_muro_detectado = false; // Clear flag PRIMERO
-        chequeomuro();               // Ejecutar función completa
-      }
-      else
-      {
-        // Solo ejecutar control de línea recta si NO hay interrupciones pendientes
-        controlar_linea_recta();
-      }
-    }
-    else
-    {
-      termino();
-    }
-    reset_posicion_pushbutton(); // ⚡ I AM SPEED button
+          if (flag_linea_detectada)
+          {
+            flag_linea_detectada = false; // Clear flag PRIMERO
+            chequeolinea();               // Ejecutar función completa
+          }
+          else if (flag_muro_detectado)
+          {                              // else if = prioridad a línea
+            flag_muro_detectado = false; // Clear flag PRIMERO
+            chequeomuro();               // Ejecutar función completa
+          }
+          else
+          {
+            // Solo ejecutar control de línea recta si NO hay interrupciones pendientes
+            // FALTA HACER: HACER BREAKS DENTRO DE CONTROLAR_LINEA_RECTA PARA VERIFICAR SI HAY MURO O LINEA
+            controlar_linea_recta();
+          }
+        }
 
-    /* // OJO SOLO PARA PROBAR LOS TIEMPOS DE LOS GIROS
-    avanza(); // Comenzar avanzando 1 SEGUNDO
-    HAL_Delay(1000);
+        //reset_posicion_pushbutton(); // ⚡ I AM SPEED button
 
-    // Simular detección de pared - girar a la derecha
-    sentido_actual = gira90der(sentido_actual); // Gira Y SIGUE AVANZANDO POR 2 SEGUNDOS
-    avanza();
-    HAL_Delay(2000);
+        /*  // OJO SOLO PARA PROBAR LOS TIEMPOS DE LOS GIROS
+         avanza(); // Comenzar avanzando 1 SEGUNDO
+         HAL_Delay(1000);
 
-    // Otro obstáculo - girar a la izquierda
-    sentido_actual = gira90izq(sentido_actual); // Gira Y SIGUE AVANZANDO
-    avanza();
-    HAL_Delay(2000);
+         // Simular detección de pared - girar a la derecha
+         sentido_actual = gira90der(sentido_actual); // Gira Y SIGUE AVANZANDO POR 2 SEGUNDOS
+         HAL_Delay(2000);
 
-    // Callejón sin salida - dar media vuelta
-    sentido_actual = gira180(sentido_actual); // Gira Y SIGUE AVANZANDO POR 3 SEGUNDOS
-    avanza();
-    HAL_Delay(3000);
+         // Otro obstáculo - girar a la izquierda
+         sentido_actual = gira90izq(sentido_actual); // Gira Y SIGUE AVANZANDO
+         HAL_Delay(2000);
 
-    // SIMULA QUE TERMINÓ
-    termino();       // Usando tu función
-    HAL_Delay(5000); // Pausa antes de reiniciar
+         // Callejón sin salida - dar media vuelta
+         sentido_actual = gira180(sentido_actual); // Gira Y SIGUE AVANZANDO POR 3 SEGUNDOS
+         HAL_Delay(3000);
 
-    // Aquí se podría agregar el festejo */
+         // SIMULA QUE TERMINÓ
+         termino();       // Usando tu función
+         HAL_Delay(5000); // Pausa antes de reiniciar
+       }
 
-    /* USER CODE END 3 */
+       // Aquí se podría agregar el festejo
+     } */
   }
+  /* USER CODE END 3 */
 }
 
 /**
- * @brief System Clock Configuration
- * @retval None
- */
+  * @brief System Clock Configuration
+  * @retval None
+  */
 void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
 
   /** Configure the main internal regulator output voltage
-   */
+  */
   __HAL_RCC_PWR_CLK_ENABLE();
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
   /** Initializes the RCC Oscillators according to the specified parameters
-   * in the RCC_OscInitTypeDef structure.
-   */
+  * in the RCC_OscInitTypeDef structure.
+  */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
@@ -245,8 +257,9 @@ void SystemClock_Config(void)
   }
 
   /** Initializes the CPU, AHB and APB buses clocks
-   */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
+  */
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
@@ -259,10 +272,10 @@ void SystemClock_Config(void)
 }
 
 /**
- * @brief ADC1 Initialization Function
- * @param None
- * @retval None
- */
+  * @brief ADC1 Initialization Function
+  * @param None
+  * @retval None
+  */
 static void MX_ADC1_Init(void)
 {
 
@@ -277,7 +290,7 @@ static void MX_ADC1_Init(void)
   /* USER CODE END ADC1_Init 1 */
 
   /** Configure the global features of the ADC (Clock, Resolution, Data Alignment and number of conversion)
-   */
+  */
   hadc1.Instance = ADC1;
   hadc1.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV8;
   hadc1.Init.Resolution = ADC_RESOLUTION_12B;
@@ -296,7 +309,7 @@ static void MX_ADC1_Init(void)
   }
 
   /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
-   */
+  */
   sConfig.Channel = ADC_CHANNEL_8;
   sConfig.Rank = 1;
   sConfig.SamplingTime = ADC_SAMPLETIME_112CYCLES;
@@ -306,7 +319,7 @@ static void MX_ADC1_Init(void)
   }
 
   /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
-   */
+  */
   sConfig.Channel = ADC_CHANNEL_9;
   sConfig.Rank = 2;
   if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
@@ -316,13 +329,14 @@ static void MX_ADC1_Init(void)
   /* USER CODE BEGIN ADC1_Init 2 */
 
   /* USER CODE END ADC1_Init 2 */
+
 }
 
 /**
- * @brief I2C1 Initialization Function
- * @param None
- * @retval None
- */
+  * @brief I2C1 Initialization Function
+  * @param None
+  * @retval None
+  */
 static void MX_I2C1_Init(void)
 {
 
@@ -349,46 +363,14 @@ static void MX_I2C1_Init(void)
   /* USER CODE BEGIN I2C1_Init 2 */
 
   /* USER CODE END I2C1_Init 2 */
+
 }
 
 /**
- * @brief I2S3 Initialization Function
- * @param None
- * @retval None
- */
-static void MX_I2S3_Init(void)
-{
-
-  /* USER CODE BEGIN I2S3_Init 0 */
-
-  /* USER CODE END I2S3_Init 0 */
-
-  /* USER CODE BEGIN I2S3_Init 1 */
-
-  /* USER CODE END I2S3_Init 1 */
-  hi2s3.Instance = SPI3;
-  hi2s3.Init.Mode = I2S_MODE_MASTER_TX;
-  hi2s3.Init.Standard = I2S_STANDARD_PHILIPS;
-  hi2s3.Init.DataFormat = I2S_DATAFORMAT_16B;
-  hi2s3.Init.MCLKOutput = I2S_MCLKOUTPUT_DISABLE;
-  hi2s3.Init.AudioFreq = I2S_AUDIOFREQ_8K;
-  hi2s3.Init.CPOL = I2S_CPOL_LOW;
-  hi2s3.Init.ClockSource = I2S_CLOCK_PLL;
-  hi2s3.Init.FullDuplexMode = I2S_FULLDUPLEXMODE_DISABLE;
-  if (HAL_I2S_Init(&hi2s3) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN I2S3_Init 2 */
-
-  /* USER CODE END I2S3_Init 2 */
-}
-
-/**
- * @brief SPI1 Initialization Function
- * @param None
- * @retval None
- */
+  * @brief SPI1 Initialization Function
+  * @param None
+  * @retval None
+  */
 static void MX_SPI1_Init(void)
 {
 
@@ -419,13 +401,14 @@ static void MX_SPI1_Init(void)
   /* USER CODE BEGIN SPI1_Init 2 */
 
   /* USER CODE END SPI1_Init 2 */
+
 }
 
 /**
- * @brief TIM3 Initialization Function
- * @param None
- * @retval None
- */
+  * @brief TIM3 Initialization Function
+  * @param None
+  * @retval None
+  */
 static void MX_TIM3_Init(void)
 {
 
@@ -481,11 +464,45 @@ static void MX_TIM3_Init(void)
 
   /* USER CODE END TIM3_Init 2 */
   HAL_TIM_MspPostInit(&htim3);
+
 }
 
 /**
- * Enable DMA controller clock
- */
+  * @brief UART5 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_UART5_Init(void)
+{
+
+  /* USER CODE BEGIN UART5_Init 0 */
+
+  /* USER CODE END UART5_Init 0 */
+
+  /* USER CODE BEGIN UART5_Init 1 */
+
+  /* USER CODE END UART5_Init 1 */
+  huart5.Instance = UART5;
+  huart5.Init.BaudRate = 115200;
+  huart5.Init.WordLength = UART_WORDLENGTH_8B;
+  huart5.Init.StopBits = UART_STOPBITS_1;
+  huart5.Init.Parity = UART_PARITY_NONE;
+  huart5.Init.Mode = UART_MODE_TX_RX;
+  huart5.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart5.Init.OverSampling = UART_OVERSAMPLING_16;
+  if (HAL_UART_Init(&huart5) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN UART5_Init 2 */
+
+  /* USER CODE END UART5_Init 2 */
+
+}
+
+/**
+  * Enable DMA controller clock
+  */
 static void MX_DMA_Init(void)
 {
 
@@ -496,13 +513,14 @@ static void MX_DMA_Init(void)
   /* DMA2_Stream0_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA2_Stream0_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(DMA2_Stream0_IRQn);
+
 }
 
 /**
- * @brief GPIO Initialization Function
- * @param None
- * @retval None
- */
+  * @brief GPIO Initialization Function
+  * @param None
+  * @retval None
+  */
 static void MX_GPIO_Init(void)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
@@ -525,10 +543,11 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(OTG_FS_PowerSwitchOn_GPIO_Port, OTG_FS_PowerSwitchOn_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, MI0_Pin | MI1_Pin | MD0_Pin | MD1_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, MI0_Pin|MI1_Pin|MD0_Pin|MD1_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOD, LD4_Pin | LD3_Pin | LD5_Pin | LD6_Pin | Audio_RST_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOD, LD4_Pin|LD3_Pin|LD5_Pin|LD6_Pin
+                          |Audio_RST_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : CS_I2C_SPI_Pin */
   GPIO_InitStruct.Pin = CS_I2C_SPI_Pin;
@@ -558,6 +577,14 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(i_am_speed_GPIO_Port, &GPIO_InitStruct);
 
+  /*Configure GPIO pin : I2S3_WS_Pin */
+  GPIO_InitStruct.Pin = I2S3_WS_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  GPIO_InitStruct.Alternate = GPIO_AF6_SPI3;
+  HAL_GPIO_Init(I2S3_WS_GPIO_Port, &GPIO_InitStruct);
+
   /*Configure GPIO pin : BOOT1_Pin */
   GPIO_InitStruct.Pin = BOOT1_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
@@ -573,7 +600,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(CLK_IN_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : MI0_Pin MI1_Pin MD0_Pin MD1_Pin */
-  GPIO_InitStruct.Pin = MI0_Pin | MI1_Pin | MD0_Pin | MD1_Pin;
+  GPIO_InitStruct.Pin = MI0_Pin|MI1_Pin|MD0_Pin|MD1_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -581,17 +608,26 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pins : LD4_Pin LD3_Pin LD5_Pin LD6_Pin
                            Audio_RST_Pin */
-  GPIO_InitStruct.Pin = LD4_Pin | LD3_Pin | LD5_Pin | LD6_Pin | Audio_RST_Pin;
+  GPIO_InitStruct.Pin = LD4_Pin|LD3_Pin|LD5_Pin|LD6_Pin
+                          |Audio_RST_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
   /*Configure GPIO pins : WallSensor_Pin LineSensor_Pin */
-  GPIO_InitStruct.Pin = WallSensor_Pin | LineSensor_Pin;
+  GPIO_InitStruct.Pin = WallSensor_Pin|LineSensor_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : I2S3_SCK_Pin */
+  GPIO_InitStruct.Pin = I2S3_SCK_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  GPIO_InitStruct.Alternate = GPIO_AF6_SPI3;
+  HAL_GPIO_Init(I2S3_SCK_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : OTG_FS_OverCurrent_Pin */
   GPIO_InitStruct.Pin = OTG_FS_OverCurrent_Pin;
@@ -605,16 +641,16 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(MEMS_INT2_GPIO_Port, &GPIO_InitStruct);
 
-  /* USER CODE BEGIN MX_GPIO_Init_2 */
-
-  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 1, 0); // Prioridad alta para ambos sensores
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
+
+  /* USER CODE BEGIN MX_GPIO_Init_2 */
 
   /* USER CODE END MX_GPIO_Init_2 */
 }
 
 /* USER CODE BEGIN 4 */
-// FUNCION QUE ACTUALIZA LA POSICION CADA VEZ QUE SE CRUZA UNA LINEA
 void actualizar_posicion(uint8_t *fila, uint8_t *columna, brujula sentido)
 {
   switch (sentido)
@@ -646,18 +682,26 @@ void chequeolinea(void)
   // Actualizar posición
   actualizar_posicion(&fila_actual, &columna_actual, sentido_actual);
 
+  //enviar posicion por uart
+//revisar que es lo que tiene que enviar
+  sprintf(mensaje, "%d,%d", fila_actual, columna_actual);
+      Transmision();
+
+
   // terminó?
   if (fila_actual == 1 && columna_actual == 1)
   {
     termino();
     terminado = true;
     return;
+
+  	strcpy(mensaje, "Finalizado");
+    Transmision();
   }
 
   // Calcular y ejecutar
   brujula sentido_deseado = calcular_mejor_direccion(fila_actual, columna_actual); // funcion definida en navegacion.h
   sentido_actual = ejecutar_movimiento(sentido_actual, sentido_deseado);           // funcion definida en navegacion.h
-  avanza();
   HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
   //}
 }
@@ -667,6 +711,8 @@ void chequeomuro(void)
 {
   HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
   // if (antirebote(WallSensor_GPIO_Port, WallSensor_Pin))
+
+  //{
 
   // 1. Registrar el muro detectado
   laberinto_set_muro(fila_actual, columna_actual, sentido_actual);
@@ -679,7 +725,7 @@ void chequeomuro(void)
 
   // 4. Ejecutar movimiento LO QUE HIZO EL COLO YA ACTUALIZA EL SENTIDO ACTUAL SOLO
   sentido_actual = ejecutar_movimiento(sentido_actual, sentido_deseado);
-  avanza();
+  //}
   HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 }
 
@@ -688,7 +734,6 @@ void reset_posicion_pushbutton(void)
 {
   if (antirebote(i_am_speed_GPIO_Port, i_am_speed_Pin))
   {
-    HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
 
     // Resetear posición
     fila_actual = 4;
@@ -699,17 +744,6 @@ void reset_posicion_pushbutton(void)
     // ⚡ I AM SPEED!
     activar_modo_sprint();     // Esta función está en control_motor.c
     TIEMPO_AVANCE_LINEA = 400; // Reducir tiempo de avance a 400 ms
-
-    flag_linea_detectada = false;
-    flag_muro_detectado = false;
-
-    // Resetear estados de sensores
-    ultimo_estado_linea = true;
-    ultimo_estado_muro = true;
-
-    avanza();
-    // Reactivar interrupciones
-    HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
   }
 }
 
@@ -745,13 +779,12 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     ultimo_estado_muro = estado_actual;
   }
 }
-
 /* USER CODE END 4 */
 
 /**
- * @brief  This function is executed in case of error occurrence.
- * @retval None
- */
+  * @brief  This function is executed in case of error occurrence.
+  * @retval None
+  */
 void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
@@ -763,14 +796,14 @@ void Error_Handler(void)
   /* USER CODE END Error_Handler_Debug */
 }
 
-#ifdef USE_FULL_ASSERT
+#ifdef  USE_FULL_ASSERT
 /**
- * @brief  Reports the name of the source file and the source line number
- *         where the assert_param error has occurred.
- * @param  file: pointer to the source file name
- * @param  line: assert_param error line source number
- * @retval None
- */
+  * @brief  Reports the name of the source file and the source line number
+  *         where the assert_param error has occurred.
+  * @param  file: pointer to the source file name
+  * @param  line: assert_param error line source number
+  * @retval None
+  */
 void assert_failed(uint8_t *file, uint32_t line)
 {
   /* USER CODE BEGIN 6 */

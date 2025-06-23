@@ -7,7 +7,7 @@
 // Definiciones
 #define BUFFER_TOTAL 200
 #define BUFFER_MINIMO 100
-#define MUESTRAS 20
+#define MUESTRAS 50
 
 // Variables externas
 extern uint16_t dma_buffer[BUFFER_TOTAL];

@@ -38,34 +38,34 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := stm32-maze-solver
+BUILD_ARTIFACT_NAME := Funcionadale
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX :=
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-stm32-maze-solver.elf \
+Funcionadale.elf \
 
 MAP_FILES += \
-stm32-maze-solver.map \
+Funcionadale.map \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-stm32-maze-solver.list \
+Funcionadale.list \
 
 
 # All Target
 all: main-build
 
 # Main-build Target
-main-build: stm32-maze-solver.elf secondary-outputs
+main-build: Funcionadale.elf secondary-outputs
 
 # Tool invocations
-stm32-maze-solver.elf stm32-maze-solver.map: $(OBJS) $(USER_OBJS) /Users/demian/STM32CubeIDE/workspace_1.18.1/stm32-maze-solver/STM32F407VGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "stm32-maze-solver.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/Users/demian/STM32CubeIDE/workspace_1.18.1/stm32-maze-solver/STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="stm32-maze-solver.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Funcionadale.elf Funcionadale.map: $(OBJS) $(USER_OBJS) C:\Users\tamis\STM32CubeIDE\workspace_1.18.1\Funcionadale\STM32F407VGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "Funcionadale.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\tamis\STM32CubeIDE\workspace_1.18.1\Funcionadale\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Funcionadale.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -74,14 +74,14 @@ default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-stm32-maze-solver.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "stm32-maze-solver.list"
+Funcionadale.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "Funcionadale.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) default.size.stdout stm32-maze-solver.elf stm32-maze-solver.list stm32-maze-solver.map
+	-$(RM) Funcionadale.elf Funcionadale.list Funcionadale.map default.size.stdout
 	-@echo ' '
 
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)
