@@ -4,8 +4,8 @@
 ../Core/Src/control_motor.c:73:6:set_motor_der	16	static
 ../Core/Src/control_motor.c:102:6:avanza	8	static
 ../Core/Src/control_motor.c:112:9:gira90izq	16	static
-../Core/Src/control_motor.c:146:9:gira90der	16	static
-../Core/Src/control_motor.c:180:9:gira180	16	static
-../Core/Src/control_motor.c:213:6:termino	8	static
-../Core/Src/control_motor.c:219:6:correccion_izquierda	16	static
-../Core/Src/control_motor.c:233:6:correccion_derecha	16	static
+../Core/Src/control_motor.c:149:9:gira90der	16	static
+../Core/Src/control_motor.c:184:9:gira180	16	static
+../Core/Src/control_motor.c:217:6:termino	8	static
+../Core/Src/control_motor.c:223:6:correccion_izquierda	16	static
+../Core/Src/control_motor.c:237:6:correccion_derecha	16	static

@@ -65,10 +65,13 @@ uint8_t fila_actual = 4, columna_actual = 4;
 brujula sentido_actual = norte;
 bool terminado = false; // Flag de finalización
 
-uint16_t TIEMPO_AVANCE_LINEA = 200; // Exploración
+uint16_t TIEMPO_AVANCE_LINEA = 250; // Exploración
 bool modo_sprint = false;
 
 uint16_t dma_buffer[BUFFER_TOTAL];
+
+volatile uint32_t tiempo_inicio = 0;		//para el atirrebote croto del sensor
+uint32_t tiempo_actual = 0;
 
 volatile bool ultimo_estado_linea = true; // Asumimos que inicia en HIGH (no detectando)
 volatile bool ultimo_estado_muro = true;  // Asumimos que inicia en HIGH (no detectando)
@@ -167,11 +170,31 @@ int main(void)
       {
         flag_linea_detectada = false; // Clear flag PRIMERO
         chequeolinea();               // Ejecutar función completa
+
+        // espera 20ms antes de volver a mirar muro despues de haber girado
+        tiempo_actual = HAL_GetTick();
+
+        if ((!HAL_GPIO_ReadPin(WallSensor_GPIO_Port, WallSensor_Pin))&&20 <= (tiempo_actual - tiempo_inicio))         //chequea muro
+        {
+            flag_muro_detectado = false; 				// Clear flag PRIMERO
+            tiempo_inicio = HAL_GetTick();
+            chequeomuro();               				// Ejecutar función completa
+        }
       }
       else if (flag_muro_detectado)
       {                              // else if = prioridad a línea
         flag_muro_detectado = false; // Clear flag PRIMERO
         chequeomuro();               // Ejecutar función completa
+
+        // espera 20ms antes de volver a mirar linea despues de haber girado
+        tiempo_actual = HAL_GetTick();
+
+        if ((!HAL_GPIO_ReadPin(WallSensor_GPIO_Port, WallSensor_Pin))&&20 <= (tiempo_actual - tiempo_inicio))         //chequea muro
+        {
+            flag_muro_detectado = false; 				// Clear flag PRIMERO
+            tiempo_inicio = HAL_GetTick();
+            chequeomuro();              		 		// Ejecutar función completa
+        }
       }
       else
       {
@@ -183,9 +206,10 @@ int main(void)
     {
       termino();
     }
-    reset_posicion_pushbutton(); // ⚡ I AM SPEED button
+    reset_posicion_pushbutton(); // ⚡ I AM SPEED button */
 
-    /* // OJO SOLO PARA PROBAR LOS TIEMPOS DE LOS GIROS
+    // OJO SOLO PARA PROBAR LOS TIEMPOS DE LOS GIROS
+    /*
     avanza(); // Comenzar avanzando 1 SEGUNDO
     HAL_Delay(1000);
 
