@@ -114,7 +114,7 @@ brujula gira90izq(brujula sentido)
     set_motor_izq(MOTOR_RETROCESO, velocidad_giro_actual_izq);
     set_motor_der(MOTOR_AVANCE, velocidad_giro_actual_der);
 
-    HAL_Delay(TIEMPO_GIRO_90);
+    HAL_Delay(TIEMPO_GIRO_90_IZQ);
     switch (sentido)
     {
     case norte:
@@ -151,7 +151,7 @@ brujula gira90der(brujula sentido)
     set_motor_izq(MOTOR_AVANCE, velocidad_giro_actual_izq);
     set_motor_der(MOTOR_RETROCESO, velocidad_giro_actual_der);
 
-    HAL_Delay(TIEMPO_GIRO_90);
+    HAL_Delay(TIEMPO_GIRO_90_DER);
     switch (sentido)
     {
     case norte:

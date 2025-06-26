@@ -33,8 +33,10 @@ void activar_modo_sprint(void);  // Declaración
 #define VELOCIDAD_GIRO_DER 700   // Motor derecho giro
 
 /* Tiempos de giro en milisegundos (ajustar según calibración) */
-#define TIEMPO_GIRO_90 500  // Tiempo para giro de 90 grados
-#define TIEMPO_GIRO_180 1000 // Tiempo para giro de 180 grados
+#define TIEMPO_GIRO_90_IZQ 500  // Tiempo para giro de 90 grados
+#define TIEMPO_GIRO_90_DER 550  // Tiempo para giro de 90 grados
+
+#define TIEMPO_GIRO_180 1100 // Tiempo para giro de 180 grados
 
 /**
  * @brief Estados de motor según tabla de control

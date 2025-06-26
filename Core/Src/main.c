@@ -168,6 +168,7 @@ int main(void)
 
       if (flag_linea_detectada)
       {
+    	HAL_GPIO_WritePin(LD4_GPIO_Port, LD4_Pin, GPIO_PIN_SET); // Naranja
         flag_linea_detectada = false; // Clear flag PRIMERO
         chequeolinea();               // Ejecutar función completa
 
@@ -182,10 +183,13 @@ int main(void)
             // Ejecutar función completa
         }*/
       }
-      else if (flag_muro_detectado)
-      {                              // else if = prioridad a línea
+      else if (flag_muro_detectado) 		// else if = prioridad a línea
+      {
+    	HAL_GPIO_WritePin(LD6_GPIO_Port, LD6_Pin, GPIO_PIN_SET); // Prende LED al detectar muro
+
         flag_muro_detectado = false; // Clear flag PRIMERO
         chequeomuro();
+
         // Ejecutar función completa
 
         /* // espera 20ms antes de volver a mirar linea despues de haber girado
@@ -688,6 +692,8 @@ void chequeolinea(void)
   __HAL_GPIO_EXTI_CLEAR_IT(LineSensor_Pin);
   __HAL_GPIO_EXTI_CLEAR_IT(WallSensor_Pin);
   HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
+  HAL_GPIO_WritePin(LD4_GPIO_Port, LD4_Pin, GPIO_PIN_RESET); // Naranja
+
   //}
 }
 
@@ -712,6 +718,8 @@ void chequeomuro(void)
   __HAL_GPIO_EXTI_CLEAR_IT(LineSensor_Pin);
   __HAL_GPIO_EXTI_CLEAR_IT(WallSensor_Pin);
   HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
+  HAL_GPIO_WritePin(LD6_GPIO_Port, LD6_Pin, GPIO_PIN_RESET); // Naranja
+
 }
 
 // VELOCIDAD
