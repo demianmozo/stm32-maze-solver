@@ -70,7 +70,7 @@ bool modo_sprint = false;
 
 uint16_t dma_buffer[BUFFER_TOTAL];
 
-volatile uint32_t tiempo_inicio = 0;		//para el atirrebote croto del sensor
+volatile uint32_t tiempo_inicio = 0; // para el atirrebote croto del sensor
 uint32_t tiempo_actual = 0;
 
 volatile bool ultimo_estado_linea = true; // Asumimos que inicia en HIGH (no detectando)
@@ -171,30 +171,33 @@ int main(void)
         flag_linea_detectada = false; // Clear flag PRIMERO
         chequeolinea();               // Ejecutar función completa
 
-        // espera 20ms antes de volver a mirar muro despues de haber girado
+        /* // espera 20ms antes de volver a mirar muro despues de haber girado
         tiempo_actual = HAL_GetTick();
 
         if ((!HAL_GPIO_ReadPin(WallSensor_GPIO_Port, WallSensor_Pin))&&20 <= (tiempo_actual - tiempo_inicio))         //chequea muro
         {
             flag_muro_detectado = false; 				// Clear flag PRIMERO
             tiempo_inicio = HAL_GetTick();
-            chequeomuro();               				// Ejecutar función completa
-        }
+            chequeomuro();
+            // Ejecutar función completa
+        }*/
       }
       else if (flag_muro_detectado)
       {                              // else if = prioridad a línea
         flag_muro_detectado = false; // Clear flag PRIMERO
-        chequeomuro();               // Ejecutar función completa
+        chequeomuro();
+        // Ejecutar función completa
 
-        // espera 20ms antes de volver a mirar linea despues de haber girado
+        /* // espera 20ms antes de volver a mirar linea despues de haber girado
         tiempo_actual = HAL_GetTick();
 
         if ((!HAL_GPIO_ReadPin(WallSensor_GPIO_Port, WallSensor_Pin))&&20 <= (tiempo_actual - tiempo_inicio))         //chequea muro
         {
             flag_muro_detectado = false; 				// Clear flag PRIMERO
             tiempo_inicio = HAL_GetTick();
-            chequeomuro();              		 		// Ejecutar función completa
-        }
+            chequeomuro();
+            // Ejecutar función completa
+        } */
       }
       else
       {
@@ -682,6 +685,8 @@ void chequeolinea(void)
   brujula sentido_deseado = calcular_mejor_direccion(fila_actual, columna_actual); // funcion definida en navegacion.h
   sentido_actual = ejecutar_movimiento(sentido_actual, sentido_deseado);           // funcion definida en navegacion.h
   avanza();
+  __HAL_GPIO_EXTI_CLEAR_IT(LineSensor_Pin);
+  __HAL_GPIO_EXTI_CLEAR_IT(WallSensor_Pin);
   HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
   //}
 }
@@ -704,6 +709,8 @@ void chequeomuro(void)
   // 4. Ejecutar movimiento LO QUE HIZO EL COLO YA ACTUALIZA EL SENTIDO ACTUAL SOLO
   sentido_actual = ejecutar_movimiento(sentido_actual, sentido_deseado);
   avanza();
+  __HAL_GPIO_EXTI_CLEAR_IT(LineSensor_Pin);
+  __HAL_GPIO_EXTI_CLEAR_IT(WallSensor_Pin);
   HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 }
 
