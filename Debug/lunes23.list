@@ -41,13 +41,13 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  18 .debug_line   00023258  00000000  00000000  0005b665  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    000e1fd1  00000000  00000000  0007e8bd  2**0
+ 19 .debug_str    000e1f9f  00000000  00000000  0007e8bd  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .comment      00000043  00000000  00000000  0016088e  2**0
+ 20 .comment      00000043  00000000  00000000  0016085c  2**0
                   CONTENTS, READONLY
- 21 .debug_frame  0000732c  00000000  00000000  001608d4  2**2
+ 21 .debug_frame  0000732c  00000000  00000000  001608a0  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 22 .debug_line_str 00000070  00000000  00000000  00167c00  2**0
+ 22 .debug_line_str 0000003e  00000000  00000000  00167bcc  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -2929,9 +2929,9 @@ static void MX_UART5_Init(void)
  8001418:	4b11      	ldr	r3, [pc, #68]	@ (8001460 <MX_UART5_Init+0x4c>)
  800141a:	4a12      	ldr	r2, [pc, #72]	@ (8001464 <MX_UART5_Init+0x50>)
  800141c:	601a      	str	r2, [r3, #0]
-  huart5.Init.BaudRate = 9600;
+  huart5.Init.BaudRate = 115200;
  800141e:	4b10      	ldr	r3, [pc, #64]	@ (8001460 <MX_UART5_Init+0x4c>)
- 8001420:	f44f 5216 	mov.w	r2, #9600	@ 0x2580
+ 8001420:	f44f 32e1 	mov.w	r2, #115200	@ 0x1c200
  8001424:	605a      	str	r2, [r3, #4]
   huart5.Init.WordLength = UART_WORDLENGTH_8B;
  8001426:	4b0e      	ldr	r3, [pc, #56]	@ (8001460 <MX_UART5_Init+0x4c>)

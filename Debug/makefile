@@ -64,8 +64,8 @@ all: main-build
 main-build: lunes23.elf secondary-outputs
 
 # Tool invocations
-lunes23.elf lunes23.map: $(OBJS) $(USER_OBJS) D:\Tami\inge\Sistemas\ digitales\MazeSolver\stm32-maze-solver\.git\STM32F407VGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "lunes23.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"D:\Tami\inge\Sistemas digitales\MazeSolver\stm32-maze-solver\.git\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="lunes23.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+lunes23.elf lunes23.map: $(OBJS) $(USER_OBJS) D:\Tami\lunes23\STM32F407VGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "lunes23.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"D:\Tami\lunes23\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="lunes23.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

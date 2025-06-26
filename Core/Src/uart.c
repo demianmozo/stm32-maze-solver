@@ -4,6 +4,8 @@
  *  Created on: Jun 9, 2025
  *      Author: tamis
  */
+//nota: Baud rate: 115200
+
 
 #include "main.h"
 #include "uart.h"
