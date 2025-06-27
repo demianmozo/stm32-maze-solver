@@ -29,12 +29,12 @@ void activar_modo_sprint(void);  // Declaración
 #define VELOCIDAD_AVANCE_DER 700 // Motor derecho avance
 #define VELOCIDAD_SPRINT_IZQ 900 // 90% - Motor izq modo velocidad máxima
 #define VELOCIDAD_SPRINT_DER 900 // 90% - Motor der modo velocidad máxima
-#define VELOCIDAD_GIRO_IZQ 700   // Motor izquierdo giro
-#define VELOCIDAD_GIRO_DER 700   // Motor derecho giro
+#define VELOCIDAD_GIRO_IZQ 700   // Motor izquierdo giro a la izquierda
+#define VELOCIDAD_GIRO_DER 700   // Motor derecho giro a la derecha
 
 /* Tiempos de giro en milisegundos (ajustar según calibración) */
-#define TIEMPO_GIRO_90_IZQ 500  // Tiempo para giro de 90 grados
-#define TIEMPO_GIRO_90_DER 550  // Tiempo para giro de 90 grados
+#define TIEMPO_GIRO_90_IZQ 500  // Tiempo para giro de 90 grados a la izquierda
+#define TIEMPO_GIRO_90_DER 550  // Tiempo para giro de 90 grados a la derecha
 
 #define TIEMPO_GIRO_180 1100 // Tiempo para giro de 180 grados
 
