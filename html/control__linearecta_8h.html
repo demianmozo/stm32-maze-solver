@@ -1,0 +1,347 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.14.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>STM32 Maze Solver: Referencia del archivo Core/Inc/control_linearecta.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">STM32 Maze Solver<span id="projectnumber">&#160;v1.0</span>
+   </div>
+   <div id="projectbrief">Proyecto de robot autónomo que resuelve un laberinto mediante un algoritmo de llenado (*Flood Fill*), desarrollado sobre STM32.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.14.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Buscar',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('control__linearecta_8h.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Referencia del archivo control_linearecta.h</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="main_8h_source.html">main.h</a>&quot;</code><br />
+<code>#include &lt;stdint.h&gt;</code><br />
+</div>
+<p><a href="control__linearecta_8h_source.html">Ir al código fuente de este archivo.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
+defines</h2></td></tr>
+<tr class="memitem:accdae47cc42beb9c8bf9d40e8bdd28ba" id="r_accdae47cc42beb9c8bf9d40e8bdd28ba"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#accdae47cc42beb9c8bf9d40e8bdd28ba">BUFFER_TOTAL</a>&#160;&#160;&#160;200</td></tr>
+<tr class="memitem:aeafb65774aaabfe28b37d39994d7425d" id="r_aeafb65774aaabfe28b37d39994d7425d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeafb65774aaabfe28b37d39994d7425d">BUFFER_MINIMO</a>&#160;&#160;&#160;100</td></tr>
+<tr class="memitem:a88e7e6110cdfad7a20ea37254935b3cb" id="r_a88e7e6110cdfad7a20ea37254935b3cb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a88e7e6110cdfad7a20ea37254935b3cb">MUESTRAS</a>&#160;&#160;&#160;20</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Funciones</h2></td></tr>
+<tr class="memitem:a81ca1934a5c8070bedb760b4dd6b6431" id="r_a81ca1934a5c8070bedb760b4dd6b6431"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a81ca1934a5c8070bedb760b4dd6b6431">auto_calibracion</a> (void)</td></tr>
+<tr class="memdesc:a81ca1934a5c8070bedb760b4dd6b6431"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ejecuta la secuencia de auto-calibración de sensores IR.  <br /></td></tr>
+<tr class="memitem:aa03b960431ff3e5a43173095909d1505" id="r_aa03b960431ff3e5a43173095909d1505"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa03b960431ff3e5a43173095909d1505">promediar_sensores</a> (uint16_t *<a class="el" href="group___u_a_r_t___variables.html#ga39a88290a5fbb1b3f35ca4c174271a00">buffer</a>)</td></tr>
+<tr class="memdesc:aa03b960431ff3e5a43173095909d1505"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calcula el promedio filtrado de los sensores IR.  <br /></td></tr>
+<tr class="memitem:a8924281cea26160d06523edffd438ad7" id="r_a8924281cea26160d06523edffd438ad7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8924281cea26160d06523edffd438ad7">controlar_linea_recta</a> (void)</td></tr>
+<tr class="memdesc:a8924281cea26160d06523edffd438ad7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Controla el seguimiento de línea recta usando sensores IR.  <br /></td></tr>
+<tr class="memitem:a87d80d1b455461e2ba4573a1a9398f73" id="r_a87d80d1b455461e2ba4573a1a9398f73"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a87d80d1b455461e2ba4573a1a9398f73">correccion_izquierda</a> (void)</td></tr>
+<tr class="memdesc:a87d80d1b455461e2ba4573a1a9398f73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aplica corrección hacia la izquierda para seguimiento de línea.  <br /></td></tr>
+<tr class="memitem:a823403d6e0cf566f73adbbc3e634bc71" id="r_a823403d6e0cf566f73adbbc3e634bc71"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a823403d6e0cf566f73adbbc3e634bc71">correccion_derecha</a> (void)</td></tr>
+<tr class="memdesc:a823403d6e0cf566f73adbbc3e634bc71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aplica corrección hacia la derecha para seguimiento de línea.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:gae88c5af646d2928f5a8a88492d37dd17" id="r_gae88c5af646d2928f5a8a88492d37dd17"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___main___variables.html#gae88c5af646d2928f5a8a88492d37dd17">dma_buffer</a> [<a class="el" href="#accdae47cc42beb9c8bf9d40e8bdd28ba">BUFFER_TOTAL</a>]</td></tr>
+<tr class="memdesc:gae88c5af646d2928f5a8a88492d37dd17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffer para ADC con DMA.  <br /></td></tr>
+<tr class="memitem:ga06fd8d25f6adb4c4762f2b6311a62c55" id="r_ga06fd8d25f6adb4c4762f2b6311a62c55"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___control_linea___variables.html#ga06fd8d25f6adb4c4762f2b6311a62c55">sensor_izq_avg</a></td></tr>
+<tr class="memdesc:ga06fd8d25f6adb4c4762f2b6311a62c55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Promedio del sensor izquierdo (filtrado)  <br /></td></tr>
+<tr class="memitem:ga4fa3bf92e782d32208bab6f514343161" id="r_ga4fa3bf92e782d32208bab6f514343161"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___control_linea___variables.html#ga4fa3bf92e782d32208bab6f514343161">sensor_der_avg</a></td></tr>
+<tr class="memdesc:ga4fa3bf92e782d32208bab6f514343161"><td class="mdescLeft">&#160;</td><td class="mdescRight">Promedio del sensor derecho (filtrado)  <br /></td></tr>
+</table>
+<a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Documentación de «define»</h2>
+<a id="aeafb65774aaabfe28b37d39994d7425d" name="aeafb65774aaabfe28b37d39994d7425d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeafb65774aaabfe28b37d39994d7425d">&#9670;&#160;</a></span>BUFFER_MINIMO</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BUFFER_MINIMO&#160;&#160;&#160;100</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="control__linearecta_8h_source.html#l00009">9</a> del archivo <a class="el" href="control__linearecta_8h_source.html">control_linearecta.h</a>.</p>
+
+</div>
+</div>
+<a id="accdae47cc42beb9c8bf9d40e8bdd28ba" name="accdae47cc42beb9c8bf9d40e8bdd28ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accdae47cc42beb9c8bf9d40e8bdd28ba">&#9670;&#160;</a></span>BUFFER_TOTAL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BUFFER_TOTAL&#160;&#160;&#160;200</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="control__linearecta_8h_source.html#l00008">8</a> del archivo <a class="el" href="control__linearecta_8h_source.html">control_linearecta.h</a>.</p>
+
+</div>
+</div>
+<a id="a88e7e6110cdfad7a20ea37254935b3cb" name="a88e7e6110cdfad7a20ea37254935b3cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88e7e6110cdfad7a20ea37254935b3cb">&#9670;&#160;</a></span>MUESTRAS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MUESTRAS&#160;&#160;&#160;20</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="control__linearecta_8h_source.html#l00010">10</a> del archivo <a class="el" href="control__linearecta_8h_source.html">control_linearecta.h</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Documentación de funciones</h2>
+<a id="a81ca1934a5c8070bedb760b4dd6b6431" name="a81ca1934a5c8070bedb760b4dd6b6431"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81ca1934a5c8070bedb760b4dd6b6431">&#9670;&#160;</a></span>auto_calibracion()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void auto_calibracion </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Ejecuta la secuencia de auto-calibración de sensores IR. </p>
+<p>Proceso de calibración en 3 etapas con indicación led:</p>
+<p><b>Etapa 1 (LED Naranja):</b> Cerca de pared derecha (3s)</p><ul>
+<li>Captura valor mínimo del sensor derecho (der_cerca)</li>
+</ul>
+<p><b>Etapa 2 (LED Rojo):</b> Cerca de pared izquierda (3s)</p><ul>
+<li>Captura valor mínimo del sensor izquierdo (izq_cerca)</li>
+</ul>
+<p><b>Etapa 3 (LED Azul):</b> Centrado en pasillo (3s)</p><ul>
+<li>Captura valores máximos de ambos sensores (izq_lejos, der_lejos)</li>
+<li>Calcula puntos medios para detección de centrado</li>
+</ul>
+<p><b>Finalización (LED Verde):</b> Calibración completa</p><ul>
+<li>Activa flag calibrado = true</li>
+</ul>
+<dl class="section warning"><dt>Atención</dt><dd>Requiere intervención manual para posicionar el robot </dd></dl>
+<dl class="section note"><dt>Nota</dt><dd>Los umbrales se calculan dinámicamente según las condiciones del entorno </dd></dl>
+
+<p class="definition">Definición en la línea <a class="el" href="control__linearecta_8c_source.html#l00101">101</a> del archivo <a class="el" href="control__linearecta_8c_source.html">control_linearecta.c</a>.</p>
+
+</div>
+</div>
+<a id="a8924281cea26160d06523edffd438ad7" name="a8924281cea26160d06523edffd438ad7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8924281cea26160d06523edffd438ad7">&#9670;&#160;</a></span>controlar_linea_recta()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void controlar_linea_recta </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Controla el seguimiento de línea recta usando sensores IR. </p>
+<p>Algoritmo de control reactivo:</p><ol type="1">
+<li>Verifica que la calibración esté completa</li>
+<li>Evalúa la proximidad a las paredes laterales</li>
+<li>Aplica correcciones direccionales según la situación:<ul>
+<li>Muy cerca de pared izquierda → Corrección derecha</li>
+<li>Muy cerca de pared derecha → Corrección izquierda</li>
+<li>Centrado → Avance recto</li>
+</ul>
+</li>
+</ol>
+<dl class="section note"><dt>Nota</dt><dd>Utiliza umbrales dinámicos calculados en calibración </dd>
+<dd>
+Margen de seguridad de 200 unidades sobre valores de calibración </dd></dl>
+<dl class="section warning"><dt>Atención</dt><dd>No opera sin calibración previa (calibrado = false) </dd></dl>
+
+<p class="definition">Definición en la línea <a class="el" href="control__linearecta_8c_source.html#l00153">153</a> del archivo <a class="el" href="control__linearecta_8c_source.html">control_linearecta.c</a>.</p>
+
+</div>
+</div>
+<a id="a823403d6e0cf566f73adbbc3e634bc71" name="a823403d6e0cf566f73adbbc3e634bc71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a823403d6e0cf566f73adbbc3e634bc71">&#9670;&#160;</a></span>correccion_derecha()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void correccion_derecha </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Aplica corrección hacia la derecha para seguimiento de línea. </p>
+<p>Reduce velocidad del motor derecho temporalmente para corregir la trayectoria cuando el robot se desvía hacia la izquierda </p><dl class="section note"><dt>Nota</dt><dd>Se interrumpe automáticamente si se detecta línea o muro </dd></dl>
+
+<p class="definition">Definición en la línea <a class="el" href="control__motor_8c_source.html#l00254">254</a> del archivo <a class="el" href="control__motor_8c_source.html">control_motor.c</a>.</p>
+
+</div>
+</div>
+<a id="a87d80d1b455461e2ba4573a1a9398f73" name="a87d80d1b455461e2ba4573a1a9398f73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87d80d1b455461e2ba4573a1a9398f73">&#9670;&#160;</a></span>correccion_izquierda()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void correccion_izquierda </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Aplica corrección hacia la izquierda para seguimiento de línea. </p>
+<p>Reduce velocidad del motor izquierdo temporalmente para corregir la trayectoria cuando el robot se desvía hacia la derecha </p><dl class="section note"><dt>Nota</dt><dd>Se interrumpe automáticamente si se detecta línea </dd></dl>
+
+<p class="definition">Definición en la línea <a class="el" href="control__motor_8c_source.html#l00235">235</a> del archivo <a class="el" href="control__motor_8c_source.html">control_motor.c</a>.</p>
+
+</div>
+</div>
+<a id="aa03b960431ff3e5a43173095909d1505" name="aa03b960431ff3e5a43173095909d1505"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa03b960431ff3e5a43173095909d1505">&#9670;&#160;</a></span>promediar_sensores()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void promediar_sensores </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t *</td>          <td class="paramname"><span class="paramname"><em>buffer</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calcula el promedio filtrado de los sensores IR. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buffer</td><td>Puntero al segmento del buffer DMA a procesar</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Proceso de filtrado:</p><ul>
+<li>Procesa MUESTRAS lecturas intercaladas (canal 8 y 9)</li>
+<li>Canal 8 (PB0): Sensor derecho</li>
+<li>Canal 9 (PB1): Sensor izquierdo</li>
+<li>Calcula promedio aritmético para reducir ruido</li>
+<li>Actualiza variables globales sensor_der_avg y sensor_izq_avg</li>
+</ul>
+<dl class="section note"><dt>Nota</dt><dd>Se ejecuta constantemente en DMA para actualización en tiempo real </dd></dl>
+
+<p class="definition">Definición en la línea <a class="el" href="control__linearecta_8c_source.html#l00065">65</a> del archivo <a class="el" href="control__linearecta_8c_source.html">control_linearecta.c</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_c6310732a22f63c0c2fc5595561e68f1.html">Core</a></li><li class="navelem"><a href="dir_e2489e887f17afa3cbc07a4ec152cdd2.html">Inc</a></li><li class="navelem"><a href="control__linearecta_8h.html">control_linearecta.h</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
+  </ul>
+</div>
+</body>
+</html>

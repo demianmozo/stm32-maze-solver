@@ -1,0 +1,512 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.14.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>STM32 Maze Solver: Referencia del archivo Core/Inc/control_motor.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">STM32 Maze Solver<span id="projectnumber">&#160;v1.0</span>
+   </div>
+   <div id="projectbrief">Proyecto de robot autónomo que resuelve un laberinto mediante un algoritmo de llenado (*Flood Fill*), desarrollado sobre STM32.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.14.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Buscar',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('control__motor_8h.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Referencia del archivo control_motor.h</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Módulo de control de motores.  
+<a href="#details">Más...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="main_8h_source.html">main.h</a>&quot;</code><br />
+</div>
+<p><a href="control__motor_8h_source.html">Ir al código fuente de este archivo.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
+defines</h2></td></tr>
+<tr class="memitem:afc92b36f4d09da0592b55e0c89d69669" id="r_afc92b36f4d09da0592b55e0c89d69669"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afc92b36f4d09da0592b55e0c89d69669">VELOCIDAD_AVANCE_IZQ</a>&#160;&#160;&#160;700</td></tr>
+<tr class="memitem:a2020fdfae77fa776a1455c6eac1e6c3c" id="r_a2020fdfae77fa776a1455c6eac1e6c3c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2020fdfae77fa776a1455c6eac1e6c3c">VELOCIDAD_AVANCE_DER</a>&#160;&#160;&#160;700</td></tr>
+<tr class="memitem:a8fc7652c6c21187d2c9fa8db70b9840b" id="r_a8fc7652c6c21187d2c9fa8db70b9840b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8fc7652c6c21187d2c9fa8db70b9840b">VELOCIDAD_SPRINT_IZQ</a>&#160;&#160;&#160;900</td></tr>
+<tr class="memitem:a716297d6a13fa39782b4e3cc7849b63d" id="r_a716297d6a13fa39782b4e3cc7849b63d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a716297d6a13fa39782b4e3cc7849b63d">VELOCIDAD_SPRINT_DER</a>&#160;&#160;&#160;900</td></tr>
+<tr class="memitem:a2a5d824478e6a114c37c9027bdd2bcc3" id="r_a2a5d824478e6a114c37c9027bdd2bcc3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2a5d824478e6a114c37c9027bdd2bcc3">VELOCIDAD_GIRO_IZQ</a>&#160;&#160;&#160;700</td></tr>
+<tr class="memitem:a023602ad3885a83d3ed9992bccaa8629" id="r_a023602ad3885a83d3ed9992bccaa8629"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a023602ad3885a83d3ed9992bccaa8629">VELOCIDAD_GIRO_DER</a>&#160;&#160;&#160;700</td></tr>
+<tr class="memitem:a468f5ecd6e79c36b0a2cd8eb614b9202" id="r_a468f5ecd6e79c36b0a2cd8eb614b9202"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a468f5ecd6e79c36b0a2cd8eb614b9202">TIEMPO_GIRO_90_IZQ</a>&#160;&#160;&#160;500</td></tr>
+<tr class="memitem:ad8b637936f5a0e0b0673d9c7f8d81f4f" id="r_ad8b637936f5a0e0b0673d9c7f8d81f4f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad8b637936f5a0e0b0673d9c7f8d81f4f">TIEMPO_GIRO_90_DER</a>&#160;&#160;&#160;550</td></tr>
+<tr class="memitem:a391d170925a051d0b033f200e5d0abd8" id="r_a391d170925a051d0b033f200e5d0abd8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a391d170925a051d0b033f200e5d0abd8">TIEMPO_GIRO_180</a>&#160;&#160;&#160;1100</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumeraciones</h2></td></tr>
+<tr class="memitem:a2663002e830a96e71dbcbb8e27a81dfa" id="r_a2663002e830a96e71dbcbb8e27a81dfa"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2663002e830a96e71dbcbb8e27a81dfa">motor_estado_t</a> { <a class="el" href="#a2663002e830a96e71dbcbb8e27a81dfaaa71874643829b1acbe12df8bdae04713">MOTOR_AVANCE</a> = 0
+, <a class="el" href="#a2663002e830a96e71dbcbb8e27a81dfaa00c3ac302373e1c0b32dc47c972dfa50">MOTOR_RETROCESO</a>
+, <a class="el" href="#a2663002e830a96e71dbcbb8e27a81dfaa49c8f05a309bcd70f7301c28715b9c75">MOTOR_FRENADO</a>
+ }</td></tr>
+<tr class="memdesc:a2663002e830a96e71dbcbb8e27a81dfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estados de motor según tabla de control.  <a href="#a2663002e830a96e71dbcbb8e27a81dfa">Más...</a><br /></td></tr>
+<tr class="memitem:aec76296107bce3509215d59c25641f83" id="r_aec76296107bce3509215d59c25641f83"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aec76296107bce3509215d59c25641f83">brujula</a> { <a class="el" href="#aec76296107bce3509215d59c25641f83a26f4ffb5ab65f0091f0af9906a6923fc">norte</a> = 0
+, <a class="el" href="#aec76296107bce3509215d59c25641f83af36885e2ac842be3e438ed66db6c7550">este</a>
+, <a class="el" href="#aec76296107bce3509215d59c25641f83a8ddf06d9a60fa54efa20760ce649dc56">sur</a>
+, <a class="el" href="#aec76296107bce3509215d59c25641f83a7ac643eeb25bd8ea1bacfb2c3aeaf8f4">oeste</a>
+ }</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Funciones</h2></td></tr>
+<tr class="memitem:a40c945d2b067ea750fa4755b98524fb3" id="r_a40c945d2b067ea750fa4755b98524fb3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a40c945d2b067ea750fa4755b98524fb3">activar_modo_sprint</a> (void)</td></tr>
+<tr class="memdesc:a40c945d2b067ea750fa4755b98524fb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Activa el modo sprint de alta velocidad.  <br /></td></tr>
+<tr class="memitem:ga78eb73797c69058669b1a02c4a323a2b" id="r_ga78eb73797c69058669b1a02c4a323a2b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___control_motor.html#ga78eb73797c69058669b1a02c4a323a2b">control_motor_init</a> (void)</td></tr>
+<tr class="memdesc:ga78eb73797c69058669b1a02c4a323a2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inicializa el sistema de control de motores.  <br /></td></tr>
+<tr class="memitem:gabc7b24d0ece6918ca9856bdf1056c0b8" id="r_gabc7b24d0ece6918ca9856bdf1056c0b8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___control_motor.html#gabc7b24d0ece6918ca9856bdf1056c0b8">avanza</a> (void)</td></tr>
+<tr class="memdesc:gabc7b24d0ece6918ca9856bdf1056c0b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Avanza con ambos motores al 70% de velocidad.  <br /></td></tr>
+<tr class="memitem:ga4f6af199f6a42c5ebdc27f0a0d9012fc" id="r_ga4f6af199f6a42c5ebdc27f0a0d9012fc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#aec76296107bce3509215d59c25641f83">brujula</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___control_motor.html#ga4f6af199f6a42c5ebdc27f0a0d9012fc">gira90izq</a> (<a class="el" href="#aec76296107bce3509215d59c25641f83">brujula</a> sentido)</td></tr>
+<tr class="memdesc:ga4f6af199f6a42c5ebdc27f0a0d9012fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gira 90 grados a la izquierda y continúa avanzando.  <br /></td></tr>
+<tr class="memitem:ga12b0bec321b81180d6d1d8884366f02f" id="r_ga12b0bec321b81180d6d1d8884366f02f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#aec76296107bce3509215d59c25641f83">brujula</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___control_motor.html#ga12b0bec321b81180d6d1d8884366f02f">gira90der</a> (<a class="el" href="#aec76296107bce3509215d59c25641f83">brujula</a> sentido)</td></tr>
+<tr class="memdesc:ga12b0bec321b81180d6d1d8884366f02f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gira 90 grados a la derecha y continúa avanzando.  <br /></td></tr>
+<tr class="memitem:gabb9a1ee5b79512ba094423c50229cf77" id="r_gabb9a1ee5b79512ba094423c50229cf77"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#aec76296107bce3509215d59c25641f83">brujula</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___control_motor.html#gabb9a1ee5b79512ba094423c50229cf77">gira180</a> (<a class="el" href="#aec76296107bce3509215d59c25641f83">brujula</a> sentido)</td></tr>
+<tr class="memdesc:gabb9a1ee5b79512ba094423c50229cf77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gira 180 grados y continúa avanzando.  <br /></td></tr>
+<tr class="memitem:ga3bd86bdf33be17187cb052c48c4c0f84" id="r_ga3bd86bdf33be17187cb052c48c4c0f84"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___control_motor.html#ga3bd86bdf33be17187cb052c48c4c0f84">termino</a> (void)</td></tr>
+<tr class="memdesc:ga3bd86bdf33be17187cb052c48c4c0f84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Detiene ambos motores completamente.  <br /></td></tr>
+<tr class="memitem:gaea869ae4a071ec341537819cd7cb7f5c" id="r_gaea869ae4a071ec341537819cd7cb7f5c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___control_motor_aux.html#gaea869ae4a071ec341537819cd7cb7f5c">set_motor_izq</a> (<a class="el" href="#a2663002e830a96e71dbcbb8e27a81dfa">motor_estado_t</a> estado, uint16_t pwm)</td></tr>
+<tr class="memdesc:gaea869ae4a071ec341537819cd7cb7f5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configura el motor izquierdo.  <br /></td></tr>
+<tr class="memitem:gaf3c5783b72cc3ebc19b1d9f74ab62896" id="r_gaf3c5783b72cc3ebc19b1d9f74ab62896"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___control_motor_aux.html#gaf3c5783b72cc3ebc19b1d9f74ab62896">set_motor_der</a> (<a class="el" href="#a2663002e830a96e71dbcbb8e27a81dfa">motor_estado_t</a> estado, uint16_t pwm)</td></tr>
+<tr class="memdesc:gaf3c5783b72cc3ebc19b1d9f74ab62896"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configura el motor derecho.  <br /></td></tr>
+<tr class="memitem:ga87d80d1b455461e2ba4573a1a9398f73" id="r_ga87d80d1b455461e2ba4573a1a9398f73"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___control_motor_aux.html#ga87d80d1b455461e2ba4573a1a9398f73">correccion_izquierda</a> (void)</td></tr>
+<tr class="memdesc:ga87d80d1b455461e2ba4573a1a9398f73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aplica corrección hacia la izquierda para seguimiento de línea.  <br /></td></tr>
+<tr class="memitem:ga823403d6e0cf566f73adbbc3e634bc71" id="r_ga823403d6e0cf566f73adbbc3e634bc71"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___control_motor_aux.html#ga823403d6e0cf566f73adbbc3e634bc71">correccion_derecha</a> (void)</td></tr>
+<tr class="memdesc:ga823403d6e0cf566f73adbbc3e634bc71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aplica corrección hacia la derecha para seguimiento de línea.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a207cf366a8889df99991d3c296efa62d" id="r_a207cf366a8889df99991d3c296efa62d"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a207cf366a8889df99991d3c296efa62d">velocidad_actual_izq</a></td></tr>
+<tr class="memitem:a6ace41090c94cb7ca3698b2f735c650a" id="r_a6ace41090c94cb7ca3698b2f735c650a"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6ace41090c94cb7ca3698b2f735c650a">velocidad_actual_der</a></td></tr>
+<tr class="memitem:a326ac6a5463061960467bfd99962d67a" id="r_a326ac6a5463061960467bfd99962d67a"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a326ac6a5463061960467bfd99962d67a">velocidad_giro_actual_izq</a></td></tr>
+<tr class="memitem:a1a7e9c8c6d9334929542019c9a631fae" id="r_a1a7e9c8c6d9334929542019c9a631fae"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1a7e9c8c6d9334929542019c9a631fae">velocidad_giro_actual_der</a></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Descripción detallada</h2>
+<div class="textblock"><p>Módulo de control de motores. </p>
+<dl class="section author"><dt>Autor</dt><dd>demianmozo </dd></dl>
+<dl class="section date"><dt>Fecha</dt><dd>2025-06-07 </dd></dl>
+<dl class="section version"><dt>Versión</dt><dd>1.0</dd></dl>
+<p>Este módulo controla los dos motores del robot usando:</p><ul>
+<li>Pines digitales para dirección (MI0/MI1, MD0/MD1)</li>
+<li>PWM para velocidad (PC8, PC9)</li>
+<li>Timer TIM3 para generar señales PWM </li>
+</ul>
+
+<p class="definition">Definición en el archivo <a class="el" href="control__motor_8h_source.html">control_motor.h</a>.</p>
+</div><a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Documentación de «define»</h2>
+<a id="a391d170925a051d0b033f200e5d0abd8" name="a391d170925a051d0b033f200e5d0abd8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a391d170925a051d0b033f200e5d0abd8">&#9670;&#160;</a></span>TIEMPO_GIRO_180</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TIEMPO_GIRO_180&#160;&#160;&#160;1100</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="control__motor_8h_source.html#l00039">39</a> del archivo <a class="el" href="control__motor_8h_source.html">control_motor.h</a>.</p>
+
+</div>
+</div>
+<a id="ad8b637936f5a0e0b0673d9c7f8d81f4f" name="ad8b637936f5a0e0b0673d9c7f8d81f4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8b637936f5a0e0b0673d9c7f8d81f4f">&#9670;&#160;</a></span>TIEMPO_GIRO_90_DER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TIEMPO_GIRO_90_DER&#160;&#160;&#160;550</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="control__motor_8h_source.html#l00037">37</a> del archivo <a class="el" href="control__motor_8h_source.html">control_motor.h</a>.</p>
+
+</div>
+</div>
+<a id="a468f5ecd6e79c36b0a2cd8eb614b9202" name="a468f5ecd6e79c36b0a2cd8eb614b9202"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a468f5ecd6e79c36b0a2cd8eb614b9202">&#9670;&#160;</a></span>TIEMPO_GIRO_90_IZQ</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TIEMPO_GIRO_90_IZQ&#160;&#160;&#160;500</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="control__motor_8h_source.html#l00036">36</a> del archivo <a class="el" href="control__motor_8h_source.html">control_motor.h</a>.</p>
+
+</div>
+</div>
+<a id="a2020fdfae77fa776a1455c6eac1e6c3c" name="a2020fdfae77fa776a1455c6eac1e6c3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2020fdfae77fa776a1455c6eac1e6c3c">&#9670;&#160;</a></span>VELOCIDAD_AVANCE_DER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define VELOCIDAD_AVANCE_DER&#160;&#160;&#160;700</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="control__motor_8h_source.html#l00029">29</a> del archivo <a class="el" href="control__motor_8h_source.html">control_motor.h</a>.</p>
+
+</div>
+</div>
+<a id="afc92b36f4d09da0592b55e0c89d69669" name="afc92b36f4d09da0592b55e0c89d69669"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc92b36f4d09da0592b55e0c89d69669">&#9670;&#160;</a></span>VELOCIDAD_AVANCE_IZQ</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define VELOCIDAD_AVANCE_IZQ&#160;&#160;&#160;700</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="control__motor_8h_source.html#l00028">28</a> del archivo <a class="el" href="control__motor_8h_source.html">control_motor.h</a>.</p>
+
+</div>
+</div>
+<a id="a023602ad3885a83d3ed9992bccaa8629" name="a023602ad3885a83d3ed9992bccaa8629"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a023602ad3885a83d3ed9992bccaa8629">&#9670;&#160;</a></span>VELOCIDAD_GIRO_DER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define VELOCIDAD_GIRO_DER&#160;&#160;&#160;700</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="control__motor_8h_source.html#l00033">33</a> del archivo <a class="el" href="control__motor_8h_source.html">control_motor.h</a>.</p>
+
+</div>
+</div>
+<a id="a2a5d824478e6a114c37c9027bdd2bcc3" name="a2a5d824478e6a114c37c9027bdd2bcc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a5d824478e6a114c37c9027bdd2bcc3">&#9670;&#160;</a></span>VELOCIDAD_GIRO_IZQ</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define VELOCIDAD_GIRO_IZQ&#160;&#160;&#160;700</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="control__motor_8h_source.html#l00032">32</a> del archivo <a class="el" href="control__motor_8h_source.html">control_motor.h</a>.</p>
+
+</div>
+</div>
+<a id="a716297d6a13fa39782b4e3cc7849b63d" name="a716297d6a13fa39782b4e3cc7849b63d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a716297d6a13fa39782b4e3cc7849b63d">&#9670;&#160;</a></span>VELOCIDAD_SPRINT_DER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define VELOCIDAD_SPRINT_DER&#160;&#160;&#160;900</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="control__motor_8h_source.html#l00031">31</a> del archivo <a class="el" href="control__motor_8h_source.html">control_motor.h</a>.</p>
+
+</div>
+</div>
+<a id="a8fc7652c6c21187d2c9fa8db70b9840b" name="a8fc7652c6c21187d2c9fa8db70b9840b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8fc7652c6c21187d2c9fa8db70b9840b">&#9670;&#160;</a></span>VELOCIDAD_SPRINT_IZQ</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define VELOCIDAD_SPRINT_IZQ&#160;&#160;&#160;900</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="control__motor_8h_source.html#l00030">30</a> del archivo <a class="el" href="control__motor_8h_source.html">control_motor.h</a>.</p>
+
+</div>
+</div>
+<a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Documentación de enumeraciones</h2>
+<a id="aec76296107bce3509215d59c25641f83" name="aec76296107bce3509215d59c25641f83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec76296107bce3509215d59c25641f83">&#9670;&#160;</a></span>brujula</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="#aec76296107bce3509215d59c25641f83">brujula</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Valores de enumeraciones</th></tr><tr><td class="fieldname"><a id="aec76296107bce3509215d59c25641f83a26f4ffb5ab65f0091f0af9906a6923fc" name="aec76296107bce3509215d59c25641f83a26f4ffb5ab65f0091f0af9906a6923fc"></a>norte&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aec76296107bce3509215d59c25641f83af36885e2ac842be3e438ed66db6c7550" name="aec76296107bce3509215d59c25641f83af36885e2ac842be3e438ed66db6c7550"></a>este&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aec76296107bce3509215d59c25641f83a8ddf06d9a60fa54efa20760ce649dc56" name="aec76296107bce3509215d59c25641f83a8ddf06d9a60fa54efa20760ce649dc56"></a>sur&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aec76296107bce3509215d59c25641f83a7ac643eeb25bd8ea1bacfb2c3aeaf8f4" name="aec76296107bce3509215d59c25641f83a7ac643eeb25bd8ea1bacfb2c3aeaf8f4"></a>oeste&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definición en la línea <a class="el" href="control__motor_8h_source.html#l00062">62</a> del archivo <a class="el" href="control__motor_8h_source.html">control_motor.h</a>.</p>
+
+</div>
+</div>
+<a id="a2663002e830a96e71dbcbb8e27a81dfa" name="a2663002e830a96e71dbcbb8e27a81dfa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2663002e830a96e71dbcbb8e27a81dfa">&#9670;&#160;</a></span>motor_estado_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="#a2663002e830a96e71dbcbb8e27a81dfa">motor_estado_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Estados de motor según tabla de control. </p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">M1  </th><th class="markdownTableHeadNone">M0  </th><th class="markdownTableHeadNone">Acción  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">0  </td><td class="markdownTableBodyNone">1  </td><td class="markdownTableBodyNone">Avance  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1  </td><td class="markdownTableBodyNone">0  </td><td class="markdownTableBodyNone">Retroceso  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">0  </td><td class="markdownTableBodyNone">0  </td><td class="markdownTableBodyNone">Frenado  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1  </td><td class="markdownTableBodyNone">1  </td><td class="markdownTableBodyNone">Frenado  </td></tr>
+</table>
+<table class="fieldtable">
+<tr><th colspan="2">Valores de enumeraciones</th></tr><tr><td class="fieldname"><a id="a2663002e830a96e71dbcbb8e27a81dfaaa71874643829b1acbe12df8bdae04713" name="a2663002e830a96e71dbcbb8e27a81dfaaa71874643829b1acbe12df8bdae04713"></a>MOTOR_AVANCE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a2663002e830a96e71dbcbb8e27a81dfaa00c3ac302373e1c0b32dc47c972dfa50" name="a2663002e830a96e71dbcbb8e27a81dfaa00c3ac302373e1c0b32dc47c972dfa50"></a>MOTOR_RETROCESO&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a2663002e830a96e71dbcbb8e27a81dfaa49c8f05a309bcd70f7301c28715b9c75" name="a2663002e830a96e71dbcbb8e27a81dfaa49c8f05a309bcd70f7301c28715b9c75"></a>MOTOR_FRENADO&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definición en la línea <a class="el" href="control__motor_8h_source.html#l00052">52</a> del archivo <a class="el" href="control__motor_8h_source.html">control_motor.h</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Documentación de funciones</h2>
+<a id="a40c945d2b067ea750fa4755b98524fb3" name="a40c945d2b067ea750fa4755b98524fb3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40c945d2b067ea750fa4755b98524fb3">&#9670;&#160;</a></span>activar_modo_sprint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void activar_modo_sprint </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Activa el modo sprint de alta velocidad. </p>
+<p>Cambia las velocidades de avance a valores de sprint (90% vs 70%) </p><dl class="section note"><dt>Nota</dt><dd>Se llama cuando se presiona el botón "I AM SPEED" </dd></dl>
+
+<p class="definition">Definición en la línea <a class="el" href="control__motor_8c_source.html#l00024">24</a> del archivo <a class="el" href="control__motor_8c_source.html">control_motor.c</a>.</p>
+
+</div>
+</div>
+<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Documentación de variables</h2>
+<a id="a6ace41090c94cb7ca3698b2f735c650a" name="a6ace41090c94cb7ca3698b2f735c650a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ace41090c94cb7ca3698b2f735c650a">&#9670;&#160;</a></span>velocidad_actual_der</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t velocidad_actual_der</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel extern">extern</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="control__motor_8c_source.html#l00015">15</a> del archivo <a class="el" href="control__motor_8c_source.html">control_motor.c</a>.</p>
+
+</div>
+</div>
+<a id="a207cf366a8889df99991d3c296efa62d" name="a207cf366a8889df99991d3c296efa62d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a207cf366a8889df99991d3c296efa62d">&#9670;&#160;</a></span>velocidad_actual_izq</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t velocidad_actual_izq</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel extern">extern</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="control__motor_8c_source.html#l00014">14</a> del archivo <a class="el" href="control__motor_8c_source.html">control_motor.c</a>.</p>
+
+</div>
+</div>
+<a id="a1a7e9c8c6d9334929542019c9a631fae" name="a1a7e9c8c6d9334929542019c9a631fae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a7e9c8c6d9334929542019c9a631fae">&#9670;&#160;</a></span>velocidad_giro_actual_der</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t velocidad_giro_actual_der</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel extern">extern</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="control__motor_8c_source.html#l00017">17</a> del archivo <a class="el" href="control__motor_8c_source.html">control_motor.c</a>.</p>
+
+</div>
+</div>
+<a id="a326ac6a5463061960467bfd99962d67a" name="a326ac6a5463061960467bfd99962d67a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a326ac6a5463061960467bfd99962d67a">&#9670;&#160;</a></span>velocidad_giro_actual_izq</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t velocidad_giro_actual_izq</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel extern">extern</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="control__motor_8c_source.html#l00016">16</a> del archivo <a class="el" href="control__motor_8c_source.html">control_motor.c</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_c6310732a22f63c0c2fc5595561e68f1.html">Core</a></li><li class="navelem"><a href="dir_e2489e887f17afa3cbc07a4ec152cdd2.html">Inc</a></li><li class="navelem"><a href="control__motor_8h.html">control_motor.h</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
+  </ul>
+</div>
+</body>
+</html>

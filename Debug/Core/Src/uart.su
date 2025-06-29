@@ -1,2 +1,2 @@
-../Core/Src/uart.c:20:6:Transmision	8	static
-../Core/Src/uart.c:25:6:Inicializar_UART	16	static
+../Core/Src/uart.c:46:6:Transmision	8	static
+../Core/Src/uart.c:64:6:Inicializar_UART	16	static

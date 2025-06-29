@@ -1,13 +1,31 @@
 /**
  * @file laberinto.c
  * @brief Implementación del módulo de control del laberinto
+ * @author demianmozo
  */
 
 #include "laberinto.h"
 
-/* Array que representa el laberinto completo */
+/** @defgroup Laberinto_Variables Variables del laberinto
+ * @brief Variables estáticas para representación interna del laberinto
+ * @{
+ */
+
+/** @brief Array bidimensional que representa el laberinto completo */
 static casilla_t laberinto[TAMAÑO_LABERINTO][TAMAÑO_LABERINTO];
 
+/**
+ * @}
+ */
+
+/**
+ * @brief Inicializa el laberinto con pesos por distancia Manhattan y sin muros
+ * @details Configura cada casilla con:
+ * - Identificación de posición (fila, columna)
+ * - Peso inicial calculado como distancia Manhattan a la meta
+ * - Sin muros inicialmente (laberinto abierto)
+ * - Meta en (1,1) con peso 0
+ */
 void laberinto_init(void)
 {
     // Inicializar cada casilla
@@ -38,6 +56,12 @@ void laberinto_init(void)
     laberinto[POSICION_META_FILA - 1][POSICION_META_COLUMNA - 1].peso = 0;
 }
 
+/**
+ * @brief Obtiene el peso de una casilla específica
+ * @param fila Fila de la casilla 
+ * @param columna Columna de la casilla 
+ * @return Peso de la casilla, PESO_MAXIMO si posición inválida
+ */
 uint8_t laberinto_get_peso(uint8_t fila, uint8_t columna)
 {
     if (!laberinto_posicion_valida(fila, columna))
@@ -48,6 +72,16 @@ uint8_t laberinto_get_peso(uint8_t fila, uint8_t columna)
     return laberinto[fila - 1][columna - 1].peso;
 }
 
+/**
+ * @brief Registra un muro detectado y actualiza el laberinto
+ * @param fila Fila donde se detectó el muro
+ * @param columna Columna donde se detectó el muro
+ * @param direccion Dirección del muro detectado
+ * @details Proceso completo:
+ * 1. Marca el muro en la casilla actual
+ * 2. Marca el muro opuesto en la casilla adyacente
+ * 3. Recalcula todos los pesos con Flood Fill
+ */
 void laberinto_set_muro(uint8_t fila, uint8_t columna, brujula direccion)
 {
     if (!laberinto_posicion_valida(fila, columna))
@@ -73,6 +107,16 @@ void laberinto_set_muro(uint8_t fila, uint8_t columna, brujula direccion)
     laberinto_recalcular_pesos();
 }
 
+/**
+ * @brief Implementa el algoritmo Flood Fill para recalcular pesos
+ * @details Algoritmo iterativo que propaga pesos desde la meta:
+ * 1. Mantiene la meta con peso 0
+ * 2. Para cada casilla, calcula peso = menor_peso_adyacente + 1
+ * 3. Respeta muros existentes (no considera casillas bloqueadas)
+ * 4. Itera hasta convergencia o máximo de iteraciones
+ *
+ * @note Protección contra bucles infinitos con MAX_ITERACIONES = 20
+ */
 void laberinto_recalcular_pesos(void)
 {
     bool cambio_detectado = true;
@@ -137,6 +181,13 @@ void laberinto_recalcular_pesos(void)
     }
 }
 
+/**
+ * @brief Verifica si existe un muro en una dirección específica
+ * @param fila Fila de la casilla a verificar
+ * @param columna Columna de la casilla a verificar
+ * @param direccion Dirección a verificar (norte, este, sur, oeste)
+ * @return true si hay muro o posición inválida, false si está libre
+ */
 bool laberinto_hay_muro(uint8_t fila, uint8_t columna, brujula direccion)
 {
     if (!laberinto_posicion_valida(fila, columna))
@@ -147,6 +198,12 @@ bool laberinto_hay_muro(uint8_t fila, uint8_t columna, brujula direccion)
     return laberinto[fila - 1][columna - 1].muros[direccion];
 }
 
+/**
+ * @brief Calcula la posición adyacente en una dirección dada
+ * @param pos_actual Posición de referencia
+ * @param direccion Dirección de movimiento (norte, este, sur, oeste)
+ * @return Nueva posición calculada (puede ser inválida si está fuera del laberinto)
+ */
 posicion_t laberinto_get_posicion_adyacente(posicion_t pos_actual, brujula direccion)
 {
     posicion_t nueva_pos = pos_actual;
@@ -170,6 +227,12 @@ posicion_t laberinto_get_posicion_adyacente(posicion_t pos_actual, brujula direc
     return nueva_pos;
 }
 
+/**
+ * @brief Valida si una posición está dentro de los límites del laberinto
+ * @param fila Fila a validar
+ * @param columna Columna a validar
+ * @return true si la posición es válida (1 ≤ fila,columna ≤ 4), false en caso contrario
+ */
 bool laberinto_posicion_valida(uint8_t fila, uint8_t columna)
 {
     return (fila >= 1 && fila <= TAMAÑO_LABERINTO &&

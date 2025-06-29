@@ -1,7 +1,7 @@
-../Core/Src/laberinto.c:11:6:laberinto_init	16	static
-../Core/Src/laberinto.c:41:9:laberinto_get_peso	16	static
-../Core/Src/laberinto.c:51:6:laberinto_set_muro	32	static
-../Core/Src/laberinto.c:76:6:laberinto_recalcular_pesos	32	static
-../Core/Src/laberinto.c:140:6:laberinto_hay_muro	24	static
-../Core/Src/laberinto.c:150:12:laberinto_get_posicion_adyacente	24	static
-../Core/Src/laberinto.c:173:6:laberinto_posicion_valida	16	static
+../Core/Src/laberinto.c:29:6:laberinto_init	16	static
+../Core/Src/laberinto.c:65:9:laberinto_get_peso	16	static
+../Core/Src/laberinto.c:85:6:laberinto_set_muro	32	static
+../Core/Src/laberinto.c:120:6:laberinto_recalcular_pesos	32	static
+../Core/Src/laberinto.c:191:6:laberinto_hay_muro	24	static
+../Core/Src/laberinto.c:207:12:laberinto_get_posicion_adyacente	24	static
+../Core/Src/laberinto.c:236:6:laberinto_posicion_valida	16	static
