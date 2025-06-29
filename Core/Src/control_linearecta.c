@@ -88,31 +88,21 @@ void controlar_linea_recta(void)
     if (!calibrado)
         return;
 
-    // Verificar flags AL INICIO
-    if (flag_linea_detectada || flag_muro_detectado)
-        return;
-
     // Determinar posición relativa
     bool muy_cerca_izq = (sensor_izq_avg < izq_cerca + 200);
     bool muy_cerca_der = (sensor_der_avg < der_cerca + 200);
 
     if (muy_cerca_izq)
     {
-        // Verificar flags durante ejecución
-        if (flag_linea_detectada || flag_muro_detectado)
-        {
-            return;
-        }
         correccion_derecha(); // Alejarse de pared izquierda
     }
     else if (muy_cerca_der)
     {
-        // Verificar flags durante ejecución
-        if (flag_linea_detectada || flag_muro_detectado)
-        {
-            return;
-        }
         correccion_izquierda(); // Alejarse de pared derecha
+    }
+    else if (muy_cerca_izq)
+    {
+        correccion_derecha(); // Alejarse de pared izquierda
     }
     else
     {

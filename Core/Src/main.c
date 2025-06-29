@@ -170,31 +170,22 @@ int main(void)
     /* USER CODE BEGIN 3 */
     if (!terminado)
     {
+      controlar_linea_recta();
       // PROCESAR FLAGS CON PRIORIDAD: LÍNEA > MURO
-
       if (flag_linea_detectada)
       {
-        if (antirrebote())
+        HAL_GPIO_WritePin(LD4_GPIO_Port, LD4_Pin, GPIO_PIN_SET); // Naranja
+        flag_linea_detectada = false;                            // Clear flag PRIMERO
+        chequeolinea();
+      }
+      if (GPIO_PIN_RESET == HAL_GPIO_ReadPin(WallSensor_GPIO_Port, WallSensor_Pin))
+      {
+        HAL_Delay(20);
+        if (HAL_GPIO_ReadPin(WallSensor_GPIO_Port, WallSensor_Pin) == GPIO_PIN_RESET)
         {
-          HAL_GPIO_WritePin(LD4_GPIO_Port, LD4_Pin, GPIO_PIN_SET); // Naranja
-          flag_linea_detectada = false;                            // Clear flag PRIMERO
-          chequeolinea();
+          HAL_GPIO_WritePin(LD6_GPIO_Port, LD6_Pin, GPIO_PIN_SET); // Prende LED al detectar muro
+          chequeomuro();
         }
-        else
-          flag_linea_detectada = false;
-      }
-
-      else if (flag_muro_detectado) // else if = prioridad a línea
-      {
-        HAL_GPIO_WritePin(LD6_GPIO_Port, LD6_Pin, GPIO_PIN_SET); // Prende LED al detectar muro
-        flag_muro_detectado = false;                             // Clear flag PRIMERO
-        chequeomuro();
-      }
-
-      else
-      {
-        // Solo ejecutar control de línea recta si NO hay interrupciones pendientes
-        controlar_linea_recta();
       }
     }
     else
@@ -202,33 +193,6 @@ int main(void)
       termino();
     }
     reset_posicion_pushbutton(); // ⚡ I AM SPEED button */
-
-    // OJO SOLO PARA PROBAR LOS TIEMPOS DE LOS GIROS
-    /*
-    avanza(); // Comenzar avanzando 1 SEGUNDO
-    HAL_Delay(1000);
-
-    // Simular detección de pared - girar a la derecha
-    sentido_actual = gira90der(sentido_actual); // Gira Y SIGUE AVANZANDO POR 2 SEGUNDOS
-    avanza();
-    HAL_Delay(2000);
-
-    // Otro obstáculo - girar a la izquierda
-    sentido_actual = gira90izq(sentido_actual); // Gira Y SIGUE AVANZANDO
-    avanza();
-    HAL_Delay(2000);
-
-    // Callejón sin salida - dar media vuelta
-    sentido_actual = gira180(sentido_actual); // Gira Y SIGUE AVANZANDO POR 3 SEGUNDOS
-    avanza();
-    HAL_Delay(3000);
-
-    // SIMULA QUE TERMINÓ
-    termino();       // Usando tu función
-    HAL_Delay(5000); // Pausa antes de reiniciar
-
-    // Aquí se podría agregar el festejo */
-
     /* USER CODE END 3 */
   }
 }
@@ -613,11 +577,17 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : WallSensor_Pin LineSensor_Pin */
-  GPIO_InitStruct.Pin = WallSensor_Pin | LineSensor_Pin;
+  /*Configure GPIO pin : WallSensor_Pin */
+  GPIO_InitStruct.Pin = WallSensor_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(WallSensor_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : LineSensor_Pin */
+  GPIO_InitStruct.Pin = LineSensor_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+  HAL_GPIO_Init(LineSensor_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : I2S3_SCK_Pin */
   GPIO_InitStruct.Pin = I2S3_SCK_Pin;
@@ -698,8 +668,6 @@ void chequeolinea(void)
   brujula sentido_deseado = calcular_mejor_direccion(fila_actual, columna_actual); // funcion definida en navegacion.h
   sentido_actual = ejecutar_movimiento(sentido_actual, sentido_deseado);           // funcion definida en navegacion.h
   avanza();
-  __HAL_GPIO_EXTI_CLEAR_IT(LineSensor_Pin);
-  __HAL_GPIO_EXTI_CLEAR_IT(WallSensor_Pin);
   HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
   HAL_GPIO_WritePin(LD4_GPIO_Port, LD4_Pin, GPIO_PIN_RESET);
 }
@@ -721,8 +689,6 @@ void chequeomuro(void)
   // 4. Ejecutar movimiento LO QUE HIZO EL COLO YA ACTUALIZA EL SENTIDO ACTUAL SOLO
   sentido_actual = ejecutar_movimiento(sentido_actual, sentido_deseado);
   avanza();
-  __HAL_GPIO_EXTI_CLEAR_IT(LineSensor_Pin);
-  __HAL_GPIO_EXTI_CLEAR_IT(WallSensor_Pin);
   HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
   HAL_GPIO_WritePin(LD6_GPIO_Port, LD6_Pin, GPIO_PIN_RESET);
 }
@@ -757,76 +723,31 @@ void reset_posicion_pushbutton(void)
   }
 }
 
-bool antirrebote(void)
-{
-  int es_linea = 0;
-
-  HAL_Delay(5); // 5ms de delay
-  if (HAL_GPIO_ReadPin(LineSensor_GPIO_Port, LineSensor_Pin) == GPIO_PIN_SET)
-    return false;
-  HAL_Delay(5); // 5ms de delay
-  if (HAL_GPIO_ReadPin(LineSensor_GPIO_Port, LineSensor_Pin) == GPIO_PIN_SET)
-    return false;
-  HAL_Delay(5); // 5ms de delay
-  if (HAL_GPIO_ReadPin(LineSensor_GPIO_Port, LineSensor_Pin) == GPIO_PIN_SET)
-    return false;
-  es_linea = 1;
-
-  while (es_linea == 1)
-  {
-    while (HAL_GPIO_ReadPin(LineSensor_GPIO_Port, LineSensor_Pin) == GPIO_PIN_RESET)
-      avanza();
-    if (HAL_GPIO_ReadPin(LineSensor_GPIO_Port, LineSensor_Pin) == GPIO_PIN_SET)
-      HAL_Delay(5); // 5ms de delay
-    if (HAL_GPIO_ReadPin(LineSensor_GPIO_Port, LineSensor_Pin) == GPIO_PIN_SET)
-      return true;
-  }
-  return false; // no deberia pasar nunca, en caso de falla
-}
-
 // ATENCION A LA INTERRUPCION
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
   if (GPIO_Pin == LineSensor_Pin)
   {
-    flag_linea_detectada = true;
-    /* // Leer estado actual del sensor
-    bool estado_actual1 = HAL_GPIO_ReadPin(LineSensor_GPIO_Port, LineSensor_Pin);
+    static GPIO_PinState ultima_lectura_valida_linea = GPIO_PIN_SET;
+    GPIO_PinState lectura1, lectura2;
 
-
-    uint32_t startTick = HAL_GetTick();		//delay re croto del chat
-
-    while ((HAL_GetTick() - startTick) < 5)
+    lectura1 = HAL_GPIO_ReadPin(LineSensor_GPIO_Port, LineSensor_Pin);
+    if (lectura1 != ultima_lectura_valida_linea)
     {
-        // wait
+      // Micro-delay en lugar de HAL_Delay (no bloquea tanto)
+      for (volatile int i = 0; i < 1000000; i++)
+        ; // ~20ms aprox (equivale a tiempo_rebotes)
+
+      lectura2 = HAL_GPIO_ReadPin(LineSensor_GPIO_Port, LineSensor_Pin);
+      if (lectura2 == lectura1)
+      {
+        ultima_lectura_valida_linea = lectura2;
+        if (ultima_lectura_valida_linea == GPIO_PIN_RESET)
+        {
+          flag_linea_detectada = true;
+        }
+      }
     }
-
-    bool estado_actual2 = HAL_GPIO_ReadPin(LineSensor_GPIO_Port, LineSensor_Pin);
-
-
-    // Solo activar flag si hubo transición HIGH → LOW
-    if (ultimo_estado_linea == true && estado_actual1 == false && estado_actual2 == false)
-    {
-      flag_linea_detectada = true;
-    }
-
-    // Actualizar último estado
-    ultimo_estado_linea = estado_actual2; */
-  }
-  else if (GPIO_Pin == WallSensor_Pin)
-  {
-    flag_muro_detectado = true;
-    // Leer estado actual del sensor
-    bool estado_actual = HAL_GPIO_ReadPin(WallSensor_GPIO_Port, WallSensor_Pin);
-
-    // Solo activar flag si hubo transición HIGH → LOW
-    if (ultimo_estado_muro == true && estado_actual == false)
-    {
-      flag_muro_detectado = true;
-    }
-
-    // Actualizar último estado
-    ultimo_estado_muro = estado_actual;
   }
 }
 
