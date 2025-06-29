@@ -12,5 +12,5 @@
 ../Core/Src/main.c:708:6:chequeomuro	1
 ../Core/Src/main.c:731:6:reset_posicion_pushbutton	2
 ../Core/Src/main.c:760:6:antirrebote	8
-../Core/Src/main.c:788:6:HAL_GPIO_EXTI_Callback	3
+../Core/Src/main.c:788:6:HAL_GPIO_EXTI_Callback	5
 ../Core/Src/main.c:839:6:Error_Handler	1

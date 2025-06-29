@@ -816,7 +816,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
   else if (GPIO_Pin == WallSensor_Pin)
   {
     flag_muro_detectado = true;
-    /* // Leer estado actual del sensor
+    // Leer estado actual del sensor
     bool estado_actual = HAL_GPIO_ReadPin(WallSensor_GPIO_Port, WallSensor_Pin);
 
     // Solo activar flag si hubo transición HIGH → LOW
@@ -826,7 +826,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     }
 
     // Actualizar último estado
-    ultimo_estado_muro = estado_actual;*/
+    ultimo_estado_muro = estado_actual;
   }
 }
 
