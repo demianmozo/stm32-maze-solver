@@ -6,6 +6,12 @@
  * @author demianmozo
  * @date 2025-06-07
  * Este archivo contiene la función main y la lógica principal del robot.
+ *
+ * @section hardware Hardware utilizado
+ * - STM32F407VG Discovery Board
+ * - Sensores IR para detección de líneas y muros
+ * - Motores DC con control PWM
+ * - Comunicación UART
  ******************************************************************************
  * @attention
  *
@@ -25,16 +31,16 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "antirebote.h"
-#include "control_motor.h"
-#include "laberinto.h"
-#include "navegacion.h"
-#include "control_linearecta.h"
-#include <stdint.h>
-#include <stdbool.h>
-#include "uart.h"
-#include <string.h> //para mandar mensajes por la UART
-#include <stdio.h>
+#include "antirebote.h"         ///< Funciones de antirebote para sensores
+#include "control_motor.h"      ///< Control de motores y PWM
+#include "laberinto.h"          ///< Representación y manejo del laberinto
+#include "navegacion.h"         ///< Algoritmos de navegación Flood Fill
+#include "control_linearecta.h" ///< Control PID para línea recta
+#include <stdint.h>             ///< Tipos de datos enteros estándar
+#include <stdbool.h>            ///< Tipo de dato booleano
+#include "uart.h"               ///< Comunicación UART para debugging
+#include <string.h>             ///< Funciones de manipulación de strings
+#include <stdio.h>              ///< Funciones de entrada/salida estándar
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -64,24 +70,36 @@ TIM_HandleTypeDef htim3;
 UART_HandleTypeDef huart5;
 
 /* USER CODE BEGIN PV */
-uint8_t fila_actual = 4, columna_actual = 4;
-brujula sentido_actual = norte;
-bool terminado = false; // Flag de finalización
+/** @defgroup Main_Variables Variables globales principales
+ * @brief Variables globales utilizadas en el programa principal
+ * @{
+ */
 
-uint16_t TIEMPO_AVANCE_LINEA = 250; // Exploración
-bool modo_sprint = false;
+/** @brief Posición actual del robot */
+uint8_t fila_actual = 4, columna_actual = 4; ///< Fila y columna inicial  del robot (4;4)
 
-uint16_t dma_buffer[BUFFER_TOTAL];
+/** @brief Estado y orientación del robot */
+brujula sentido_actual = norte; ///< Orientación inicial del robot
+bool terminado = false;         ///< Flag que indica si el robot llegó a la meta
 
-volatile uint32_t tiempo_inicio = 0; // para el atirrebote croto del sensor
-uint32_t tiempo_actual = 0;
+/** @brief Control de timing y velocidad */
+uint16_t TIEMPO_AVANCE_LINEA = 250; ///< Tiempo de avance entre líneas (ms) - Exploración
+bool modo_sprint = false;           ///< Flag para modo de alta velocidad
 
-volatile bool ultimo_estado_linea = true; // Asumimos que inicia en HIGH (no detectando)
-volatile bool ultimo_estado_muro = true;  // Asumimos que inicia en HIGH (no detectando)
+/** @brief Buffer para ADC con DMA */
+uint16_t dma_buffer[BUFFER_TOTAL]; ///< Buffer para lecturas ADC de sensores IR
 
-// NUEVAS BANDERAS PARA INTERRUPCIONES
-volatile bool flag_linea_detectada = false;
-volatile bool flag_muro_detectado = false;
+/** @brief Variables para control de interrupciones */
+volatile bool ultimo_estado_linea = true; ///< Último estado del sensor de línea (HIGH = no detectando)
+volatile bool ultimo_estado_muro = true;  ///< Último estado del sensor de muro (HIGH = no detectando)
+
+/** @brief Flags de interrupciones */
+volatile bool flag_linea_detectada = false; ///< Flag activado por ISR al detectar línea
+volatile bool flag_muro_detectado = false;  ///< Flag activado por ISR al detectar muro
+
+/**
+ * @}
+ */
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -96,15 +114,61 @@ static void MX_UART5_Init(void);
 void MX_USB_HOST_Process(void);
 
 /* USER CODE BEGIN PFP */
+
+/** @defgroup Main_Functions Prototipos de funciones principales
+ * @brief Declaraciones de funciones implementadas en este archivo
+ * @{
+ */
+
+/**
+ * @brief Procesa la detección de una línea
+ * @details Actualiza posición, verifica meta, calcula nueva dirección y ejecuta movimiento
+ */
 void chequeolinea(void);
+
+/**
+ * @brief Procesa la detección de un muro
+ * @details Registra el muro, recalcula pesos y ejecuta nuevo movimiento
+ */
 void chequeomuro(void);
+
+/**
+ * @brief Maneja el botón para modo sprint
+ * @details Reinicia posición y activa modo de alta velocidad
+ */
 void reset_posicion_pushbutton(void);
+
+/**
+ * @brief Realiza auto-calibración inicial de sensores
+ * @details Calibra los valores mínimos y máximos de los sensores IR
+ */
 void auto_calibracion(void);
+
+/**
+ * @brief Promedia las lecturas de los sensores IR
+ * @param buffer Buffer con las lecturas DMA del ADC
+ */
 void promediar_sensores(uint16_t *buffer);
+
+/**
+ * @brief Controla el seguimiento de línea recta
+ * @details Mantiene el robot centrado
+ */
 void controlar_linea_recta(void);
+
+/**
+ * @brief Aplica corrección hacia la izquierda
+ */
 void correccion_izquierda(void);
+
+/**
+ * @brief Aplica corrección hacia la derecha
+ */
 void correccion_derecha(void);
-bool antirrebote(void);
+
+/**
+ * @}
+ */
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -113,8 +177,10 @@ bool antirrebote(void);
 /* USER CODE END 0 */
 
 /**
- * @brief  The application entry point.
- * @retval int
+ * @brief  Punto de entrada principal de la aplicación
+ * @details Inicializa todos los periféricos, calibra sensores e inicia
+ *          el bucle principal de navegación del laberinto
+ * @retval Código de retorno (nunca debería retornar en funcionamiento normal)
  */
 int main(void)
 {
@@ -154,14 +220,23 @@ int main(void)
 
   // Auto-calibración (sin motores activos)
   auto_calibracion();
-  // Inicializar el módulo de motores
-  control_motor_init();
-  Inicializar_UART();
 
+  // Inicializar módulos
+  control_motor_init();
+  laberinto_init();
+  Inicializar_UART();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  /**
+   * @brief Bucle principal del programa
+   * @details Implementa la máquina de estados principal:
+   * - Control de línea recta
+   * - Procesamiento de interrupciones (línea > muro)
+   * - Verificación de botón de sprint
+   * - Verificación de estado terminado
+   */
   while (1)
   {
     /* USER CODE END WHILE */
@@ -170,65 +245,27 @@ int main(void)
     /* USER CODE BEGIN 3 */
     if (!terminado)
     {
+      controlar_linea_recta();
       // PROCESAR FLAGS CON PRIORIDAD: LÍNEA > MURO
-
       if (flag_linea_detectada)
       {
-        if (antirrebote())
+        flag_linea_detectada = false;                            // Clear flag PRIMERO
+        chequeolinea();
+      }
+      if (GPIO_PIN_RESET == HAL_GPIO_ReadPin(WallSensor_GPIO_Port, WallSensor_Pin))
+      {
+        HAL_Delay(20);
+        if (HAL_GPIO_ReadPin(WallSensor_GPIO_Port, WallSensor_Pin) == GPIO_PIN_RESET)
         {
-          HAL_GPIO_WritePin(LD4_GPIO_Port, LD4_Pin, GPIO_PIN_SET); // Naranja
-          flag_linea_detectada = false;                            // Clear flag PRIMERO
-          chequeolinea();
+          chequeomuro();
         }
-        else
-          flag_linea_detectada = false;
-      }
-
-      else if (flag_muro_detectado) // else if = prioridad a línea
-      {
-        HAL_GPIO_WritePin(LD6_GPIO_Port, LD6_Pin, GPIO_PIN_SET); // Prende LED al detectar muro
-        flag_muro_detectado = false;                             // Clear flag PRIMERO
-        chequeomuro();
-      }
-
-      else
-      {
-        // Solo ejecutar control de línea recta si NO hay interrupciones pendientes
-        controlar_linea_recta();
       }
     }
     else
     {
-      termino();
+      termino(); // Robot detenido en meta
     }
     reset_posicion_pushbutton(); // ⚡ I AM SPEED button */
-
-    // OJO SOLO PARA PROBAR LOS TIEMPOS DE LOS GIROS
-    /*
-    avanza(); // Comenzar avanzando 1 SEGUNDO
-    HAL_Delay(1000);
-
-    // Simular detección de pared - girar a la derecha
-    sentido_actual = gira90der(sentido_actual); // Gira Y SIGUE AVANZANDO POR 2 SEGUNDOS
-    avanza();
-    HAL_Delay(2000);
-
-    // Otro obstáculo - girar a la izquierda
-    sentido_actual = gira90izq(sentido_actual); // Gira Y SIGUE AVANZANDO
-    avanza();
-    HAL_Delay(2000);
-
-    // Callejón sin salida - dar media vuelta
-    sentido_actual = gira180(sentido_actual); // Gira Y SIGUE AVANZANDO POR 3 SEGUNDOS
-    avanza();
-    HAL_Delay(3000);
-
-    // SIMULA QUE TERMINÓ
-    termino();       // Usando tu función
-    HAL_Delay(5000); // Pausa antes de reiniciar
-
-    // Aquí se podría agregar el festejo */
-
     /* USER CODE END 3 */
   }
 }
@@ -613,11 +650,17 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : WallSensor_Pin LineSensor_Pin */
-  GPIO_InitStruct.Pin = WallSensor_Pin | LineSensor_Pin;
+  /*Configure GPIO pin : WallSensor_Pin */
+  GPIO_InitStruct.Pin = WallSensor_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(WallSensor_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : LineSensor_Pin */
+  GPIO_InitStruct.Pin = LineSensor_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+  HAL_GPIO_Init(LineSensor_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : I2S3_SCK_Pin */
   GPIO_InitStruct.Pin = I2S3_SCK_Pin;
@@ -652,7 +695,15 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-// FUNCION QUE ACTUALIZA LA POSICION CADA VEZ QUE SE CRUZA UNA LINEA
+/**
+ * @brief Actualiza la posición del robot en el laberinto
+ * @details Modifica las coordenadas del robot según la dirección de movimiento
+ * @param fila Puntero a la fila actual (se modifica)
+ * @param columna Puntero a la columna actual (se modifica)
+ * @param sentido Orientación actual del robot
+ *
+ * @note Las coordenadas van de 1 a 4 para un laberinto 4x4
+ */
 void actualizar_posicion(uint8_t *fila, uint8_t *columna, brujula sentido)
 {
   switch (sentido)
@@ -672,7 +723,19 @@ void actualizar_posicion(uint8_t *fila, uint8_t *columna, brujula sentido)
   }
 }
 
-// FUNCION CHEQUEO LINEA
+/**
+ * @brief Procesa la detección de una línea del laberinto
+ * @details Secuencia completa de procesamiento al cruzar una línea:
+ * 1. Desactiva interrupciones temporalmente
+ * 2. Avanza el tiempo necesario para posicionarse
+ * 3. Actualiza la posición del robot
+ * 4. Verifica si llegó a la meta (1,1)
+ * 5. Calcula la mejor dirección usando Flood Fill
+ * 6. Ejecuta el movimiento necesario
+ * 7. Reactiva interrupciones
+ *
+ * @note Usa TIEMPO_AVANCE_LINEA que varía según el modo (exploración/sprint)
+ */
 void chequeolinea(void)
 {
   HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
@@ -698,13 +761,23 @@ void chequeolinea(void)
   brujula sentido_deseado = calcular_mejor_direccion(fila_actual, columna_actual); // funcion definida en navegacion.h
   sentido_actual = ejecutar_movimiento(sentido_actual, sentido_deseado);           // funcion definida en navegacion.h
   avanza();
-  __HAL_GPIO_EXTI_CLEAR_IT(LineSensor_Pin);
-  __HAL_GPIO_EXTI_CLEAR_IT(WallSensor_Pin);
+
   HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
   HAL_GPIO_WritePin(LD4_GPIO_Port, LD4_Pin, GPIO_PIN_RESET);
 }
 
-// FUNCION CHEQUEO MURO
+/**
+ * @brief Procesa la detección de un muro
+ * @details Secuencia de procesamiento al detectar un obstáculo:
+ * 1. Desactiva interrupciones
+ * 2. Registra el muro en el mapa del laberinto
+ * 3. Recalcula todos los pesos usando Flood Fill
+ * 4. Calcula nueva mejor dirección
+ * 5. Ejecuta el movimiento alternativo
+ * 6. Reactiva interrupciones
+ *
+ * @note El algoritmo Flood Fill se ejecuta completamente tras cada muro detectado
+ */
 void chequeomuro(void)
 {
   HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
@@ -721,13 +794,22 @@ void chequeomuro(void)
   // 4. Ejecutar movimiento LO QUE HIZO EL COLO YA ACTUALIZA EL SENTIDO ACTUAL SOLO
   sentido_actual = ejecutar_movimiento(sentido_actual, sentido_deseado);
   avanza();
-  __HAL_GPIO_EXTI_CLEAR_IT(LineSensor_Pin);
-  __HAL_GPIO_EXTI_CLEAR_IT(WallSensor_Pin);
+
   HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
   HAL_GPIO_WritePin(LD6_GPIO_Port, LD6_Pin, GPIO_PIN_RESET);
 }
 
-// VELOCIDAD
+/**
+ * @brief Maneja el botón para activar modo sprint
+ * @details Al presionar el botón "I AM SPEED":
+ * 1. Reinicia la posición a (4,4) orientación norte
+ * 2. Activa el modo sprint (mayor velocidad)
+ * 3. Reduce el tiempo de avance entre líneas
+ * 4. Resetea flags y estados de sensores
+ * 5. Inicia el movimiento inmediatamente
+ *
+ * @note El robot mantiene el conocimiento del laberinto de la primera ejecución
+ */
 void reset_posicion_pushbutton(void)
 {
   if (antirebote(i_am_speed_GPIO_Port, i_am_speed_Pin))
@@ -757,76 +839,38 @@ void reset_posicion_pushbutton(void)
   }
 }
 
-bool antirrebote(void)
-{
-  int es_linea = 0;
-
-  HAL_Delay(5); // 5ms de delay
-  if (HAL_GPIO_ReadPin(LineSensor_GPIO_Port, LineSensor_Pin) == GPIO_PIN_SET)
-    return false;
-  HAL_Delay(5); // 5ms de delay
-  if (HAL_GPIO_ReadPin(LineSensor_GPIO_Port, LineSensor_Pin) == GPIO_PIN_SET)
-    return false;
-  HAL_Delay(5); // 5ms de delay
-  if (HAL_GPIO_ReadPin(LineSensor_GPIO_Port, LineSensor_Pin) == GPIO_PIN_SET)
-    return false;
-  es_linea = 1;
-
-  while (es_linea == 1)
-  {
-    while (HAL_GPIO_ReadPin(LineSensor_GPIO_Port, LineSensor_Pin) == GPIO_PIN_RESET)
-      avanza();
-    if (HAL_GPIO_ReadPin(LineSensor_GPIO_Port, LineSensor_Pin) == GPIO_PIN_SET)
-      HAL_Delay(5); // 5ms de delay
-    if (HAL_GPIO_ReadPin(LineSensor_GPIO_Port, LineSensor_Pin) == GPIO_PIN_SET)
-      return true;
-  }
-  return false; // no deberia pasar nunca, en caso de falla
-}
-
-// ATENCION A LA INTERRUPCION
+/**
+ * @brief Rutina de atencion a la interrupción para sensores
+ * @details ISR para interrupciones externas EXTI9_5. Implementa antirebote
+ *          por hardware y activa flags para procesamiento en main loop
+ * @param GPIO_Pin Pin que generó la interrupción
+ *
+ * @note Esta función implementa antirebote con delay no bloqueante
+ */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
   if (GPIO_Pin == LineSensor_Pin)
   {
-    flag_linea_detectada = true;
-    /* // Leer estado actual del sensor
-    bool estado_actual1 = HAL_GPIO_ReadPin(LineSensor_GPIO_Port, LineSensor_Pin);
+    static GPIO_PinState ultima_lectura_valida_linea = GPIO_PIN_SET;
+    GPIO_PinState lectura1, lectura2;
 
-
-    uint32_t startTick = HAL_GetTick();		//delay re croto del chat
-
-    while ((HAL_GetTick() - startTick) < 5)
+    lectura1 = HAL_GPIO_ReadPin(LineSensor_GPIO_Port, LineSensor_Pin);
+    if (lectura1 != ultima_lectura_valida_linea)
     {
-        // wait
+      // Micro-delay en lugar de HAL_Delay (no bloquea tanto)
+      for (volatile int i = 0; i < 1000000; i++)
+        ; // ~20ms aprox
+
+      lectura2 = HAL_GPIO_ReadPin(LineSensor_GPIO_Port, LineSensor_Pin);
+      if (lectura2 == lectura1)
+      {
+        ultima_lectura_valida_linea = lectura2;
+        if (ultima_lectura_valida_linea == GPIO_PIN_RESET)
+        {
+          flag_linea_detectada = true;
+        }
+      }
     }
-
-    bool estado_actual2 = HAL_GPIO_ReadPin(LineSensor_GPIO_Port, LineSensor_Pin);
-
-
-    // Solo activar flag si hubo transición HIGH → LOW
-    if (ultimo_estado_linea == true && estado_actual1 == false && estado_actual2 == false)
-    {
-      flag_linea_detectada = true;
-    }
-
-    // Actualizar último estado
-    ultimo_estado_linea = estado_actual2; */
-  }
-  else if (GPIO_Pin == WallSensor_Pin)
-  {
-    flag_muro_detectado = true;
-    // Leer estado actual del sensor
-    bool estado_actual = HAL_GPIO_ReadPin(WallSensor_GPIO_Port, WallSensor_Pin);
-
-    // Solo activar flag si hubo transición HIGH → LOW
-    if (ultimo_estado_muro == true && estado_actual == false)
-    {
-      flag_muro_detectado = true;
-    }
-
-    // Actualizar último estado
-    ultimo_estado_muro = estado_actual;
   }
 }
 

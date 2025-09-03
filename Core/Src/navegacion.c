@@ -1,10 +1,27 @@
 /**
  * @file navegacion.c
  * @brief Implementación del módulo de navegación
+ * @author demianmozo
  */
 
 #include "navegacion.h"
 
+/**
+ * @brief Calcula la mejor dirección para moverse basándose en los pesos del laberinto
+ * @param fila_actual Fila actual del robot 
+ * @param columna_actual Columna actual del robot 
+ * @return Dirección óptima para moverse (norte, este, sur, oeste)
+ *
+ * @details Algoritmo de selección de dirección:
+ * 1. Evalúa las 4 direcciones posibles en orden de preferencia: oeste, norte, sur, este
+ * 2. Descarta direcciones bloqueadas por muros
+ * 3. Descarta direcciones que salen del laberinto
+ * 4. Selecciona la dirección con menor peso (más cerca de la meta)
+ * 5. En caso de empate, da preferencia al orden de evaluación
+ * 6. Incluye verificación de seguridad final
+ *
+ * @note El orden de evaluación favorece movimientos hacia la meta (1,1)
+ */
 brujula calcular_mejor_direccion(uint8_t fila_actual, uint8_t columna_actual) // nos devuelve direccion en TIPO BRUJULA gracias colo
 {
     uint8_t peso_minimo = PESO_MAXIMO;
@@ -76,6 +93,21 @@ brujula calcular_mejor_direccion(uint8_t fila_actual, uint8_t columna_actual) //
     return mejor_direccion;
 }
 
+/**
+ * @brief Ejecuta el movimiento necesario para cambiar del sentido actual al deseado
+ * @param sentido_actual Orientación actual del robot
+ * @param sentido_deseado Orientación objetivo
+ * @return Nueva orientación del robot después del movimiento
+ *
+ * @details Lógica de movimiento optimizada:
+ * - Si ya está orientado correctamente: no hace nada
+ * - Diferencia de 1: giro de 90° a la derecha
+ * - Diferencia de 2: giro de 180° (media vuelta)
+ * - Diferencia de 3: giro de 90° a la izquierda
+ *
+ * @note Utiliza aritmética modular para calcular la diferencia angular
+ * @note Los valores de brújula son: norte=0, este=1, sur=2, oeste=3
+ */
 brujula ejecutar_movimiento(brujula sentido_actual, brujula sentido_deseado)
 {
     // ¿Ya está orientado correctamente?

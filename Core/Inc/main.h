@@ -109,7 +109,6 @@ void Error_Handler(void);
 #define LD6_GPIO_Port GPIOD
 #define WallSensor_Pin GPIO_PIN_6
 #define WallSensor_GPIO_Port GPIOC
-#define WallSensor_EXTI_IRQn EXTI9_5_IRQn
 #define LineSensor_Pin GPIO_PIN_7
 #define LineSensor_GPIO_Port GPIOC
 #define LineSensor_EXTI_IRQn EXTI9_5_IRQn

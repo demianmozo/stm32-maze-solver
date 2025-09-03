@@ -1,2 +1,2 @@
-../Core/Src/navegacion.c:8:9:calcular_mejor_direccion	56	static
-../Core/Src/navegacion.c:79:9:ejecutar_movimiento	24	static
+../Core/Src/navegacion.c:25:9:calcular_mejor_direccion	56	static
+../Core/Src/navegacion.c:111:9:ejecutar_movimiento	24	static

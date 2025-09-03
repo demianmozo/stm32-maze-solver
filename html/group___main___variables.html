@@ -1,0 +1,349 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.14.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>STM32 Maze Solver: Variables globales principales</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">STM32 Maze Solver<span id="projectnumber">&#160;v1.0</span>
+   </div>
+   <div id="projectbrief">Proyecto de robot autónomo que resuelve un laberinto mediante un algoritmo de llenado (*Flood Fill*), desarrollado sobre STM32.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.14.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Buscar',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('group___main___variables.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Variables globales principales </div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Variables globales utilizadas en el programa principal.  
+<a href="#details">Más...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:ga764af527164f1d12e1df00e278dc6e92" id="r_ga764af527164f1d12e1df00e278dc6e92"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga764af527164f1d12e1df00e278dc6e92">fila_actual</a> = 4</td></tr>
+<tr class="memdesc:ga764af527164f1d12e1df00e278dc6e92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Posición actual del robot.  <br /></td></tr>
+<tr class="memitem:ga711efd6aed9c3e3f4407b41d3c61b18e" id="r_ga711efd6aed9c3e3f4407b41d3c61b18e"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga711efd6aed9c3e3f4407b41d3c61b18e">columna_actual</a> = 4</td></tr>
+<tr class="memdesc:ga711efd6aed9c3e3f4407b41d3c61b18e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fila y columna inicial del robot (4;4)  <br /></td></tr>
+<tr class="memitem:gab9d09cde750c3abbd25ca0e1a43d5db0" id="r_gab9d09cde750c3abbd25ca0e1a43d5db0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="control__motor_8h.html#aec76296107bce3509215d59c25641f83">brujula</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gab9d09cde750c3abbd25ca0e1a43d5db0">sentido_actual</a> = <a class="el" href="control__motor_8h.html#aec76296107bce3509215d59c25641f83a26f4ffb5ab65f0091f0af9906a6923fc">norte</a></td></tr>
+<tr class="memdesc:gab9d09cde750c3abbd25ca0e1a43d5db0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estado y orientación del robot.  <br /></td></tr>
+<tr class="memitem:ga0ccce3215e76b544222073046ef56be6" id="r_ga0ccce3215e76b544222073046ef56be6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga0ccce3215e76b544222073046ef56be6">terminado</a> = false</td></tr>
+<tr class="memdesc:ga0ccce3215e76b544222073046ef56be6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag que indica si el robot llegó a la meta.  <br /></td></tr>
+<tr class="memitem:ga1d3865db7af7ebece82d76e592b2c92e" id="r_ga1d3865db7af7ebece82d76e592b2c92e"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga1d3865db7af7ebece82d76e592b2c92e">TIEMPO_AVANCE_LINEA</a> = 250</td></tr>
+<tr class="memdesc:ga1d3865db7af7ebece82d76e592b2c92e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Control de timing y velocidad.  <br /></td></tr>
+<tr class="memitem:ga62eed626626ebd77a7e0421d8af7b712" id="r_ga62eed626626ebd77a7e0421d8af7b712"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga62eed626626ebd77a7e0421d8af7b712">modo_sprint</a> = false</td></tr>
+<tr class="memdesc:ga62eed626626ebd77a7e0421d8af7b712"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag para modo de alta velocidad.  <br /></td></tr>
+<tr class="memitem:gae88c5af646d2928f5a8a88492d37dd17" id="r_gae88c5af646d2928f5a8a88492d37dd17"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gae88c5af646d2928f5a8a88492d37dd17">dma_buffer</a> [<a class="el" href="control__linearecta_8h.html#accdae47cc42beb9c8bf9d40e8bdd28ba">BUFFER_TOTAL</a>]</td></tr>
+<tr class="memdesc:gae88c5af646d2928f5a8a88492d37dd17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffer para ADC con DMA.  <br /></td></tr>
+<tr class="memitem:ga8c282d1ff74f62e847a2fe1a1e0a9c00" id="r_ga8c282d1ff74f62e847a2fe1a1e0a9c00"><td class="memItemLeft" align="right" valign="top">volatile bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga8c282d1ff74f62e847a2fe1a1e0a9c00">ultimo_estado_linea</a> = true</td></tr>
+<tr class="memdesc:ga8c282d1ff74f62e847a2fe1a1e0a9c00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Variables para control de interrupciones.  <br /></td></tr>
+<tr class="memitem:gae1cdd087b040ee1967c16129faab6f24" id="r_gae1cdd087b040ee1967c16129faab6f24"><td class="memItemLeft" align="right" valign="top">volatile bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gae1cdd087b040ee1967c16129faab6f24">ultimo_estado_muro</a> = true</td></tr>
+<tr class="memdesc:gae1cdd087b040ee1967c16129faab6f24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Último estado del sensor de muro (HIGH = no detectando)  <br /></td></tr>
+<tr class="memitem:gab63e2378c46f96286002a5dcc75cb9e2" id="r_gab63e2378c46f96286002a5dcc75cb9e2"><td class="memItemLeft" align="right" valign="top">volatile bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gab63e2378c46f96286002a5dcc75cb9e2">flag_linea_detectada</a> = false</td></tr>
+<tr class="memdesc:gab63e2378c46f96286002a5dcc75cb9e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flags de interrupciones.  <br /></td></tr>
+<tr class="memitem:gaf0c46bf1820597add2405f1a2382b0fa" id="r_gaf0c46bf1820597add2405f1a2382b0fa"><td class="memItemLeft" align="right" valign="top">volatile bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gaf0c46bf1820597add2405f1a2382b0fa">flag_muro_detectado</a> = false</td></tr>
+<tr class="memdesc:gaf0c46bf1820597add2405f1a2382b0fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag activado por ISR al detectar muro.  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Descripción detallada</h2>
+<p>Variables globales utilizadas en el programa principal. </p>
+<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Documentación de variables</h2>
+<a id="ga711efd6aed9c3e3f4407b41d3c61b18e" name="ga711efd6aed9c3e3f4407b41d3c61b18e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga711efd6aed9c3e3f4407b41d3c61b18e">&#9670;&#160;</a></span>columna_actual</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t columna_actual = 4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fila y columna inicial del robot (4;4) </p>
+
+<p class="definition">Definición en la línea <a class="el" href="main_8c_source.html#l00079">79</a> del archivo <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="gae88c5af646d2928f5a8a88492d37dd17" name="gae88c5af646d2928f5a8a88492d37dd17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae88c5af646d2928f5a8a88492d37dd17">&#9670;&#160;</a></span>dma_buffer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t dma_buffer[<a class="el" href="control__linearecta_8h.html#accdae47cc42beb9c8bf9d40e8bdd28ba">BUFFER_TOTAL</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Buffer para ADC con DMA. </p>
+<p>Buffer para lecturas ADC de sensores IR </p>
+
+<p class="definition">Definición en la línea <a class="el" href="main_8c_source.html#l00090">90</a> del archivo <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="ga764af527164f1d12e1df00e278dc6e92" name="ga764af527164f1d12e1df00e278dc6e92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga764af527164f1d12e1df00e278dc6e92">&#9670;&#160;</a></span>fila_actual</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t fila_actual = 4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Posición actual del robot. </p>
+
+<p class="definition">Definición en la línea <a class="el" href="main_8c_source.html#l00079">79</a> del archivo <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="gab63e2378c46f96286002a5dcc75cb9e2" name="gab63e2378c46f96286002a5dcc75cb9e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab63e2378c46f96286002a5dcc75cb9e2">&#9670;&#160;</a></span>flag_linea_detectada</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile bool flag_linea_detectada = false</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Flags de interrupciones. </p>
+<p>Flag de interrupción de línea.</p>
+<p>Flag activado por ISR al detectar línea </p>
+
+<p class="definition">Definición en la línea <a class="el" href="main_8c_source.html#l00097">97</a> del archivo <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="gaf0c46bf1820597add2405f1a2382b0fa" name="gaf0c46bf1820597add2405f1a2382b0fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf0c46bf1820597add2405f1a2382b0fa">&#9670;&#160;</a></span>flag_muro_detectado</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile bool flag_muro_detectado = false</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Flag activado por ISR al detectar muro. </p>
+<p>Flag de interrupción de muro. </p>
+
+<p class="definition">Definición en la línea <a class="el" href="main_8c_source.html#l00098">98</a> del archivo <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="ga62eed626626ebd77a7e0421d8af7b712" name="ga62eed626626ebd77a7e0421d8af7b712"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga62eed626626ebd77a7e0421d8af7b712">&#9670;&#160;</a></span>modo_sprint</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool modo_sprint = false</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Flag para modo de alta velocidad. </p>
+
+<p class="definition">Definición en la línea <a class="el" href="main_8c_source.html#l00087">87</a> del archivo <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="gab9d09cde750c3abbd25ca0e1a43d5db0" name="gab9d09cde750c3abbd25ca0e1a43d5db0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab9d09cde750c3abbd25ca0e1a43d5db0">&#9670;&#160;</a></span>sentido_actual</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="control__motor_8h.html#aec76296107bce3509215d59c25641f83">brujula</a> sentido_actual = <a class="el" href="control__motor_8h.html#aec76296107bce3509215d59c25641f83a26f4ffb5ab65f0091f0af9906a6923fc">norte</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Estado y orientación del robot. </p>
+<p>Orientación inicial del robot </p>
+
+<p class="definition">Definición en la línea <a class="el" href="main_8c_source.html#l00082">82</a> del archivo <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="ga0ccce3215e76b544222073046ef56be6" name="ga0ccce3215e76b544222073046ef56be6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0ccce3215e76b544222073046ef56be6">&#9670;&#160;</a></span>terminado</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool terminado = false</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Flag que indica si el robot llegó a la meta. </p>
+
+<p class="definition">Definición en la línea <a class="el" href="main_8c_source.html#l00083">83</a> del archivo <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="ga1d3865db7af7ebece82d76e592b2c92e" name="ga1d3865db7af7ebece82d76e592b2c92e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1d3865db7af7ebece82d76e592b2c92e">&#9670;&#160;</a></span>TIEMPO_AVANCE_LINEA</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t TIEMPO_AVANCE_LINEA = 250</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Control de timing y velocidad. </p>
+<p>Tiempo de avance entre líneas (ms) - Exploración </p>
+
+<p class="definition">Definición en la línea <a class="el" href="main_8c_source.html#l00086">86</a> del archivo <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="ga8c282d1ff74f62e847a2fe1a1e0a9c00" name="ga8c282d1ff74f62e847a2fe1a1e0a9c00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8c282d1ff74f62e847a2fe1a1e0a9c00">&#9670;&#160;</a></span>ultimo_estado_linea</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile bool ultimo_estado_linea = true</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Variables para control de interrupciones. </p>
+<p>Último estado del sensor de línea (HIGH = no detectando) </p>
+
+<p class="definition">Definición en la línea <a class="el" href="main_8c_source.html#l00093">93</a> del archivo <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="gae1cdd087b040ee1967c16129faab6f24" name="gae1cdd087b040ee1967c16129faab6f24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae1cdd087b040ee1967c16129faab6f24">&#9670;&#160;</a></span>ultimo_estado_muro</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile bool ultimo_estado_muro = true</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Último estado del sensor de muro (HIGH = no detectando) </p>
+
+<p class="definition">Definición en la línea <a class="el" href="main_8c_source.html#l00094">94</a> del archivo <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,6 +1,7 @@
 /**
  * @file control_motor.c
  * @brief Implementación del módulo de control de motores.
+ * @author demianmozo
  */
 #include "control_motor.h"
 #include <stdbool.h>
@@ -15,6 +16,11 @@ uint16_t velocidad_actual_der = VELOCIDAD_AVANCE_DER;
 uint16_t velocidad_giro_actual_izq = VELOCIDAD_GIRO_IZQ;
 uint16_t velocidad_giro_actual_der = VELOCIDAD_GIRO_DER;
 
+/**
+ * @brief Activa el modo sprint de alta velocidad
+ * @details Cambia las velocidades de avance a valores de sprint (90% vs 70%)
+ * @note Se llama cuando se presiona el botón "I AM SPEED"
+ */
 void activar_modo_sprint(void)
 {
     velocidad_actual_izq = VELOCIDAD_SPRINT_IZQ;
@@ -97,7 +103,7 @@ void set_motor_der(motor_estado_t estado, uint16_t pwm)
 }
 
 /**
- * @brief Avanza con ambos motores al 70% de velocidad
+ * @brief Avanza con ambos motores
  */
 void avanza(void)
 {
@@ -107,7 +113,7 @@ void avanza(void)
 
 /**
  * @brief Gira 90 grados a la izquierda y luego continúa avanzando
- * Motor izq retrocede, motor der avanza al 100%
+ * Motor izq retrocede, motor der avanza
  */
 brujula gira90izq(brujula sentido)
 {
@@ -144,7 +150,7 @@ brujula gira90izq(brujula sentido)
 
 /**
  * @brief Gira 90 grados a la derecha y luego continúa avanzando
- * Motor der retrocede, motor izq avanza al 100%
+ * Motor der retrocede, motor izq avanza
  */
 brujula gira90der(brujula sentido)
 {
@@ -179,7 +185,7 @@ brujula gira90der(brujula sentido)
 
 /**
  * @brief Gira 180 grados y luego continúa avanzando
- * Motor der retrocede, motor izq avanza al 100%
+ * Motor der retrocede, motor izq avanza
  */
 brujula gira180(brujula sentido)
 {
@@ -220,9 +226,14 @@ void termino(void)
     set_motor_der(MOTOR_FRENADO, 0);
 }
 
+/**
+ * @brief Aplica corrección hacia la izquierda para seguimiento de línea
+ * @details Reduce velocidad del motor izquierdo temporalmente para corregir
+ *          la trayectoria cuando el robot se desvía hacia la derecha
+ * @note Se interrumpe automáticamente si se detecta línea
+ */
 void correccion_izquierda(void)
 {
-
     __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_3, 100); // Motor izq más lento
     __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_4, 700); // Motor der normal
      for (int i = 0; i < 7; i++)                       // 10 ciclos de 10 ms = 100 ms de corrección
@@ -234,6 +245,12 @@ void correccion_izquierda(void)
     } 
 }
 
+/**
+ * @brief Aplica corrección hacia la derecha para seguimiento de línea
+ * @details Reduce velocidad del motor derecho temporalmente para corregir
+ *          la trayectoria cuando el robot se desvía hacia la izquierda
+ * @note Se interrumpe automáticamente si se detecta línea o muro
+ */
 void correccion_derecha(void)
 {
     __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_3, 700); // Motor izq normal

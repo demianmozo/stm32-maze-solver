@@ -1,0 +1,486 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.14.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>STM32 Maze Solver: Referencia del archivo Core/Src/main.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">STM32 Maze Solver<span id="projectnumber">&#160;v1.0</span>
+   </div>
+   <div id="projectbrief">Proyecto de robot autónomo que resuelve un laberinto mediante un algoritmo de llenado (*Flood Fill*), desarrollado sobre STM32.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.14.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Buscar',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('main_8c.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Referencia del archivo main.c</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>: Main program body  
+<a href="#details">Más...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="main_8h_source.html">main.h</a>&quot;</code><br />
+<code>#include &quot;usb_host.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="antirebote_8h_source.html">antirebote.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="control__motor_8h_source.html">control_motor.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="laberinto_8h_source.html">laberinto.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="navegacion_8h_source.html">navegacion.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="control__linearecta_8h_source.html">control_linearecta.h</a>&quot;</code><br />
+<code>#include &lt;stdint.h&gt;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="uart_8h_source.html">uart.h</a>&quot;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+</div>
+<p><a href="main_8c_source.html">Ir al código fuente de este archivo.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Funciones</h2></td></tr>
+<tr class="memitem:a70af21c671abfcc773614a9a4f63d920" id="r_a70af21c671abfcc773614a9a4f63d920"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a70af21c671abfcc773614a9a4f63d920">SystemClock_Config</a> (void)</td></tr>
+<tr class="memdesc:a70af21c671abfcc773614a9a4f63d920"><td class="mdescLeft">&#160;</td><td class="mdescRight">System Clock Configuration.  <br /></td></tr>
+<tr class="memitem:a601fe6dca9df9023275eef4d1cc49432" id="r_a601fe6dca9df9023275eef4d1cc49432"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a601fe6dca9df9023275eef4d1cc49432">MX_USB_HOST_Process</a> (void)</td></tr>
+<tr class="memitem:gaa3e80214708e5b699b11c95fb43b89c6" id="r_gaa3e80214708e5b699b11c95fb43b89c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___main___functions.html#gaa3e80214708e5b699b11c95fb43b89c6">chequeolinea</a> (void)</td></tr>
+<tr class="memdesc:gaa3e80214708e5b699b11c95fb43b89c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Procesa la detección de una línea.  <br /></td></tr>
+<tr class="memitem:ga3e6d49950d729b7ab61f66e3248f375c" id="r_ga3e6d49950d729b7ab61f66e3248f375c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___main___functions.html#ga3e6d49950d729b7ab61f66e3248f375c">chequeomuro</a> (void)</td></tr>
+<tr class="memdesc:ga3e6d49950d729b7ab61f66e3248f375c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Procesa la detección de un muro.  <br /></td></tr>
+<tr class="memitem:ga1ba3ecbdcbbb317eb4efd8acba22b214" id="r_ga1ba3ecbdcbbb317eb4efd8acba22b214"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___main___functions.html#ga1ba3ecbdcbbb317eb4efd8acba22b214">reset_posicion_pushbutton</a> (void)</td></tr>
+<tr class="memdesc:ga1ba3ecbdcbbb317eb4efd8acba22b214"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maneja el botón para modo sprint.  <br /></td></tr>
+<tr class="memitem:ga81ca1934a5c8070bedb760b4dd6b6431" id="r_ga81ca1934a5c8070bedb760b4dd6b6431"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___main___functions.html#ga81ca1934a5c8070bedb760b4dd6b6431">auto_calibracion</a> (void)</td></tr>
+<tr class="memdesc:ga81ca1934a5c8070bedb760b4dd6b6431"><td class="mdescLeft">&#160;</td><td class="mdescRight">Realiza auto-calibración inicial de sensores.  <br /></td></tr>
+<tr class="memitem:gaa03b960431ff3e5a43173095909d1505" id="r_gaa03b960431ff3e5a43173095909d1505"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___main___functions.html#gaa03b960431ff3e5a43173095909d1505">promediar_sensores</a> (uint16_t *<a class="el" href="group___u_a_r_t___variables.html#ga39a88290a5fbb1b3f35ca4c174271a00">buffer</a>)</td></tr>
+<tr class="memdesc:gaa03b960431ff3e5a43173095909d1505"><td class="mdescLeft">&#160;</td><td class="mdescRight">Promedia las lecturas de los sensores IR.  <br /></td></tr>
+<tr class="memitem:ga8924281cea26160d06523edffd438ad7" id="r_ga8924281cea26160d06523edffd438ad7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___main___functions.html#ga8924281cea26160d06523edffd438ad7">controlar_linea_recta</a> (void)</td></tr>
+<tr class="memdesc:ga8924281cea26160d06523edffd438ad7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Controla el seguimiento de línea recta.  <br /></td></tr>
+<tr class="memitem:ga87d80d1b455461e2ba4573a1a9398f73" id="r_ga87d80d1b455461e2ba4573a1a9398f73"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___main___functions.html#ga87d80d1b455461e2ba4573a1a9398f73">correccion_izquierda</a> (void)</td></tr>
+<tr class="memdesc:ga87d80d1b455461e2ba4573a1a9398f73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aplica corrección hacia la izquierda.  <br /></td></tr>
+<tr class="memitem:ga823403d6e0cf566f73adbbc3e634bc71" id="r_ga823403d6e0cf566f73adbbc3e634bc71"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___main___functions.html#ga823403d6e0cf566f73adbbc3e634bc71">correccion_derecha</a> (void)</td></tr>
+<tr class="memdesc:ga823403d6e0cf566f73adbbc3e634bc71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aplica corrección hacia la derecha.  <br /></td></tr>
+<tr class="memitem:a840291bc02cba5474a4cb46a9b9566fe" id="r_a840291bc02cba5474a4cb46a9b9566fe"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a840291bc02cba5474a4cb46a9b9566fe">main</a> (void)</td></tr>
+<tr class="memdesc:a840291bc02cba5474a4cb46a9b9566fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Punto de entrada principal de la aplicación.  <br /></td></tr>
+<tr class="memitem:a4a8247faaee025c750c49c9a982d44ae" id="r_a4a8247faaee025c750c49c9a982d44ae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4a8247faaee025c750c49c9a982d44ae">actualizar_posicion</a> (uint8_t *fila, uint8_t *columna, <a class="el" href="control__motor_8h.html#aec76296107bce3509215d59c25641f83">brujula</a> sentido)</td></tr>
+<tr class="memdesc:a4a8247faaee025c750c49c9a982d44ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actualiza la posición del robot en el laberinto.  <br /></td></tr>
+<tr class="memitem:a0cd91fd3a9608559c2a87a8ba6cba55f" id="r_a0cd91fd3a9608559c2a87a8ba6cba55f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0cd91fd3a9608559c2a87a8ba6cba55f">HAL_GPIO_EXTI_Callback</a> (uint16_t GPIO_Pin)</td></tr>
+<tr class="memdesc:a0cd91fd3a9608559c2a87a8ba6cba55f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rutina de atencion a la interrupción para sensores.  <br /></td></tr>
+<tr class="memitem:a1730ffe1e560465665eb47d9264826f9" id="r_a1730ffe1e560465665eb47d9264826f9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1730ffe1e560465665eb47d9264826f9">Error_Handler</a> (void)</td></tr>
+<tr class="memdesc:a1730ffe1e560465665eb47d9264826f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is executed in case of error occurrence.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a22b804736f5648d52f639b2647d4ed13" id="r_a22b804736f5648d52f639b2647d4ed13"><td class="memItemLeft" align="right" valign="top">ADC_HandleTypeDef&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a22b804736f5648d52f639b2647d4ed13">hadc1</a></td></tr>
+<tr class="memdesc:a22b804736f5648d52f639b2647d4ed13"><td class="mdescLeft">&#160;</td><td class="mdescRight">&lt; Funciones de antirebote para sensores  <br /></td></tr>
+<tr class="memitem:a1c126854bb1813d31ab4776b21dcc51f" id="r_a1c126854bb1813d31ab4776b21dcc51f"><td class="memItemLeft" align="right" valign="top">DMA_HandleTypeDef&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1c126854bb1813d31ab4776b21dcc51f">hdma_adc1</a></td></tr>
+<tr class="memitem:af7b2c26e44dadaaa798a5c3d82914ba7" id="r_af7b2c26e44dadaaa798a5c3d82914ba7"><td class="memItemLeft" align="right" valign="top">I2C_HandleTypeDef&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af7b2c26e44dadaaa798a5c3d82914ba7">hi2c1</a></td></tr>
+<tr class="memitem:a9c6222bae4d0328dd843ae099623b40b" id="r_a9c6222bae4d0328dd843ae099623b40b"><td class="memItemLeft" align="right" valign="top">SPI_HandleTypeDef&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9c6222bae4d0328dd843ae099623b40b">hspi1</a></td></tr>
+<tr class="memitem:aac3d2c59ee0e3bbae1b99529a154eb62" id="r_aac3d2c59ee0e3bbae1b99529a154eb62"><td class="memItemLeft" align="right" valign="top">TIM_HandleTypeDef&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aac3d2c59ee0e3bbae1b99529a154eb62">htim3</a></td></tr>
+<tr class="memitem:a25a82fcf0cd24eb6d39977cb5864cec8" id="r_a25a82fcf0cd24eb6d39977cb5864cec8"><td class="memItemLeft" align="right" valign="top">UART_HandleTypeDef&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a25a82fcf0cd24eb6d39977cb5864cec8">huart5</a></td></tr>
+<tr class="memitem:ga764af527164f1d12e1df00e278dc6e92" id="r_ga764af527164f1d12e1df00e278dc6e92"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___main___variables.html#ga764af527164f1d12e1df00e278dc6e92">fila_actual</a> = 4</td></tr>
+<tr class="memdesc:ga764af527164f1d12e1df00e278dc6e92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Posición actual del robot.  <br /></td></tr>
+<tr class="memitem:ga711efd6aed9c3e3f4407b41d3c61b18e" id="r_ga711efd6aed9c3e3f4407b41d3c61b18e"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___main___variables.html#ga711efd6aed9c3e3f4407b41d3c61b18e">columna_actual</a> = 4</td></tr>
+<tr class="memdesc:ga711efd6aed9c3e3f4407b41d3c61b18e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fila y columna inicial del robot (4;4)  <br /></td></tr>
+<tr class="memitem:gab9d09cde750c3abbd25ca0e1a43d5db0" id="r_gab9d09cde750c3abbd25ca0e1a43d5db0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="control__motor_8h.html#aec76296107bce3509215d59c25641f83">brujula</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___main___variables.html#gab9d09cde750c3abbd25ca0e1a43d5db0">sentido_actual</a> = <a class="el" href="control__motor_8h.html#aec76296107bce3509215d59c25641f83a26f4ffb5ab65f0091f0af9906a6923fc">norte</a></td></tr>
+<tr class="memdesc:gab9d09cde750c3abbd25ca0e1a43d5db0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estado y orientación del robot.  <br /></td></tr>
+<tr class="memitem:ga0ccce3215e76b544222073046ef56be6" id="r_ga0ccce3215e76b544222073046ef56be6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___main___variables.html#ga0ccce3215e76b544222073046ef56be6">terminado</a> = false</td></tr>
+<tr class="memdesc:ga0ccce3215e76b544222073046ef56be6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag que indica si el robot llegó a la meta.  <br /></td></tr>
+<tr class="memitem:ga1d3865db7af7ebece82d76e592b2c92e" id="r_ga1d3865db7af7ebece82d76e592b2c92e"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___main___variables.html#ga1d3865db7af7ebece82d76e592b2c92e">TIEMPO_AVANCE_LINEA</a> = 250</td></tr>
+<tr class="memdesc:ga1d3865db7af7ebece82d76e592b2c92e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Control de timing y velocidad.  <br /></td></tr>
+<tr class="memitem:ga62eed626626ebd77a7e0421d8af7b712" id="r_ga62eed626626ebd77a7e0421d8af7b712"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___main___variables.html#ga62eed626626ebd77a7e0421d8af7b712">modo_sprint</a> = false</td></tr>
+<tr class="memdesc:ga62eed626626ebd77a7e0421d8af7b712"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag para modo de alta velocidad.  <br /></td></tr>
+<tr class="memitem:gae88c5af646d2928f5a8a88492d37dd17" id="r_gae88c5af646d2928f5a8a88492d37dd17"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___main___variables.html#gae88c5af646d2928f5a8a88492d37dd17">dma_buffer</a> [<a class="el" href="control__linearecta_8h.html#accdae47cc42beb9c8bf9d40e8bdd28ba">BUFFER_TOTAL</a>]</td></tr>
+<tr class="memdesc:gae88c5af646d2928f5a8a88492d37dd17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffer para ADC con DMA.  <br /></td></tr>
+<tr class="memitem:ga8c282d1ff74f62e847a2fe1a1e0a9c00" id="r_ga8c282d1ff74f62e847a2fe1a1e0a9c00"><td class="memItemLeft" align="right" valign="top">volatile bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___main___variables.html#ga8c282d1ff74f62e847a2fe1a1e0a9c00">ultimo_estado_linea</a> = true</td></tr>
+<tr class="memdesc:ga8c282d1ff74f62e847a2fe1a1e0a9c00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Variables para control de interrupciones.  <br /></td></tr>
+<tr class="memitem:gae1cdd087b040ee1967c16129faab6f24" id="r_gae1cdd087b040ee1967c16129faab6f24"><td class="memItemLeft" align="right" valign="top">volatile bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___main___variables.html#gae1cdd087b040ee1967c16129faab6f24">ultimo_estado_muro</a> = true</td></tr>
+<tr class="memdesc:gae1cdd087b040ee1967c16129faab6f24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Último estado del sensor de muro (HIGH = no detectando)  <br /></td></tr>
+<tr class="memitem:gab63e2378c46f96286002a5dcc75cb9e2" id="r_gab63e2378c46f96286002a5dcc75cb9e2"><td class="memItemLeft" align="right" valign="top">volatile bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___main___variables.html#gab63e2378c46f96286002a5dcc75cb9e2">flag_linea_detectada</a> = false</td></tr>
+<tr class="memdesc:gab63e2378c46f96286002a5dcc75cb9e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flags de interrupciones.  <br /></td></tr>
+<tr class="memitem:gaf0c46bf1820597add2405f1a2382b0fa" id="r_gaf0c46bf1820597add2405f1a2382b0fa"><td class="memItemLeft" align="right" valign="top">volatile bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___main___variables.html#gaf0c46bf1820597add2405f1a2382b0fa">flag_muro_detectado</a> = false</td></tr>
+<tr class="memdesc:gaf0c46bf1820597add2405f1a2382b0fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag activado por ISR al detectar muro.  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Descripción detallada</h2>
+<div class="textblock"><p>: Main program body </p>
+<dl class="section author"><dt>Autor</dt><dd>demianmozo </dd></dl>
+<dl class="section date"><dt>Fecha</dt><dd>2025-06-07 Este archivo contiene la función main y la lógica principal del robot.</dd></dl>
+<h1 class="doxsection"><a class="anchor" id="hardware"></a>
+Hardware utilizado</h1>
+<ul>
+<li>STM32F407VG Discovery Board</li>
+<li>Sensores IR para detección de líneas y muros</li>
+<li>Motores DC con control PWM</li>
+<li>Comunicación UART</li>
+</ul>
+<dl class="section attention"><dt>Atención</dt><dd></dd></dl>
+<p>Copyright (c) 2025 STMicroelectronics. All rights reserved.</p>
+<p>This software is licensed under terms that can be found in the LICENSE file in the root directory of this software component. If no LICENSE file comes with this software, it is provided AS-IS. </p>
+
+<p class="definition">Definición en el archivo <a class="el" href="main_8c_source.html">main.c</a>.</p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Documentación de funciones</h2>
+<a id="a4a8247faaee025c750c49c9a982d44ae" name="a4a8247faaee025c750c49c9a982d44ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a8247faaee025c750c49c9a982d44ae">&#9670;&#160;</a></span>actualizar_posicion()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void actualizar_posicion </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>fila</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>columna</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="control__motor_8h.html#aec76296107bce3509215d59c25641f83">brujula</a></td>          <td class="paramname"><span class="paramname"><em>sentido</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Actualiza la posición del robot en el laberinto. </p>
+<p>Modifica las coordenadas del robot según la dirección de movimiento </p><dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fila</td><td>Puntero a la fila actual (se modifica) </td></tr>
+    <tr><td class="paramname">columna</td><td>Puntero a la columna actual (se modifica) </td></tr>
+    <tr><td class="paramname">sentido</td><td>Orientación actual del robot</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Nota</dt><dd>Las coordenadas van de 1 a 4 para un laberinto 4x4 </dd></dl>
+
+<p class="definition">Definición en la línea <a class="el" href="main_8c_source.html#l00709">709</a> del archivo <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="a1730ffe1e560465665eb47d9264826f9" name="a1730ffe1e560465665eb47d9264826f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1730ffe1e560465665eb47d9264826f9">&#9670;&#160;</a></span>Error_Handler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Error_Handler </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function is executed in case of error occurrence. </p>
+<dl class="retval"><dt>Valores devueltos</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">None</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definición en la línea <a class="el" href="main_8c_source.html#l00885">885</a> del archivo <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="a0cd91fd3a9608559c2a87a8ba6cba55f" name="a0cd91fd3a9608559c2a87a8ba6cba55f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0cd91fd3a9608559c2a87a8ba6cba55f">&#9670;&#160;</a></span>HAL_GPIO_EXTI_Callback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void HAL_GPIO_EXTI_Callback </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>GPIO_Pin</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Rutina de atencion a la interrupción para sensores. </p>
+<p>ISR para interrupciones externas EXTI9_5. Implementa antirebote por hardware y activa flags para procesamiento en main loop </p><dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">GPIO_Pin</td><td>Pin que generó la interrupción</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Nota</dt><dd>Esta función implementa antirebote con delay no bloqueante </dd></dl>
+
+<p class="definition">Definición en la línea <a class="el" href="main_8c_source.html#l00852">852</a> del archivo <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="a840291bc02cba5474a4cb46a9b9566fe" name="a840291bc02cba5474a4cb46a9b9566fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a840291bc02cba5474a4cb46a9b9566fe">&#9670;&#160;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Punto de entrada principal de la aplicación. </p>
+<p>Inicializa todos los periféricos, calibra sensores e inicia el bucle principal de navegación del laberinto </p><dl class="retval"><dt>Valores devueltos</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">Código</td><td>de retorno (nunca debería retornar en funcionamiento normal) </td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Bucle principal del programa</p>
+<p>Implementa la máquina de estados principal:</p><ul>
+<li>Control de línea recta</li>
+<li>Procesamiento de interrupciones (línea &gt; muro)</li>
+<li>Verificación de botón de sprint</li>
+<li>Verificación de estado terminado</li>
+</ul>
+
+<p class="definition">Definición en la línea <a class="el" href="main_8c_source.html#l00185">185</a> del archivo <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="a601fe6dca9df9023275eef4d1cc49432" name="a601fe6dca9df9023275eef4d1cc49432"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a601fe6dca9df9023275eef4d1cc49432">&#9670;&#160;</a></span>MX_USB_HOST_Process()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MX_USB_HOST_Process </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a70af21c671abfcc773614a9a4f63d920" name="a70af21c671abfcc773614a9a4f63d920"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70af21c671abfcc773614a9a4f63d920">&#9670;&#160;</a></span>SystemClock_Config()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SystemClock_Config </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>System Clock Configuration. </p>
+<dl class="retval"><dt>Valores devueltos</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">None</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Configure the main internal regulator output voltage</p>
+<p>Initializes the RCC Oscillators according to the specified parameters in the RCC_OscInitTypeDef structure.</p>
+<p>Initializes the CPU, AHB and APB buses clocks</p>
+
+<p class="definition">Definición en la línea <a class="el" href="main_8c_source.html#l00279">279</a> del archivo <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Documentación de variables</h2>
+<a id="a22b804736f5648d52f639b2647d4ed13" name="a22b804736f5648d52f639b2647d4ed13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22b804736f5648d52f639b2647d4ed13">&#9670;&#160;</a></span>hadc1</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ADC_HandleTypeDef hadc1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>&lt; Funciones de antirebote para sensores </p>
+<p>&lt; Control de motores y PWM &lt; Representación y manejo del laberinto &lt; Algoritmos de navegación Flood Fill &lt; Control PID para línea recta &lt; Tipos de datos enteros estándar &lt; Tipo de dato booleano &lt; Comunicación UART para debugging &lt; Funciones de manipulación de strings Funciones de entrada/salida estándar </p>
+
+<p class="definition">Definición en la línea <a class="el" href="main_8c_source.html#l00061">61</a> del archivo <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="a1c126854bb1813d31ab4776b21dcc51f" name="a1c126854bb1813d31ab4776b21dcc51f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c126854bb1813d31ab4776b21dcc51f">&#9670;&#160;</a></span>hdma_adc1</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DMA_HandleTypeDef hdma_adc1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="main_8c_source.html#l00062">62</a> del archivo <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="af7b2c26e44dadaaa798a5c3d82914ba7" name="af7b2c26e44dadaaa798a5c3d82914ba7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7b2c26e44dadaaa798a5c3d82914ba7">&#9670;&#160;</a></span>hi2c1</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">I2C_HandleTypeDef hi2c1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="main_8c_source.html#l00064">64</a> del archivo <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="a9c6222bae4d0328dd843ae099623b40b" name="a9c6222bae4d0328dd843ae099623b40b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c6222bae4d0328dd843ae099623b40b">&#9670;&#160;</a></span>hspi1</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SPI_HandleTypeDef hspi1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="main_8c_source.html#l00066">66</a> del archivo <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="aac3d2c59ee0e3bbae1b99529a154eb62" name="aac3d2c59ee0e3bbae1b99529a154eb62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac3d2c59ee0e3bbae1b99529a154eb62">&#9670;&#160;</a></span>htim3</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TIM_HandleTypeDef htim3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="main_8c_source.html#l00068">68</a> del archivo <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="a25a82fcf0cd24eb6d39977cb5864cec8" name="a25a82fcf0cd24eb6d39977cb5864cec8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25a82fcf0cd24eb6d39977cb5864cec8">&#9670;&#160;</a></span>huart5</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UART_HandleTypeDef huart5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="main_8c_source.html#l00070">70</a> del archivo <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_c6310732a22f63c0c2fc5595561e68f1.html">Core</a></li><li class="navelem"><a href="dir_b596f468b52957496e4f78b80e029268.html">Src</a></li><li class="navelem"><a href="main_8c.html">main.c</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
+  </ul>
+</div>
+</body>
+</html>

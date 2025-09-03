@@ -1,0 +1,28 @@
+var searchData=
+[
+  ['sensor_5fder_5favg_0',['sensor_der_avg',['../group___control_linea___variables.html#ga4fa3bf92e782d32208bab6f514343161',1,'sensor_der_avg:&#160;control_linearecta.c'],['../group___control_linea___variables.html#ga4fa3bf92e782d32208bab6f514343161',1,'sensor_der_avg:&#160;control_linearecta.c']]],
+  ['sensor_5fizq_5favg_1',['sensor_izq_avg',['../group___control_linea___variables.html#ga06fd8d25f6adb4c4762f2b6311a62c55',1,'sensor_izq_avg:&#160;control_linearecta.c'],['../group___control_linea___variables.html#ga06fd8d25f6adb4c4762f2b6311a62c55',1,'sensor_izq_avg:&#160;control_linearecta.c']]],
+  ['sentido_5factual_2',['sentido_actual',['../group___main___variables.html#gab9d09cde750c3abbd25ca0e1a43d5db0',1,'main.c']]],
+  ['set_5fmotor_5fder_3',['set_motor_der',['../group___control_motor_aux.html#gaf3c5783b72cc3ebc19b1d9f74ab62896',1,'set_motor_der(motor_estado_t estado, uint16_t pwm):&#160;control_motor.c'],['../group___control_motor_aux.html#gaf3c5783b72cc3ebc19b1d9f74ab62896',1,'set_motor_der(motor_estado_t estado, uint16_t pwm):&#160;control_motor.c']]],
+  ['set_5fmotor_5fizq_4',['set_motor_izq',['../group___control_motor_aux.html#gaea869ae4a071ec341537819cd7cb7f5c',1,'set_motor_izq(motor_estado_t estado, uint16_t pwm):&#160;control_motor.c'],['../group___control_motor_aux.html#gaea869ae4a071ec341537819cd7cb7f5c',1,'set_motor_izq(motor_estado_t estado, uint16_t pwm):&#160;control_motor.c']]],
+  ['sistemas_20digitales_20depto_20de_20electrónica_20y_20computación_20facultad_20de_20ingeniería_20unmdp_5',['Asignatura Sistemas Digitales - Depto. de Electrónica y Computación - Facultad de Ingeniería - UNMdP',['../index.html#autotoc_md11',1,'']]],
+  ['solver_6',['stm32-maze-solver',['../index.html',1,'']]],
+  ['spi1_5fmiso_5fgpio_5fport_7',['SPI1_MISO_GPIO_Port',['../main_8h.html#a35a9c248e29ddc8522e08a3940a96c76',1,'main.h']]],
+  ['spi1_5fmiso_5fpin_8',['SPI1_MISO_Pin',['../main_8h.html#a9a4ecec51a21170be8c34706955c03ca',1,'main.h']]],
+  ['spi1_5fmosi_5fgpio_5fport_9',['SPI1_MOSI_GPIO_Port',['../main_8h.html#a66d81b5cb6fbf068d7a6eb9d16b9af97',1,'main.h']]],
+  ['spi1_5fmosi_5fpin_10',['SPI1_MOSI_Pin',['../main_8h.html#a2adcc6277c16a129f1346aeb6693d12d',1,'main.h']]],
+  ['spi1_5fsck_5fgpio_5fport_11',['SPI1_SCK_GPIO_Port',['../main_8h.html#aab3c54e5a01694dbec8caf22db8a4cc0',1,'main.h']]],
+  ['spi1_5fsck_5fpin_12',['SPI1_SCK_Pin',['../main_8h.html#a4282a56cacbdee5eee2349b34e349e6b',1,'main.h']]],
+  ['stm32_20maze_20solver_13',['stm32-maze-solver',['../index.html',1,'']]],
+  ['subsistemas_14',['🧩 Subsistemas',['../index.html#autotoc_md8',1,'']]],
+  ['sur_15',['sur',['../control__motor_8h.html#aec76296107bce3509215d59c25641f83a8ddf06d9a60fa54efa20760ce649dc56',1,'control_motor.h']]],
+  ['swclk_5fgpio_5fport_16',['SWCLK_GPIO_Port',['../main_8h.html#a54d419ccaa2653d1bceae3f1a7206890',1,'main.h']]],
+  ['swclk_5fpin_17',['SWCLK_Pin',['../main_8h.html#ad2e9165c92edc48968db01ca88c27822',1,'main.h']]],
+  ['swdio_5fgpio_5fport_18',['SWDIO_GPIO_Port',['../main_8h.html#a0d6c5c9d267a552e5bb02eb57498f683',1,'main.h']]],
+  ['swdio_5fpin_19',['SWDIO_Pin',['../main_8h.html#ac30893c7c5dd78cf02632dc653c3e74e',1,'main.h']]],
+  ['swo_5fgpio_5fport_20',['SWO_GPIO_Port',['../main_8h.html#a1540b1bd5614d42feb933c5b943263c0',1,'main.h']]],
+  ['swo_5fpin_21',['SWO_Pin',['../main_8h.html#a92aba89301afeefb00b6dfbc6e874027',1,'main.h']]],
+  ['syscalls_2ec_22',['syscalls.c',['../syscalls_8c.html',1,'']]],
+  ['sysmem_2ec_23',['sysmem.c',['../sysmem_8c.html',1,'']]],
+  ['systemclock_5fconfig_24',['SystemClock_Config',['../main_8c.html#a70af21c671abfcc773614a9a4f63d920',1,'main.c']]]
+];

@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.14.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>STM32 Maze Solver: Archivo de código fuente Core/Inc/control_linearecta.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">STM32 Maze Solver<span id="projectnumber">&#160;v1.0</span>
+   </div>
+   <div id="projectbrief">Proyecto de robot autónomo que resuelve un laberinto mediante un algoritmo de llenado (*Flood Fill*), desarrollado sobre STM32.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.14.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Buscar',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('control__linearecta_8h_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">control_linearecta.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="control__linearecta_8h.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef CONTROL_LINEARECTA_H</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define CONTROL_LINEARECTA_H</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="main_8h.html">main.h</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">// Definiciones</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="control__linearecta_8h.html#accdae47cc42beb9c8bf9d40e8bdd28ba">    8</a></span><span class="preprocessor">#define BUFFER_TOTAL 200</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="control__linearecta_8h.html#aeafb65774aaabfe28b37d39994d7425d">    9</a></span><span class="preprocessor">#define BUFFER_MINIMO 100</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="control__linearecta_8h.html#a88e7e6110cdfad7a20ea37254935b3cb">   10</a></span><span class="preprocessor">#define MUESTRAS 20</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">// Variables externas</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">extern</span> uint16_t <a class="code hl_variable" href="group___main___variables.html#gae88c5af646d2928f5a8a88492d37dd17">dma_buffer</a>[<a class="code hl_define" href="control__linearecta_8h.html#accdae47cc42beb9c8bf9d40e8bdd28ba">BUFFER_TOTAL</a>];</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">extern</span> uint16_t <a class="code hl_variable" href="group___control_linea___variables.html#ga06fd8d25f6adb4c4762f2b6311a62c55">sensor_izq_avg</a>;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">extern</span> uint16_t <a class="code hl_variable" href="group___control_linea___variables.html#ga4fa3bf92e782d32208bab6f514343161">sensor_der_avg</a>;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">// Declaraciones de funciones</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keywordtype">void</span> <a class="code hl_function" href="control__linearecta_8h.html#a81ca1934a5c8070bedb760b4dd6b6431">auto_calibracion</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keywordtype">void</span> <a class="code hl_function" href="control__linearecta_8h.html#aa03b960431ff3e5a43173095909d1505">promediar_sensores</a>(uint16_t *<a class="code hl_variable" href="group___u_a_r_t___variables.html#ga39a88290a5fbb1b3f35ca4c174271a00">buffer</a>);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keywordtype">void</span> <a class="code hl_function" href="control__linearecta_8h.html#a8924281cea26160d06523edffd438ad7">controlar_linea_recta</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keywordtype">void</span> <a class="code hl_function" href="control__linearecta_8h.html#a87d80d1b455461e2ba4573a1a9398f73">correccion_izquierda</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keywordtype">void</span> <a class="code hl_function" href="control__linearecta_8h.html#a823403d6e0cf566f73adbbc3e634bc71">correccion_derecha</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="acontrol__linearecta_8h_html_a81ca1934a5c8070bedb760b4dd6b6431"><div class="ttname"><a href="control__linearecta_8h.html#a81ca1934a5c8070bedb760b4dd6b6431">auto_calibracion</a></div><div class="ttdeci">void auto_calibracion(void)</div><div class="ttdoc">Ejecuta la secuencia de auto-calibración de sensores IR.</div><div class="ttdef"><b>Definition</b> <a href="control__linearecta_8c_source.html#l00101">control_linearecta.c:101</a></div></div>
+<div class="ttc" id="acontrol__linearecta_8h_html_a823403d6e0cf566f73adbbc3e634bc71"><div class="ttname"><a href="control__linearecta_8h.html#a823403d6e0cf566f73adbbc3e634bc71">correccion_derecha</a></div><div class="ttdeci">void correccion_derecha(void)</div><div class="ttdoc">Aplica corrección hacia la derecha para seguimiento de línea.</div><div class="ttdef"><b>Definition</b> <a href="control__motor_8c_source.html#l00254">control_motor.c:254</a></div></div>
+<div class="ttc" id="acontrol__linearecta_8h_html_a87d80d1b455461e2ba4573a1a9398f73"><div class="ttname"><a href="control__linearecta_8h.html#a87d80d1b455461e2ba4573a1a9398f73">correccion_izquierda</a></div><div class="ttdeci">void correccion_izquierda(void)</div><div class="ttdoc">Aplica corrección hacia la izquierda para seguimiento de línea.</div><div class="ttdef"><b>Definition</b> <a href="control__motor_8c_source.html#l00235">control_motor.c:235</a></div></div>
+<div class="ttc" id="acontrol__linearecta_8h_html_a8924281cea26160d06523edffd438ad7"><div class="ttname"><a href="control__linearecta_8h.html#a8924281cea26160d06523edffd438ad7">controlar_linea_recta</a></div><div class="ttdeci">void controlar_linea_recta(void)</div><div class="ttdoc">Controla el seguimiento de línea recta usando sensores IR.</div><div class="ttdef"><b>Definition</b> <a href="control__linearecta_8c_source.html#l00153">control_linearecta.c:153</a></div></div>
+<div class="ttc" id="acontrol__linearecta_8h_html_aa03b960431ff3e5a43173095909d1505"><div class="ttname"><a href="control__linearecta_8h.html#aa03b960431ff3e5a43173095909d1505">promediar_sensores</a></div><div class="ttdeci">void promediar_sensores(uint16_t *buffer)</div><div class="ttdoc">Calcula el promedio filtrado de los sensores IR.</div><div class="ttdef"><b>Definition</b> <a href="control__linearecta_8c_source.html#l00065">control_linearecta.c:65</a></div></div>
+<div class="ttc" id="acontrol__linearecta_8h_html_accdae47cc42beb9c8bf9d40e8bdd28ba"><div class="ttname"><a href="control__linearecta_8h.html#accdae47cc42beb9c8bf9d40e8bdd28ba">BUFFER_TOTAL</a></div><div class="ttdeci">#define BUFFER_TOTAL</div><div class="ttdef"><b>Definition</b> <a href="#l00008">control_linearecta.h:8</a></div></div>
+<div class="ttc" id="agroup___control_linea___variables_html_ga06fd8d25f6adb4c4762f2b6311a62c55"><div class="ttname"><a href="group___control_linea___variables.html#ga06fd8d25f6adb4c4762f2b6311a62c55">sensor_izq_avg</a></div><div class="ttdeci">uint16_t sensor_izq_avg</div><div class="ttdoc">Promedio del sensor izquierdo (filtrado)</div><div class="ttdef"><b>Definition</b> <a href="control__linearecta_8c_source.html#l00017">control_linearecta.c:17</a></div></div>
+<div class="ttc" id="agroup___control_linea___variables_html_ga4fa3bf92e782d32208bab6f514343161"><div class="ttname"><a href="group___control_linea___variables.html#ga4fa3bf92e782d32208bab6f514343161">sensor_der_avg</a></div><div class="ttdeci">uint16_t sensor_der_avg</div><div class="ttdoc">Promedio del sensor derecho (filtrado)</div><div class="ttdef"><b>Definition</b> <a href="control__linearecta_8c_source.html#l00019">control_linearecta.c:19</a></div></div>
+<div class="ttc" id="agroup___main___variables_html_gae88c5af646d2928f5a8a88492d37dd17"><div class="ttname"><a href="group___main___variables.html#gae88c5af646d2928f5a8a88492d37dd17">dma_buffer</a></div><div class="ttdeci">uint16_t dma_buffer[BUFFER_TOTAL]</div><div class="ttdoc">Buffer para ADC con DMA.</div><div class="ttdef"><b>Definition</b> <a href="main_8c_source.html#l00090">main.c:90</a></div></div>
+<div class="ttc" id="agroup___u_a_r_t___variables_html_ga39a88290a5fbb1b3f35ca4c174271a00"><div class="ttname"><a href="group___u_a_r_t___variables.html#ga39a88290a5fbb1b3f35ca4c174271a00">buffer</a></div><div class="ttdeci">uint8_t buffer[16]</div><div class="ttdoc">Buffer para recepción de datos por interrupción.</div><div class="ttdef"><b>Definition</b> <a href="uart_8c_source.html#l00030">uart.c:30</a></div></div>
+<div class="ttc" id="amain_8h_html"><div class="ttname"><a href="main_8h.html">main.h</a></div><div class="ttdoc">: Header for main.c file.</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_c6310732a22f63c0c2fc5595561e68f1.html">Core</a></li><li class="navelem"><a href="dir_e2489e887f17afa3cbc07a4ec152cdd2.html">Inc</a></li><li class="navelem"><a href="control__linearecta_8h.html">control_linearecta.h</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
+  </ul>
+</div>
+</body>
+</html>
