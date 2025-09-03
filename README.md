@@ -51,7 +51,8 @@ Este proyecto implementa un sistema de control embebido en un microcontrolador S
 
 ## 🏁 Estado del Proyecto
 
-🔧 Implementación en proceso
+✅ Implementado
+🔧 Mejoras en proceso
 
 ###### Asignatura Sistemas Digitales - Depto. de Electrónica y Computación - Facultad de Ingeniería - UNMdP 
 
