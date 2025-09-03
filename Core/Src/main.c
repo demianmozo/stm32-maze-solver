@@ -249,7 +249,6 @@ int main(void)
       // PROCESAR FLAGS CON PRIORIDAD: LÍNEA > MURO
       if (flag_linea_detectada)
       {
-        HAL_GPIO_WritePin(LD4_GPIO_Port, LD4_Pin, GPIO_PIN_SET); // Naranja
         flag_linea_detectada = false;                            // Clear flag PRIMERO
         chequeolinea();
       }
@@ -258,7 +257,6 @@ int main(void)
         HAL_Delay(20);
         if (HAL_GPIO_ReadPin(WallSensor_GPIO_Port, WallSensor_Pin) == GPIO_PIN_RESET)
         {
-          HAL_GPIO_WritePin(LD6_GPIO_Port, LD6_Pin, GPIO_PIN_SET); // Prende LED al detectar muro
           chequeomuro();
         }
       }
